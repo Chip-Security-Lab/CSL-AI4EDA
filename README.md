@@ -64,4 +64,3 @@ CSL-AI4EDA/
 - [Plugin directory](plugins/README.md)
 
 Questions and documentation feedback can be submitted through this repository's [Issues](https://github.com/Chip-Security-Lab/CSL-AI4EDA/issues).
-AI-assisted plugins for RTL design.
