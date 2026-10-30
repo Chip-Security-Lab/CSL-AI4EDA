@@ -1,0 +1,7 @@
+# Documentation-first publication: only Markdown, metadata, and the approved figure.
+*
+!*/
+!*.md
+!/.gitignore
+!/.gitattributes
+!/assets/overview-plugins.en.png
