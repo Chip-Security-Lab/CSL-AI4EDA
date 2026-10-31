@@ -59,3 +59,15 @@ CSL-AI4EDA/
 - [插件目录](plugins/README.md)
 
 问题和文档建议可通过仓库的 [Issues](https://github.com/Chip-Security-Lab/CSL-AI4EDA/issues) 反馈。
+
+## 联系我们
+
+<div align="center">
+
+<img src="assets/chip-security-lab.jpg" alt="芯片与安全实验室 · Chip Security Lab" width="220">
+
+<p><strong>微信公众号：</strong>芯片与安全实验室</p>
+<p>在微信中搜索“芯片与安全实验室”，关注实验室动态。</p>
+<p><strong>联系邮箱：</strong><a href="mailto:zitenghu@hdu.edu.cn">zitenghu@hdu.edu.cn</a></p>
+
+</div>

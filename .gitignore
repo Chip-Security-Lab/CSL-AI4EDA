@@ -1,7 +1,8 @@
-# Documentation-first publication: only Markdown, metadata, and the approved figure.
+# Documentation-first publication: only Markdown, metadata, and approved images.
 *
 !*/
 !*.md
 !/.gitignore
 !/.gitattributes
 !/assets/overview-plugins-minimal.en.png
+!/assets/chip-security-lab.jpg

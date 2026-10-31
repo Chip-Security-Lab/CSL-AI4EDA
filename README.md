@@ -64,3 +64,15 @@ CSL-AI4EDA/
 - [Plugin directory](plugins/README.md)
 
 Questions and documentation feedback can be submitted through this repository's [Issues](https://github.com/Chip-Security-Lab/CSL-AI4EDA/issues).
+
+## Contact
+
+<div align="center">
+
+<img src="assets/chip-security-lab.jpg" alt="Chip Security Lab — 芯片与安全实验室" width="220">
+
+<p><strong>WeChat Official Account:</strong> 芯片与安全实验室</p>
+<p>Search for 芯片与安全实验室 in WeChat to follow our lab.</p>
+<p><strong>Email:</strong> <a href="mailto:zitenghu@hdu.edu.cn">zitenghu@hdu.edu.cn</a></p>
+
+</div>
