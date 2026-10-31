@@ -8,12 +8,12 @@ CSL_AI4EDA organizes four plugin capabilities around the RTL design flow. Each p
 
 | Plugin | Typical input | Intended output | Technical context |
 | --- | --- | --- | --- |
-| HDL Copilot Plugin | RTL code, a question, and design constraints | Explanation, discussion, and reviewable change suggestions | Multi-turn HDL assistance |
-| Secure Generation Plugin | Functional requirements and the selected RTL or FSM workflow | RTL draft, supporting security knowledge, and a review report | PowerSecV (CWE) + SecFSM |
 | Security Detection Plugin | RTL and relevant module-access context | Vulnerability locations and access-control analysis | VerilogLAVD (CWE) + multi-module access checks |
 | Optimization & Repair Plugin | RTL, side-channel or timing concerns, and design constraints | Repair candidates and analysis of the proposed changes | Side-channel + timing repair |
+| Secure Generation Plugin | Functional requirements and the selected RTL or FSM workflow | RTL draft, supporting security knowledge, and a review report | PowerSecV (CWE) + SecFSM |
+| HDL Copilot Plugin | RTL code, a question, and design constraints | Explanation, discussion, and reviewable change suggestions | Multi-turn HDL assistance |
 
-The overview's synthesis and implementation stage is part of the wider design-flow context. Concrete synthesis, timing and hardware-verification steps remain documented by the relevant development environment and implementation release.
+The overview presents the plugin family in this order: security detection, optimization and repair, secure generation, and HDL assistance. Each plugin page describes its own inputs, outputs, and scope.
 
 ## Interaction framework
 

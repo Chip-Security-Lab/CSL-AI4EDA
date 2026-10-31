@@ -8,14 +8,14 @@
 
 | 插件 | 用途 |
 | --- | --- |
-| **HDL Copilot Plugin** | 理解 Verilog/SystemVerilog，讨论问题，审查修改建议。 |
-| **Secure Generation Plugin** | 结合硬件安全知识生成 RTL 与 FSM 草稿，技术组合为 **PowerSecV (CWE) + SecFSM**。 |
 | **Security Detection Plugin** | RTL 漏洞与多模块访问权限分析，技术组合为 **VerilogLAVD (CWE)** 与多模块权限检测。 |
 | **Optimization & Repair Plugin** | 侧信道与时序问题修复。 |
+| **Secure Generation Plugin** | 结合硬件安全知识生成 RTL 与 FSM 草稿，技术组合为 **PowerSecV (CWE) + SecFSM**。 |
+| **HDL Copilot Plugin** | 理解 Verilog/SystemVerilog，讨论问题，审查修改建议。 |
 
 ## 准备环境与模型服务
 
-HDL Copilot 和 Secure Generation 的本地实现使用 Python 3.10 或以上版本，提供 VS Code 与 Vivado 入口。VS Code 入口需要桌面版 VS Code 1.85 或以上版本，并打开受信任的工作区。Vivado 入口使用 Tcl Console 和独立助手窗口，小型模式选择面板需要 Python 支持 Tkinter。
+Secure Generation 和 HDL Copilot 的本地实现使用 Python 3.10 或以上版本，提供 VS Code 与 Vivado 入口。VS Code 入口需要桌面版 VS Code 1.85 或以上版本，并打开受信任的工作区。Vivado 入口使用 Tcl Console 和独立助手窗口，小型模式选择面板需要 Python 支持 Tkinter。
 
 使用模型功能时，在插件的模型设置中填写兼容 Chat Completions API 的文本模型服务：
 
@@ -26,6 +26,25 @@ HDL Copilot 和 Secure Generation 的本地实现使用 Python 3.10 或以上版
 | API Key | 服务商要求的凭据；无需鉴权的服务可不填写。 |
 
 问题、相关 RTL，以及对话或生成上下文会发送给配置的模型服务。请使用允许发送给该服务的材料。
+
+## Security Detection Plugin
+
+总览图介绍 RTL 漏洞检查与多模块访问权限分析。支持的输入、操作步骤和结果解释将随相应发行内容提供；本次文档首发不包含可执行的检测流程。
+
+## Optimization & Repair Plugin
+
+总览图介绍侧信道与时序问题的优化修复。支持的输入、操作步骤和验证说明将随相应发行内容提供；本次文档首发不包含可执行的优化或修复流程。
+
+## Secure Generation Plugin
+
+1. 选择通用 RTL 或 FSM 流程，描述端口、复位、设计行为和约束。
+2. 生成草稿，结合相关安全知识和审查报告查看代码。
+3. 在相应界面确认写入或加入工程前，检查目标文件和代码差异。
+4. 对结果执行编译、仿真及设计要求的其他检查。
+
+示例：“生成带使能输入和低电平有效复位的同步计数器，并明确回绕行为。”
+
+生成代码仍是草稿。模型审查不代表功能正确，也不构成不存在漏洞的证明。
 
 ## HDL Copilot Plugin
 
@@ -39,18 +58,3 @@ HDL Copilot 和 Secure Generation 的本地实现使用 Python 3.10 或以上版
 | --- | --- | --- |
 | VS Code | 当前编辑器内容，包含尚未保存的修改。 | 预览差异后手动应用；应用修改不会自动保存文件。 |
 | Vivado | 当前选中 RTL 文件已保存到磁盘的内容。 | 提问前先保存；审查并复制建议，再按原编辑流程修改文件。助手不直接写回工程。 |
-
-## Secure Generation Plugin
-
-1. 选择通用 RTL 或 FSM 流程，描述端口、复位、设计行为和约束。
-2. 生成草稿，结合相关安全知识和审查报告查看代码。
-3. 在相应界面确认写入或加入工程前，检查目标文件和代码差异。
-4. 对结果执行编译、仿真及设计要求的其他检查。
-
-示例：“生成带使能输入和低电平有效复位的同步计数器，并明确回绕行为。”
-
-生成代码仍是草稿。模型审查不代表功能正确，也不构成不存在漏洞的证明。
-
-## Security Detection 与 Optimization & Repair
-
-总览图介绍这两类插件的用途和技术组合。安装方式、支持的输入、结果解释与操作说明将随各自发行内容提供；本次文档首发不包含可执行的检测或优化修复流程。

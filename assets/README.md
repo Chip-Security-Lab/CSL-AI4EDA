@@ -1,5 +1,5 @@
 # Overview illustration
 
-[overview-plugins.en.png](overview-plugins.en.png) is the approved English comic overview for CSL_AI4EDA. It presents the plugin family, design-flow context, and concise descriptions in three main hierarchy levels.
+[overview-plugins-minimal.en.png](overview-plugins-minimal.en.png) is the English overview for CSL_AI4EDA. It uses a white background, restrained gray and blue accents, and short labels.
 
-The illustration was created with the built-in image generation tool and reviewed for English labels and the four plugin names. It is a conceptual diagram rather than a software screenshot or an experimental result.
+The plugin order is Security Detection, Optimization & Repair, Secure Generation, then HDL Copilot. The illustration was created with the built-in image generation tool and checked for labels and order.
