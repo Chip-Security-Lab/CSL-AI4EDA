@@ -8,7 +8,7 @@
 
 [Plugin Overview](#plugins) · [User Guide](docs/USER_GUIDE.md) · [Framework](docs/ARCHITECTURE.md)
 
-<img src="assets/overview-plugins-minimal.en.png" alt="CSL_AI4EDA plugin overview: Security Detection, Optimization and Repair, Secure Generation, and HDL Copilot." width="1200">
+<img src="assets/overview-plugins-minimal.en.png" alt="CSL_AI4EDA plugin overview: Security Detection, Optimization and Repair, Secure Generation, and HDL Copilot, followed by an ellipsis for additional plugins in development." width="1200">
 
 </div>
 
@@ -62,8 +62,6 @@ CSL-AI4EDA/
 - [User guide](docs/USER_GUIDE.md) / [中文使用说明](docs/USER_GUIDE.zh-CN.md)
 - [Framework and plugin interfaces](docs/ARCHITECTURE.md)
 - [Plugin directory](plugins/README.md)
-
-Questions and documentation feedback can be submitted through this repository's [Issues](https://github.com/Chip-Security-Lab/CSL-AI4EDA/issues).
 
 ## Contact
 

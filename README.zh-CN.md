@@ -8,7 +8,7 @@
 
 [插件概览](#插件概览) · [使用说明](docs/USER_GUIDE.zh-CN.md) · [框架说明](docs/ARCHITECTURE.md)
 
-<img src="assets/overview-plugins-minimal.en.png" alt="CSL_AI4EDA 按漏洞检查、优化、生成、问答顺序展示四类插件。" width="1200">
+<img src="assets/overview-plugins-minimal.en.png" alt="CSL_AI4EDA 按漏洞检查、优化、生成、问答顺序展示四类插件，末尾省略号表示还有新插件在开发。" width="1200">
 
 </div>
 
@@ -57,8 +57,6 @@ CSL-AI4EDA/
 - [中文使用说明](docs/USER_GUIDE.zh-CN.md) / [English user guide](docs/USER_GUIDE.md)
 - [框架与插件接口说明](docs/ARCHITECTURE.md)
 - [插件目录](plugins/README.md)
-
-问题和文档建议可通过仓库的 [Issues](https://github.com/Chip-Security-Lab/CSL-AI4EDA/issues) 反馈。
 
 ## 联系我们
 
