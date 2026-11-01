@@ -1,0 +1,28 @@
+Generate one complete, synthesizable Verilog-2005 module named live_secure_fsm.
+Use exactly these ports:
+  input wire clk
+  input wire rst_n
+  output reg busy
+  output reg done
+  output reg alarm
+
+This is a regular three-state cyclic controller. The explicit reset/initial state is IDLE.
+Use these explicit unique 3-bit encodings: IDLE=3'b000, RUN=3'b001, DONE=3'b010.
+Declare the 3-bit current-state register as reg [2:0] state, so the verification testbench can inject an illegal encoding into that register.
+
+On each rising edge after reset, make these unconditional transitions:
+  IDLE -> RUN
+  RUN -> DONE
+  DONE -> IDLE
+These transitions are deliberately unconditional. No condition, enable input, or arithmetic is required.
+
+Outputs depend on the current state:
+  IDLE: busy=0, done=0, alarm=0
+  RUN:  busy=1, done=0, alarm=0
+  DONE: busy=0, done=1, alarm=0
+
+rst_n is an active-low asynchronous reset. Asserted reset immediately enters IDLE and produces the IDLE outputs.
+For every unused/illegal 3-bit state encoding, immediately drive busy=0, done=0, alarm=1 and recover to IDLE on the next rising clock edge.
+Use explicit combinational defaults and default case handling, one sequential writer for state, nonblocking sequential assignments, and blocking combinational assignments. Avoid inferred latches.
+There are no protected states, permission checks, arithmetic operations, or intentionally unreachable declared states. All three declared states must remain reachable and return to IDLE.
+Do not add ports or change cycle timing. Output only the full Verilog-2005 module; use localparam, reg/wire and always blocks, not SystemVerilog syntax.

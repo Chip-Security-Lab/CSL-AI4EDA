@@ -1,0 +1,35 @@
+{
+  "example": "fsm",
+  "module": "live_secure_fsm",
+  "source": "Saved real model output from CSL_HDLGen",
+  "provider": "DeepSeek",
+  "model": "deepseek-flash",
+  "generated_on": "2026-11-01",
+  "language": "Verilog-2005",
+  "code_file": "live_secure_fsm.v",
+  "testbench_file": "tb.v",
+  "compile": {
+    "passed": true,
+    "command": "iverilog -g2005 -s tb -o simulation.vvp live_secure_fsm.v tb.v",
+    "log": "compile.log"
+  },
+  "simulation": {
+    "passed": true,
+    "command": "vvp simulation.vvp",
+    "log": "simulation.log"
+  },
+  "checks": [
+    "asynchronous reset",
+    "five IDLE/RUN/DONE cycles",
+    "Moore outputs",
+    "illegal-state safe outputs",
+    "illegal-state recovery",
+    "mid-operation reset",
+    "post-reset latency"
+  ],
+  "sha256": {
+    "live_secure_fsm.v": "cf12e32d54d29dd46b55f441d206b6a494da4719ee3cca2f2e121fb35a996794",
+    "tb.v": "cc614bbfbe9120e733191a178a10efde4dced721623ed0bc133310d54c4d93d6"
+  },
+  "scope": "Finite simulation of the listed checks; not formal verification."
+}

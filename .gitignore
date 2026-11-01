@@ -1,8 +1,22 @@
-# Documentation-first publication: only Markdown, metadata, and approved images.
+# Public repository: documentation, approved images and provided examples.
 *
 !*/
 !*.md
 !/.gitignore
 !/.gitattributes
-!/assets/overview-plugins-minimal.en.png
-!/assets/chip-security-lab.jpg
+!/assets/*.png
+!/assets/*.jpg
+!/plugins/*/assets/*.png
+!/plugins/*/assets/*.jpg
+!/plugins/*/assets/*.svg
+!/plugins/*/LICENSE*
+!/plugins/*/examples/**
+
+# Keep generated environments, local credentials and caches out of examples.
+**/.env
+**/.env.local
+**/.env.production
+**/__pycache__/
+**/.venv/
+**/node_modules/
+**/.DS_Store

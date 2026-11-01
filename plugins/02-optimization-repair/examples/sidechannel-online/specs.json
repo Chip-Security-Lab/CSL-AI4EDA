@@ -1,0 +1,108 @@
+{
+  "scope": "representative synthetic inputs, not arbitrary RTL or a cipher security proof",
+  "cases": [
+    {
+      "type": "T02",
+      "file": "t02.sv",
+      "annotations": {
+        "random_inputs": [
+          "mask_a",
+          "mask_b"
+        ],
+        "randomness_contract": "external_fresh_per_cycle"
+      },
+      "requirements": "T02 使用注册表的 isw2-and1-pair-v2 及全部函数源码，顶层返回 gadget_id=\"isw2-and1-pair-v2\"。第一级用两个2位寄存器P0/P1，在原start边沿分别捕获key[1:0] xor mask_a[1:0]和mask_a[1:0]。非线性计算直接调用 rtl_sca_isw2_and1_pair(P0,P1,mask_b[0])，不自行打乱秘密位和份额的参数顺序。第二级在同一start边沿使用旧P0/P1，将plaintext xor {7位0,函数结果[0]}捕获到8位S0，将{7位0,函数结果[1]}捕获到8位S1；公开ciphertext=S0 xor S1。复位全部份额清0，start为0时全部保持；done仍捕获start。删除旧未掩码secret_pair/state，分析属性保留到实际的份额和函数结果上。不能提前重构函数输出再存state。"
+    },
+    {
+      "type": "T03",
+      "file": "t03.sv",
+      "annotations": {
+        "random_inputs": [
+          "mask_a",
+          "mask_b"
+        ],
+        "randomness_contract": "external_fresh_per_cycle"
+      },
+      "requirements": "T03 不要在保持路径先解码S xor M，这会产生新的私有重组热点。用两个已声明独立且逐周期新鲜的随机输入，在每个全局上升沿无条件刷新编码状态：若原条件start && key[0]为真，S捕获key xor plaintext xor mask_b，M捕获mask_b；否则S捕获S xor mask_a，M捕获M xor mask_a。两个分支都更新S/M，外部保持值S xor M不变；复位S/M清0；done时序不变。可以给真实的update_share/hold_share逐份额表达式命名并保持可观测，不能生成私有明文Q副本，不要把相同 mask_b 同时用作更新与保持刷新。原控制条件内联保留，全部实际份额状态保持keep/public_flat。公开ciphertext只用寄存S xor M。"
+    },
+    {
+      "type": "T05",
+      "file": "t05.sv",
+      "annotations": {
+        "share_groups": [
+          [
+            "state_s0",
+            "state_s1"
+          ]
+        ],
+        "public_outputs": [
+          "ciphertext"
+        ]
+      },
+      "requirements": "For linear state, capture (share0 XOR public_data) and share1 on the SAME original edge; the public output XORs the two captured values. The mask in share1 must not be XORed a second time. Remove actual premature recombination, not its trace visibility. Added state must remain traceable.\n原始线性组合可以同拍捕获 state_s0 xor plaintext 和 state_s1，公开输出XOR两个寄存份额；state_s1已含mask_a，不能再异或一份mask_a。删除无用的早期reconstructed运算。"
+    },
+    {
+      "type": "T06",
+      "file": "t06.sv",
+      "annotations": {
+        "share_groups": [
+          [
+            "state_s0",
+            "state_s1"
+          ]
+        ],
+        "public_outputs": [
+          "ciphertext"
+        ]
+      },
+      "requirements": "T06 可由严格恒等式 (key xor mask_a) AND mask_a = (~key) AND mask_a 消除同组份额非线性交汇；整文件功能将由真实工具核对。原start上升沿仅用两个8位寄存份额捕获：S0 <= mixed xor plaintext xor mask_b；S1 <= mask_b；公开ciphertext=S0 xor S1。S0赋值里必须实际包含xor mask_b，不可只把mask_b捕获到另一个寄存器后又在输出抵消，否则S0仍是未掩码秘密热点。不要第三个重复mask寄存器。复位S0/S1都清0，保持时都保持，done行为不变。保留原keep/public_flat在真实计算和新份额上。这只是RTL结构缓解，不是毛刺安全或物理安全证明。"
+    },
+    {
+      "type": "T07",
+      "file": "t07.sv",
+      "annotations": {
+        "random_inputs": [
+          "mask_a",
+          "mask_b"
+        ],
+        "randomness_contract": "external_fresh_per_cycle"
+      },
+      "requirements": "Reassigning an operand from mask r to s requires compensating r XOR s at the correct PUBLIC decoding boundary. Capture every mask belonging to stored shares on the same edge. Do not directly change the decoded function or use live masks to decode old state. Register independent shares separately to avoid recreating an unmasked register.\nmasked_key用mask_a，masked_data用mask_b；分别捕获两份数据以及各自同拍mask，公开输出XOR两份数据与两份捕获mask，以保持原key xor plaintext功能。不用实时mask重构。 明确允许增加内部掩码捕获寄存器，这不是新增随机源或端口。删除旧的完整秘密state，改成R0、R1、M0、M1四个8位寄存器，在原start同一边沿分别捕获masked_key、masked_data、mask_a、mask_b，公开ciphertext=R0 xor R1 xor M0 xor M1，复位四者为0、保持时四者都保持。不能只在原state后面临时补偿实时mask。"
+    },
+    {
+      "type": "T08",
+      "file": "t08.sv",
+      "annotations": {
+        "random_inputs": [
+          "mask_a",
+          "mask_b"
+        ],
+        "randomness_contract": "external_fresh_per_cycle",
+        "mask_domains": {
+          "bool_share0": "boolean",
+          "bool_share1": "boolean",
+          "arithmetic_value": "arithmetic"
+        }
+      },
+      "requirements": "Arithmetic shares reconstruct by ADDITION modulo 2^width, NOT XOR. For B2A A=x-r, capturing A+public_data and r on the same edge permits public reconstruction by modular addition with no extra cycle. Preserve truncation and zero extension; do not expose a carry in previously zero upper bits. Keep all gadget intermediates traceable.\nA=rtl_sca_goubin_b2a4(bool_share0,mask_a[3:0],mask_b[3:0])。原start边沿捕获四位A+plaintext[3:0]及四位mask_a[3:0]，公开输出用四位模16加法而非XOR重构，高四位仍为0。 必须返回顶层 gadget_id=\"goubin-b2a4-v1\"。"
+    },
+    {
+      "type": "T09",
+      "file": "t09.sv",
+      "annotations": {
+        "random_inputs": [
+          "mask_a",
+          "mask_b"
+        ],
+        "randomness_contract": "external_fresh_per_cycle"
+      },
+      "requirements": "Arbitrary secret-gated clocks cannot generally be changed to enables. A falling-edge-captured gate may allow matching rising-edge enable semantics, but event simulation/formal checks decide. Actually remove the secret clock network, then consider unconditional encoded-state refresh using declared per-cycle fresh inputs; merely moving secret enable to an unmasked register may retain all leakage. Never suppress trace signals to improve statistics.\ngate_enable保持原下降沿捕获；删除秘密时钟网络；do_update=gate_enable && start。S和M每个全局上升沿无条件更新，S<=do_update?(key xor plaintext xor mask_a):(S xor M xor mask_a)，M<=mask_a；输出S xor M，reset二者清0。不能在S/M外再套if(do_update)。保留实际运算可观测性。"
+    },
+    {
+      "type": "T10",
+      "file": "t10.sv",
+      "annotations": {},
+      "requirements": "Look for a common datapath F across branches, including a constant branch equal to F(c). Select operands BEFORE the common computation when exactly equivalent, preserving widths/overflow. Do not add fake buffers or change latency. Parallel/factored logic alone may leave a leaky result register; with existing suitable masks, capture encoded result and mask on the original edge and decode at the public output. Structural depth is not physical arrival-time proof.\n原分支是F(plaintext)和F(1)，F(x)=(x+3)*5 mod256，先选择operand=key[0]?plaintext:8位1，再无条件执行F。在原start上升沿捕获F(operand) xor mask_a与mask_a，公开输出只用两个寄存值XOR。"
+    }
+  ]
+}

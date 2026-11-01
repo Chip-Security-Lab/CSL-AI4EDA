@@ -1,0 +1,817 @@
+<!doctype html><html lang="zh"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-76MbjyeuhaT5PQ42ebqgnwCsR082HQveTqOVaAWNFU8='; style-src 'sha256-QQ1PYOjY3PEpuTckZXuyBrGTP/ySfv7USViSgFAZz+Y='; img-src data:; connect-src 'none'; base-uri 'none'; form-action 'none';">
+<title>CSL_HDLGen</title><style>:root{color-scheme:light dark;--bg:var(--vscode-sideBar-background,#181b20);--fg:var(--vscode-sideBar-foreground,var(--vscode-foreground,#d5d9e1));--muted:var(--vscode-descriptionForeground,#969eaa);--line:var(--vscode-widget-border,#80889030);--input:var(--vscode-input-background,#22262e);--accent:var(--vscode-focusBorder,#37b5a5);--button:var(--vscode-button-background,#187f73);--button-fg:var(--vscode-button-foreground,#fff);--hover:var(--vscode-toolbar-hoverBackground,#80808020)}
+.model-settings{flex:1;min-height:0;overflow:auto;padding:14px 16px}.model-settings h1{font-size:17px;margin:4px 0}.model-settings form{margin-top:22px}.model-settings label{display:block;font-size:12px;margin:18px 0 7px;font-weight:600}.model-settings input{display:block;width:100%;min-width:0;padding:8px 10px;border:1px solid var(--line);border-radius:5px;background:var(--input);color:var(--vscode-input-foreground,var(--fg));font:12px/1.5 var(--vscode-font-family,system-ui,sans-serif)}.model-settings input:focus{outline:1px solid var(--accent);outline-offset:0}.field-help{font-size:11px;color:var(--muted);line-height:1.6;margin:6px 0;overflow-wrap:anywhere}.config-actions{display:flex;justify-content:flex-end;gap:8px;margin:22px 0}.config-actions button{border:1px solid var(--line);padding:6px 12px}.config-error{font-size:12px;color:var(--vscode-errorForeground,#df6666);overflow-wrap:anywhere}
+.demo-entry{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px;font-size:10px;color:var(--muted)}.demo-entry button{border:1px solid var(--line);background:var(--hover);color:var(--fg);font-size:11px;padding:4px 8px}
+*{box-sizing:border-box}html,body{height:100%;margin:0}body{font:13px/1.55 var(--vscode-font-family,system-ui,sans-serif);color:var(--fg);background:var(--bg);overflow:hidden}.shell{display:flex;flex-direction:column;height:100%;min-width:0}button,select,textarea{font:inherit}button,select{color:inherit;cursor:pointer}button{border:1px solid transparent;background:transparent;border-radius:5px;padding:4px 7px}button:hover{background:var(--hover)}button:disabled{opacity:.4;cursor:not-allowed}button:focus-visible,select:focus-visible,textarea:focus-visible,pre:focus-visible{outline:1px solid var(--accent);outline-offset:2px}svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}select{background:var(--input);border:1px solid var(--line);border-radius:5px;max-width:100%;padding:4px 5px}option{background:var(--input);color:var(--fg)}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:5px;padding:10px 12px;border-bottom:1px solid var(--line);flex-shrink:0;flex-wrap:wrap}.brand,.tools{display:flex;align-items:center;gap:5px}.brand{gap:7px;font-size:12px;letter-spacing:.15px}.logo,.mini-logo{display:inline-grid;place-items:center;background:var(--input);border:1px solid var(--line);font-weight:800;color:var(--accent);width:24px;height:24px;border-radius:6px}.tools select{font-size:11px;width:75px;background:transparent;border-color:transparent}.icon{display:inline-flex;align-items:center;justify-content:center;width:27px;height:27px;padding:4px;font-size:20px}.conversation{flex:1;min-height:0;overflow:auto;padding:14px 12px;scrollbar-gutter:stable}.welcome{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:26px 12px}.hero-mark{width:52px;height:52px;display:grid;place-items:center;font-size:32px;font-weight:800;color:var(--accent);border:1px solid var(--line);border-radius:15px;background:var(--input);position:relative;margin-bottom:23px}.mark-dot{width:10px;height:10px;background:var(--accent);border:2px solid var(--bg);border-radius:50%;position:absolute;bottom:3px;right:-3px}.eyebrow{font-size:10px;letter-spacing:.7px;color:var(--muted)}h1{font-size:19px;line-height:1.4;font-weight:600;margin:9px 0 10px;letter-spacing:-.4px}.welcome p{font-size:12px;color:var(--muted);max-width:290px;line-height:1.85;margin:0}.trust-tags{display:flex;justify-content:center;gap:7px;flex-wrap:wrap;margin-top:22px}.trust-tags span{font-size:10px;color:var(--muted);padding:3px 8px;border:1px solid var(--line);border-radius:20px}
+.history{border-bottom:1px solid var(--line);padding-bottom:12px;margin-bottom:15px}.section-heading{display:flex;align-items:center;justify-content:space-between}.muted{color:var(--muted);font-size:11px}#history button{width:100%;display:block;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:7px;margin:3px 0}.request{border-left:2px solid var(--accent);background:var(--input);border-radius:0 7px 7px 0;padding:9px 11px;margin-bottom:20px}.request p{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;max-height:110px;overflow:auto;margin:4px 0}.result-heading{display:flex;align-items:center;gap:7px;font-size:12px;margin-bottom:10px;flex-wrap:wrap}.badge{margin-left:auto;color:var(--muted);font-size:10px;border:1px solid var(--line);padding:2px 6px;border-radius:4px}.tabs{display:flex;gap:5px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:10px}.tabs button{font-size:12px;color:var(--muted);border-radius:0;border-bottom:2px solid transparent;padding:6px 4px}.tabs .selected{color:var(--fg);border-bottom-color:var(--accent)}.output{border:1px solid var(--line);background:var(--vscode-editor-background,var(--input));border-radius:6px;min-width:0}pre{font:12px/1.7 var(--vscode-editor-font-family,Consolas,monospace);margin:0;padding:12px;white-space:pre;overflow:auto;max-height:55vh;min-height:100px}.prose{white-space:pre-wrap;overflow-wrap:anywhere;font-family:inherit}.actions{display:flex;gap:4px;flex-wrap:wrap;margin-top:8px}.actions button{font-size:11px;color:var(--muted);border:1px solid var(--line)}#write,#power{color:var(--fg)}.disclaimer{font-size:10px;line-height:1.6;color:var(--muted);margin:9px 0}
+.composer-area{flex-shrink:0;padding:4px 10px 10px;max-height:65%;overflow:auto;border-bottom:1px solid var(--line)}.status-row{display:flex;align-items:flex-start;gap:7px;color:var(--muted);font-size:11px;line-height:1.5;padding:8px 3px;overflow-wrap:anywhere}.status-dot{width:5px;height:5px;flex-shrink:0;border-radius:50%;background:var(--muted);margin-top:6px}.working .status-dot{background:var(--accent);animation:pulse 1.4s ease-in-out infinite}.composer{border:1px solid var(--line);border-radius:9px;background:var(--input);padding:7px;box-shadow:0 2px 9px #0000000c}.composer:focus-within{border-color:var(--accent)}.context-row{display:flex;gap:5px;align-items:center;min-width:0}.attach{display:flex;align-items:center;gap:3px;color:var(--muted);font-size:10px;padding:3px;flex-shrink:0}.file-chip{font-size:10px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}.file-chip.attached{color:var(--fg);border:1px solid var(--line);padding:1px 5px;border-radius:4px}textarea{display:block;resize:none;background:transparent;border:none;color:var(--vscode-input-foreground,var(--fg));width:100%;height:96px;padding:8px 4px;line-height:1.65;font-size:12px;outline:none!important}textarea::placeholder{color:var(--vscode-input-placeholderForeground,var(--muted))}.composer-controls{display:flex;align-items:center;justify-content:space-between;gap:5px;flex-wrap:wrap}.composer-controls select{font-size:11px;max-width:65%;border-color:transparent;background:transparent}.send-controls{display:flex;align-items:center;gap:4px;margin-left:auto}.send{background:var(--button);color:var(--button-fg);font-size:11px;padding:5px 10px}.send:hover{background:var(--vscode-button-hoverBackground,var(--button));filter:brightness(1.08)}.cancel{background:var(--hover);color:var(--fg)}.options{display:flex;flex-direction:column;gap:5px;padding:7px 3px;border-block:1px solid var(--line);margin-bottom:7px;font-size:11px;color:var(--muted)}.options label{display:flex;gap:5px;align-items:center}.composer-meta{display:flex;justify-content:space-between;gap:8px;font-size:10px;color:var(--muted);padding:5px 3px 0}#modelState{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}[hidden]{display:none!important}@keyframes pulse{50%{opacity:.25}}@media(prefers-reduced-motion:reduce){.working .status-dot{animation:none}}@media(max-height:480px){.welcome{padding:10px}.hero-mark{margin-bottom:8px}.trust-tags{margin-top:10px}textarea{height:65px}.composer-area{max-height:75%}}
+
+body{--syntax-keyword:#78b8ed;--syntax-number:#acd2a5;--syntax-string:#dca78b;--syntax-comment:#89a981;--syntax-directive:#c8a0dd;--syntax-operator:#a9c9e5;--knowledge-accent:#78b8ed;--report-accent:#dfba78;--risk-accent:#e4a1a1}
+body.vscode-light{--syntax-keyword:#085eab;--syntax-number:#08744f;--syntax-string:#994719;--syntax-comment:#56733e;--syntax-directive:#803a9e;--syntax-operator:#365776;--knowledge-accent:#176fac;--report-accent:#835a0d;--risk-accent:#a53d47}
+.variant-picker{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:11px;flex-wrap:wrap}.variant-picker label{color:var(--muted)}.variant-picker select{flex:1;min-width:0}.variant-summary{border:1px solid var(--line);border-radius:6px;padding:9px 10px;margin:10px 0;background:color-mix(in srgb,var(--knowledge-accent) 5%,var(--bg))}.variant-summary h3{color:var(--knowledge-accent)}.version-handling{padding-top:7px;border-top:1px solid var(--line);margin-top:9px}.version-handling h4{color:var(--report-accent)}.version-label{font-size:10px;font-weight:600;color:var(--knowledge-accent)}.variant-diff pre{white-space:pre;overflow:auto;max-height:280px;font-size:11px}
+.report-card.report-design{border-left-color:var(--report-accent)}.report-card.report-coding{border-left-color:var(--knowledge-accent);background:color-mix(in srgb,var(--knowledge-accent) 5%,var(--bg))}.report-card.report-unresolved{border-left-color:var(--risk-accent);background:color-mix(in srgb,var(--risk-accent) 5%,var(--bg))}.category-tag{border:1px solid var(--line);border-radius:4px;color:var(--report-accent);padding:1px 6px}.report-coding .category-tag{color:var(--knowledge-accent)}.report-unresolved .category-tag{color:var(--risk-accent)}.finding-location,.finding-knowledge,.finding-id{font-size:10px;color:var(--muted);overflow-wrap:anywhere}.finding-confirmation{padding:7px 9px;margin:9px 0 5px;border:1px solid var(--line);border-radius:5px;background:var(--input);font-size:11px}.confirmation-label{font-size:10px;font-weight:600;color:var(--fg)}.finding-confirmation p{margin:4px 0 0}.finding-evidence{margin-top:9px;padding-top:7px;border-top:1px solid var(--line);font-size:11px}.finding-evidence summary{cursor:pointer;color:var(--muted)}.finding-evidence p{margin:6px 0}
+.tok-keyword{color:var(--syntax-keyword);font-weight:600}.tok-number{color:var(--syntax-number)}.tok-string{color:var(--syntax-string)}.tok-comment{color:var(--syntax-comment);font-style:italic}.tok-directive,.tok-system{color:var(--syntax-directive)}.tok-operator{color:var(--syntax-operator)}
+.hdl-code{border-top:3px solid var(--knowledge-accent);border-radius:5px;tab-size:4}.rich-panel{padding:10px;font-size:12px;line-height:1.7;overflow-wrap:anywhere}.rich-panel h3{font-size:12px;line-height:1.6;margin:8px 0;font-weight:600}.rich-panel h4{font-size:12px;margin:12px 0 5px;color:var(--fg)}.rich-panel p{margin:6px 0}.knowledge-card,.report-card,.review-card{border:1px solid var(--line);border-left:3px solid var(--knowledge-accent);border-radius:6px;margin:10px 0;padding:10px;background:var(--input);background:color-mix(in srgb,var(--knowledge-accent) 6%,var(--bg))}.report-card{border-left-color:var(--report-accent);background:color-mix(in srgb,var(--report-accent) 5%,var(--bg))}.review-card{border-left-color:var(--syntax-directive);background:color-mix(in srgb,var(--syntax-directive) 6%,var(--bg))}.card-meta{display:flex;align-items:center;gap:5px;flex-wrap:wrap;font-size:10px}.knowledge-id{color:var(--knowledge-accent);font-weight:600}.domain-tag,.control-id{color:var(--muted)}.domain-tag{border:1px solid var(--line);padding:0 5px;border-radius:3px}.pending-tag{margin-left:auto;color:var(--report-accent);border:1px solid currentColor;background:color-mix(in srgb,var(--report-accent) 10%,transparent);padding:0 5px;border-radius:3px}.risk-heading{color:var(--risk-accent)}.measure-label{font-size:10px;color:var(--report-accent);font-weight:600;margin-top:8px}.source-text,.relation-text{font-size:10px;color:var(--muted);border-top:1px solid var(--line);padding-top:7px;overflow-wrap:anywhere}.rich-text code{color:var(--syntax-string);background:var(--input);border:1px solid var(--line);border-radius:3px;padding:1px 4px;font:11px var(--vscode-editor-font-family,monospace)}.rich-text strong{font-weight:650;color:var(--fg)}.text-bullet{padding-left:13px;position:relative}.text-bullet:before{content:'•';position:absolute;left:1px;color:var(--knowledge-accent)}.result-note{padding:8px 10px;border:1px solid var(--line);border-left:3px solid var(--report-accent);border-radius:4px;background:color-mix(in srgb,var(--report-accent) 8%,var(--bg));color:var(--fg);font-size:11px}.raw-result{margin:12px 0 4px;border-top:1px solid var(--line);padding-top:8px}.raw-result summary{cursor:pointer;color:var(--muted);font-size:11px}.rich-panel .embedded-code{font-size:11px;min-height:0;max-height:280px;margin:8px 0;border:1px solid var(--line);border-radius:4px;background:var(--vscode-editor-background,var(--input))}.raw-result pre{min-height:0;font-size:11px;padding:8px 0}.vscode-high-contrast .knowledge-card,.vscode-high-contrast .report-card,.vscode-high-contrast .review-card,.vscode-high-contrast-light .knowledge-card,.vscode-high-contrast-light .report-card,.vscode-high-contrast-light .review-card{border-color:var(--vscode-contrastBorder,currentColor)}
+
+/* Fixed-color vector mark: independent of a theme's (sometimes very dark) focusBorder. */
+.logo.brand-mark,.mini-logo.brand-mark,.hero-mark.brand-mark{display:block;flex-shrink:0;border:0;border-radius:0;background:none;color:inherit;object-fit:contain}
+.logo.brand-mark{width:26px;height:26px}
+.mini-logo.brand-mark{width:26px;height:26px}
+.hero-mark.brand-mark{width:56px;height:56px}
+.brand{gap:8px}
+body.vscode-high-contrast .brand-mark,body.vscode-high-contrast-light .brand-mark{outline:1px solid var(--vscode-contrastBorder,currentColor);outline-offset:2px;border-radius:7px}
+
+
+body{background:#14181f;color:#d5d9e1;color-scheme:dark}
+.shell{max-width:1000px;margin:auto;border-inline:1px solid #333a45}
+.offline-banner{padding:10px 14px;background:#153b3b;border-bottom:1px solid #367c74;flex-shrink:0}
+.offline-banner strong{font-size:13px;color:#baf4e8}.offline-banner p{font-size:11px;margin:3px 0 0;color:#c2d8d4}
+#help,#settings,#modelSettings,#bind,#target,#optionsToggle,#options,#preview,#write{display:none!important}
+#requirement{height:120px}.context-row{min-height:0}
+@media(max-height:480px){.offline-banner{padding:6px 10px}.offline-banner p{display:none}#requirement{height:65px}}
+</style></head>
+<body data-demo-case="regular" data-route="secv" data-language="zh"><div class="shell">
+<header class="toolbar"><div class="brand"><img class="logo brand-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CiAgPHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iOCIgZmlsbD0iIzExNUU2MyIvPgogIDxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgcng9IjgiIHN0cm9rZT0iIzVERTREMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8cGF0aCBkPSJNMjMgOEgxMkw4IDEyVjIwTDEyIDI0SDI0VjE1SDE2VjE5SDIwVjIwSDE0TDEyIDE4VjE0TDE0IDEySDIzVjhaIiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="" aria-hidden="true"><b>CSL_HDLGen</b></div><div class="tools">
+<select id="language" data-label="界面语言"><option value="zh">中文</option><option value="en">English</option></select>
+<button id="help" class="icon" data-title="界面引导"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.4 9a2.6 2.6 0 0 1 5.1.6c0 1.8-2.5 2-2.5 3.9M12 17h.01"/></svg></button>
+<button id="new" class="icon" data-title="新任务"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></button>
+<button id="historyToggle" class="icon" data-title="历史记录" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M3 11a9 9 0 1 1 2 7M3 4v7h7M12 7v5l3 2"/></svg></button>
+<button id="settings" class="icon" data-title="模型设置"><svg viewBox="0 0 24 24"><path d="m10 3-.6 3-2 .9-2.6-.8L3 9l2 2v2l-2 2 1.8 2.9 2.6-.8 2 .9.6 3h4l.6-3 2-.9 2.6.8L21 15l-2-2v-2l2-2-1.8-2.9-2.6.8-2-.9L14 3Z"/><circle cx="12" cy="12" r="3"/></svg></button>
+</div></header><section class="offline-banner" aria-label="Offline demo"><strong id="offlineTitle"></strong><p id="offlineDescription"></p></section>
+<section id="modelSettings" class="model-settings" hidden aria-labelledby="settingsTitle"><div class="section-heading"><h1 id="settingsTitle" data-i18n="模型设置"></h1><button id="settingsClose" class="icon" data-title="关闭模型设置">×</button></div>
+<p class="muted" data-i18n="填写以下三项，一次保存。两个生成功能共用此配置。"></p>
+<form id="modelForm"><label for="endpoint" data-i18n="接口地址"></label><input id="endpoint" type="url" required maxlength="2048" placeholder="https://api.example.com/v1" autocomplete="off" spellcheck="false"><p class="field-help" data-i18n="填写基础地址，通常以 /v1 结尾；不要包含 /chat/completions。"></p>
+<label for="modelName" data-i18n="模型名称"></label><input id="modelName" type="text" required maxlength="256" autocomplete="off" spellcheck="false"><p class="field-help" data-i18n="使用服务商提供的准确模型 ID。"></p>
+<label for="apiKey">API Key</label><input id="apiKey" type="password" maxlength="8192" autocomplete="new-password" spellcheck="false"><p id="keyHelp" class="field-help"></p>
+<p class="field-help" data-i18n="密钥仅用于模型调用，保存到 VS Code 安全存储，不写入项目文件。"></p><p id="configError" class="config-error" role="alert" hidden></p>
+<div class="config-actions"><button id="settingsCancel" type="button" data-i18n="取消"></button><button id="configSave" type="submit" class="send" data-i18n="保存配置"></button></div></form></section>
+<section id="composerArea" class="composer-area" data-label="设计需求"><div id="statusRow" class="status-row"><span class="status-dot"></span><span id="status" role="status"></span></div>
+<div class="composer"><div class="context-row"><button id="bind" class="attach" data-title="绑定文件"><svg viewBox="0 0 24 24"><path d="m8 13 7-7a3 3 0 0 1 4 4l-9 9a5 5 0 0 1-7-7l9-9M6 15l8-8"/></svg><span data-i18n="绑定文件"></span></button><span id="target" class="file-chip"></span></div>
+<textarea id="requirement" maxlength="50000" rows="4" data-label="设计需求"></textarea>
+<div id="options" class="options" hidden><label><input id="demo" type="checkbox"><span data-i18n="演示模板"></span></label><label><input id="include" type="checkbox"><span data-i18n="授权模型参考绑定文件"></span></label></div>
+<div class="composer-controls"><select id="mode" data-label="生成方式"><option value="secv" data-i18n="通用安全生成"></option><option value="secfsm" data-i18n="FSM 安全生成"></option></select><div class="send-controls"><button id="optionsToggle" class="icon" data-title="生成选项" aria-expanded="false"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></svg></button><button id="cancel" class="send cancel" data-i18n="取消" hidden></button><button id="generate" class="send" data-i18n="生成" data-title="快捷生成：Ctrl / ⌘ + Enter"></button></div></div></div>
+<div class="demo-entry"><button id="runDemo" data-i18n="运行演示"></button><button id="runFsmUnreachable" data-i18n="不可达状态演示" hidden></button><span data-i18n="预置示例 · 无需配置环境"></span></div>
+<div class="composer-meta"><span id="modelState"></span><span>Ctrl / ⌘ ↵</span></div></section>
+<main id="conversation" class="conversation">
+<section id="historyDrawer" class="history" hidden><div class="section-heading"><b data-i18n="历史记录"></b><button id="historyClose" class="icon" data-title="关闭历史记录">×</button></div><p class="muted" data-i18n="本功能最近的生成结果"></p><div id="history"></div><p id="noHistory" class="muted" data-i18n="尚无记录"></p></section>
+<section id="welcome" class="welcome"><img class="hero-mark brand-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CiAgPHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iOCIgZmlsbD0iIzExNUU2MyIvPgogIDxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgcng9IjgiIHN0cm9rZT0iIzVERTREMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8cGF0aCBkPSJNMjMgOEgxMkw4IDEyVjIwTDEyIDI0SDI0VjE1SDE2VjE5SDIwVjIwSDE0TDEyIDE4VjE0TDE0IDEySDIzVjhaIiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="" aria-hidden="true"><span class="eyebrow">CSL_HDLGen</span><h1 id="welcomeTitle"></h1><p id="intro"></p><div class="trust-tags"><span data-i18n="本地知识库"></span><span data-i18n="写入前确认"></span></div></section>
+<section id="result" class="result" hidden><div class="request"><span data-i18n="需求" class="eyebrow"></span><p id="submitted"></p></div><div class="result-heading"><img class="mini-logo brand-mark" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSI+CiAgPHJlY3QgeD0iMSIgeT0iMSIgd2lkdGg9IjMwIiBoZWlnaHQ9IjMwIiByeD0iOCIgZmlsbD0iIzExNUU2MyIvPgogIDxyZWN0IHg9IjEiIHk9IjEiIHdpZHRoPSIzMCIgaGVpZ2h0PSIzMCIgcng9IjgiIHN0cm9rZT0iIzVERTREMCIgc3Ryb2tlLXdpZHRoPSIxLjUiLz4KICA8cGF0aCBkPSJNMjMgOEgxMkw4IDEyVjIwTDEyIDI0SDI0VjE1SDE2VjE5SDIwVjIwSDE0TDEyIDE4VjE0TDE0IDEySDIzVjhaIiBmaWxsPSIjRkZGRkZGIi8+Cjwvc3ZnPgo=" alt="" aria-hidden="true"><b>CSL_HDLGen</b><span id="badge" class="badge"></span></div>
+<div class="tabs" role="tablist"><button id="tabCode" role="tab" data-tab="code" data-i18n="安全代码" class="selected" aria-selected="true" aria-controls="code"></button><button id="tabKnowledge" role="tab" data-tab="knowledge" data-i18n="安全知识" aria-selected="false" aria-controls="knowledge"></button><button id="tabReport" role="tab" data-tab="report" data-i18n="安全报告" aria-selected="false" aria-controls="report"></button></div>
+<div id="variantPicker" class="variant-picker" hidden><label for="variantSelect" data-i18n="代码版本"></label><select id="variantSelect" data-label="代码版本"></select></div>
+<div class="output"><pre id="code" class="panel hdl-code" role="tabpanel" aria-labelledby="tabCode" tabindex="0"></pre><div id="knowledge" class="panel rich-panel" role="tabpanel" aria-labelledby="tabKnowledge" tabindex="0" hidden></div><div id="report" class="panel rich-panel" role="tabpanel" aria-labelledby="tabReport" tabindex="0" hidden></div></div>
+<div class="actions"><button id="copy" data-i18n="复制" disabled></button><button id="save" data-i18n="打开新文件" disabled></button><button id="preview" data-i18n="查看写入差异" disabled></button><button id="write" data-i18n="写入绑定文件" disabled></button><button id="power" data-i18n="低功耗优化" hidden></button></div>
+<p class="disclaimer" data-i18n="代码使用前请完成编译、仿真和安全验证。"></p><p class="disclaimer" data-i18n="原始生成内容；切换界面语言不会翻译代码、报告或知识文本。"></p></section>
+</main>
+</div><script>(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.HDLGenI18n=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+  const en={
+    '界面引导':'Interface guide','快速了解界面':'A quick tour',
+    '第 {current} 步，共 {total} 步':'Step {current} of {total}',
+    '模型配置':'Model configuration',
+    '点击右上角齿轮，一次填写 API 地址、模型名称和 API Key。':'Click the gear at the top right to enter the API endpoint, model name, and API key together.',
+    '输入设计需求':'Enter design requirements',
+    '在上方输入框描述接口、功能和时钟复位。FSM 需求还需列出状态、初态、转移条件和输出。':'Use the input above to describe interfaces, behavior, clocks, and reset. For an FSM, also list states, the initial state, transition conditions, and outputs.',
+    '查看生成结果':'View generation results',
+    '生成后在下方查看代码、安全知识和安全报告，并可复制或保存代码。':'After generation, review code, security knowledge, and the security report below. You can also copy or save the code.',
+    '运行 Demo':'Run a demo',
+    '输入框下方的演示按钮可直接加载预置案例，无需 Python 或模型配置。FSM 页面还提供功能修正演示。':'The demo buttons below the input load preset examples without Python or model configuration. FSM mode also includes a functional-correction demo.',
+    '上一步':'Back','下一步':'Next','完成':'Finish','跳过引导':'Skip tour','关闭引导':'Close tour',
+    '查看原始文本':'View original text','暂无安全知识条目。':'No knowledge entries available.',
+    '知识参考不代表已落实到代码，需结合验证结果确认。':'Retrieved knowledge is reference material, not proof that safeguards are implemented.',
+    '关联':'Relation','来源':'Source','模型生成草稿：安全措施尚待验证。':'Model-generated draft: security measures require verification.',
+    '演示模板：未按完整需求生成，尚待验证。':'Demo template: not generated for the full requirements; verification is pending.',
+    '安全措施':'Security control','待验证':'Pending verification','安全风险':'Security risk','应对措施':'Mitigation',
+    '拟采取的编码措施':'Planned coding measure','需求约束（尚无匹配知识）':'Requirement constraint (no matched knowledge)',
+    '以下为安全规划中拟采取的编码措施，不表示已落实或已消除漏洞。':'These coding measures are proposed by the security plan; implementation and vulnerability elimination have not been verified.',
+    '低功耗调用后继续保留这些计划约束；安全性、功能等价性与功耗仍待验证。':'The power pass retains these planned constraints. Security, functional equivalence and power remain unverified.',
+    '安全规划未列出编码措施；不代表设计不存在风险。':'The security planner listed no coding measures; this does not establish that the design has no risks.',
+    '安全规划格式无效，请重新生成。':'Invalid security plan format. Generate again.',
+    '安全规划包含重复字段，请重新生成。':'The security plan contains duplicate fields. Generate again.',
+    '安全规划未返回有效JSON，请重新生成。':'The security planner did not return valid JSON. Generate again.',
+    '安全规划必须是仅包含 controls 数组的JSON对象。':'The security plan must be a JSON object containing only a controls array.',
+    '安全规划最多允许32项编码措施。':'The security plan may contain at most 32 coding measures.',
+    '安全规划条目必须包含且仅包含 id、risk、knowledge_ids、measure。':'Each security plan item must contain exactly id, risk, knowledge_ids and measure.',
+    '安全规划条目编号无效或重复。':'Security plan item IDs are invalid or duplicated.',
+    '安全规划的风险与编码措施必须是长度有效的非空文本。':'Security plan risks and measures must be nonempty text within the length limits.',
+    '安全规划中的关联知识必须来自本次检索结果且不得重复。':'Related knowledge IDs must come from this retrieval and must not be duplicated.',
+    '需求状态图检查':'Requirement state-graph check',
+    '设计建议':'Design recommendation','编码约束':'Coding constraint','待确认问题':'Needs clarification',
+    '需求阶段已确认':'Confirmed in requirements','需求阶段已排除':'Ruled out in requirements',
+    '需求信息待确认':'Requirements need clarification','预防性编码约束':'Preventive coding constraint',
+    '需求分析':'Requirement analysis','需求阶段的确认不代表生成 RTL 已通过安全验证。':'Confirmation concerns the requirements; generated RTL still needs security verification.',
+    '位置':'Location','关联知识':'Related knowledge','分析证据':'Analysis evidence',
+    '确认规则':'Confirmation rule','确认方式':'Confirmation method','问题编号':'Finding ID',
+    '状态':'State','起点':'From','终点':'To','信号':'Signal','转移':'Transition',
+    '结构化 FSM':'Structured FSM','分析覆盖范围':'Analysis coverage',
+    '代码版本':'Code version','原功能安全版':'Original-function secure RTL','功能修正版':'Function-repaired RTL',
+    '版本处理说明':'Handling by version','变更与假设':'Changes and assumptions',
+    '计划处理的问题':'Findings targeted by this draft','保留的问题':'Remaining findings','无列出条目':'None listed',
+    '功能修改差异':'Functional change diff',
+    '两版均为待验证草稿；功能修正版包含功能调整，请检查变更与假设。':'Both versions are unverified drafts. Review the functional changes and assumptions in the repaired version.',
+    '未知或无效的代码版本。':'Unknown or invalid code variant.',
+    '已切换代码版本；所有代码操作使用当前版本。':'Code version selected. All code actions use this version.',
+    '运行演示':'Run demo','常规 FSM 演示':'Regular FSM demo','不可达状态演示':'Unreachable-state demo','未知或无效的演示案例。':'Unknown or invalid demo case.','预置示例 · 无需配置环境':'Preset example · No setup required',
+    '预置示例引用的安全知识。':'Security knowledge referenced by this preset example.',
+    '预置示例说明；未执行模型审查。':'Preset example notes; no model review is performed.',
+    '离线演示 · 无需配置':'Offline demo · No setup',
+    '离线示例已加载；无需 Python、模型或数据库服务。':'Offline example loaded. No Python, model, or database service required.',
+    '论文低功耗示例已加载；仅静态对照，未执行编译、仿真或功耗测量。':'Paper low-power example loaded for static comparison only; no compilation, simulation, or power measurement was performed.',
+    '代码使用前请完成编译、仿真和安全验证。':'Compile, simulate, and validate the code before use.',
+    '关闭模型设置':'Close model settings','接口地址':'API endpoint','填写以下三项，一次保存。两个生成功能共用此配置。':'Fill in all three fields and save once. Both generation modes share this configuration.',
+    '填写基础地址，通常以 /v1 结尾；不要包含 /chat/completions。':'Enter the base URL, usually ending in /v1. Do not include /chat/completions.',
+    '使用服务商提供的准确模型 ID。':'Use the exact model ID from your provider.',
+    '密钥仅用于模型调用，保存到 VS Code 安全存储，不写入项目文件。':'The key is used only for model requests and stored in VS Code secure storage, never in project files.',
+    '保存配置':'Save configuration','保存中…':'Saving…','已保存密钥；留空可保留，更换接口地址时需要重新填写。':'A key is saved. Leave blank to keep it; enter a new key when changing the endpoint.',
+    '首次配置请填写 API Key。':'Enter an API key for the initial configuration.','留空保留已有密钥':'Leave blank to keep the saved key','输入 API Key':'Enter API key',
+    '请填写有效的接口地址。':'Enter a valid API endpoint.','请填写基础地址，不要包含 /chat/completions。':'Enter the base URL without /chat/completions.',
+    '请填写模型名称。':'Enter a model name.','API Key 过长。':'API key is too long.','首次配置需要填写 API Key。':'An API key is required for the initial configuration.',
+    '接口地址已更改，请重新填写对应的 API Key。':'The endpoint has changed. Enter the corresponding API key.',
+    '配置保存失败，请重试。':'Could not save configuration. Please retry.','配置已保存；尚未测试连接。':'Configuration saved. Connection has not been tested.',
+    '安全生成':'Secure generation','通用安全生成':'General secure RTL','FSM 安全生成':'Secure FSM',
+    '界面语言':'Interface language','生成方式':'Generation mode','模型设置':'Model settings','新任务':'New task','历史记录':'History',
+    '从需求到安全 RTL':'From requirements to secure RTL','为状态机加入安全设计':'Build security into your FSM',
+    '描述你的设计，生成代码，并查看安全措施与知识依据。':'Describe your design, generate RTL, and inspect the security measures and supporting knowledge.',
+    '描述状态、初态、转移条件，以及异常状态下的预期行为。':'Describe states, reset state, transition conditions, and behavior for invalid states.',
+    '本地知识库':'Local knowledge','写入前确认':'Review before writing','开始一个新设计':'Start a new design',
+    '设计需求':'Design requirements','描述接口、功能、时钟复位和安全约束…':'Describe interfaces, behavior, clocks, reset, and security constraints…',
+    '描述状态、初态、转移条件和异常处理…':'Describe states, reset state, transitions, and error handling…',
+    '绑定文件':'Attach file','生成选项':'Generation options','演示模板':'Demo template','授权模型参考绑定文件':'Allow model to reference attached file',
+    '生成':'Generate','取消':'Cancel','安全代码':'Code','安全报告':'Security report','安全知识':'Knowledge',
+    '复制':'Copy','打开新文件':'Open as file','查看写入差异':'Review diff','写入绑定文件':'Write to file','低功耗优化':'Optimize power',
+    '尚无记录':'No history yet','本功能最近的生成结果':'Recent results for this mode','关闭历史记录':'Close history',
+    '未绑定文件':'No file attached','已配置模型':'Model configured','未配置模型':'Set up a model','待验证草稿':'Unverified draft',
+    '演示结果':'Demo result','原始生成内容；切换界面语言不会翻译代码、报告或知识文本。':'Original generated content; switching UI language does not translate code, reports, or knowledge.',
+    '正在连接…':'Connecting…','需求':'Request','快捷生成：Ctrl / ⌘ + Enter':'Generate: Ctrl / ⌘ + Enter',
+    '请先信任当前工作区。':'Please trust the current workspace first.','请先信任工作区。':'Please trust the workspace first.',
+    'CSL_HDLGen · 模型地址':'CSL_HDLGen · Model endpoint','HTTPS 兼容接口（本机模型可用 HTTP），通常以 /v1 结尾':'Compatible HTTPS endpoint (HTTP allowed for local models), usually ending in /v1',
+    '模型地址不合法。':'Invalid model endpoint.','模型地址不合法':'Invalid model endpoint.',
+    '远程模型必须使用 HTTPS。':'Remote model endpoints must use HTTPS.','远程模型必须使用 HTTPS':'Remote model endpoints must use HTTPS.',
+    '模型名称':'Model name','API Key（保存到 VS Code SecretStorage）':'API key (stored in VS Code SecretStorage)',
+    'CSL_HDLGen：模型已配置，两个页面共用设置。':'CSL_HDLGen: Model configured. Both modes share these settings.',
+    '未知页面':'Unknown mode.','填写需求，直接启动本功能的生成流程。':'Enter your requirements to start this mode.',
+    '请等待本页操作完成或取消。':'Wait for the current operation to finish or cancel it.',
+    '绑定目标文件':'Attach target file','已绑定文件；生成不会自动写入。':'File attached. Generation will not write to it automatically.',
+    '已开始新任务。':'New task started.','记录不存在':'History entry not found.',
+    '已恢复本页记录；写入时会重新检查文件版本。':'History restored. The file version will be checked again before writing.',
+    '只能优化当前未优化的通用模型生成结果。':'Only the current, unoptimized general model result can be optimized.',
+    '只能优化当前未优化的通用模型生成结果或论文 CSR 演示。':'Only the current, unoptimized general model result or paper CSR demo can be optimized.',
+    '论文低功耗示例已加载；仅静态对照，未执行编译、仿真或功耗测量。':'Paper low-power reference loaded; static comparison only. Compilation, simulation and power measurements were not performed.',
+    '请填写有效需求（最多 50000 字符）。':'Enter valid requirements (up to 50,000 characters).',
+    '请先配置模型，或勾选演示模板。':'Configure a model or select Demo template first.',
+    '正在生成…':'Generating…','后端返回了错误的页面类型。':'The backend returned a result for the wrong mode.',
+    '演示模板已生成；未覆盖完整需求，未验证。':'Demo template generated. It may not cover all requirements and is unverified.',
+    '代码草稿已生成，尚未完成编译、安全和功耗验证。':'Draft generated. Compilation, security, and power checks have not been performed.',
+    '请先生成代码。':'Generate code first.','已复制代码。':'Code copied.',
+    '已打开新文件，使用“另存为”保存。':'Opened as a new file. Use Save As to save it.',
+    '请在生成前绑定目标文件。':'Attach a target file before generating.',
+    'CSL_HDLGen · 写入差异':'CSL_HDLGen · Review changes',
+    '请先绑定目标并生成一个尚未写入的版本。':'Attach a target and generate a version that has not been written yet.',
+    '已写入并备份：':'Written. Backup: ',
+    '请绑定当前工作区内的 HDL 文件。':'Attach an HDL file inside the current workspace.',
+    '文件无效、为链接或超过 200 KB。':'Invalid file, linked file, or file larger than 200 KB.',
+    '请先保存目标文件中的修改。':'Save changes to the target file first.',
+    '目标文件自生成后已变化，请重新生成。':'The target file has changed since generation. Generate again.',
+    '将整文件替换为当前生成代码：':'Replace the entire file with the current generated code:',
+    '备份并写入':'Back up and write','未能应用修改；备份位于 ':'Could not apply changes. Backup: ',
+    '代码已应用到编辑器，但保存失败；请手动保存。备份：':'Changes applied in the editor, but saving failed. Save manually. Backup: ',
+    '无法启动 Python，请设置 cslHdlgen.pythonPath（Python 3.10+）。':'Cannot start Python. Set cslHdlgen.pythonPath to Python 3.10+.',
+    '生成后端退出，未返回结果。':'The generation backend exited without a result.',
+    '无法发送生成请求。':'Could not send the generation request.','后端响应无效。':'Invalid backend response.',
+    '生成超时，请重试。':'Generation timed out. Please retry.','已取消生成。':'Generation cancelled.',
+    '必须明确选择通用安全生成或 FSM 安全生成页面':'Select General secure RTL or Secure FSM.',
+    '请填写 1–50000 字符的需求':'Enter requirements between 1 and 50,000 characters.',
+    'FSM 页面不支持低功耗优化':'Power optimization is unavailable in FSM mode.',
+    '请配置模型，或明确选择演示模板':'Configure a model or explicitly choose Demo template.',
+    '只能优化当前未优化的模型生成通用 RTL':'Only unoptimized, model-generated general RTL can be optimized.',
+    '参考代码过大':'Reference code is too large.',
+    '生成失败，请检查模型配置、网络或 Python 环境。':'Generation failed. Check your model settings, network, or Python environment.',
+    '安全规划中…':'Planning security…','生成 RTL 中…':'Generating RTL…','低功耗优化中…':'Optimizing power…',
+    'FSM 结构提取中…':'Extracting FSM structure…','纠正 FSM 结构格式中…':'Correcting FSM structure format…','漏洞知识确认中…':'Confirming findings with security knowledge…','生成功能修正版中…':'Generating function-repaired RTL…'
+  };
+  const stages={SecurityPlanningAgent:'安全规划中…',FSMSecurityPlanningAgent:'安全规划中…',SecureRTLCoderAgent:'生成 RTL 中…',SecureFSMCoderAgent:'生成 RTL 中…',LowPowerOptimizationAgent:'低功耗优化中…',FSMExtractionAgent:'FSM 结构提取中…',FSMExtractionRepairAgent:'纠正 FSM 结构格式中…',FSMVulnerabilityConfirmationAgent:'漏洞知识确认中…',FSMFunctionalRepairCoderAgent:'生成功能修正版中…'};
+  function text(value,language='zh'){value=stages[value]||value||'';if(language!=='en')return value;if(en[value])return en[value];for(const prefix of ['已写入并备份：','未能应用修改；备份位于 ','代码已应用到编辑器，但保存失败；请手动保存。备份：'])if(value.startsWith(prefix))return en[prefix]+value.slice(prefix.length);return value;}
+  return {text,en};
+});
+
+;
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.HDLGenRender=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+  const keywords=new Set(('module endmodule input output inout wire reg logic bit integer int parameter localparam assign always always_ff always_comb always_latch initial begin end if else case casex casez endcase default for foreach while repeat generate endgenerate genvar function endfunction task endtask return posedge negedge or signed unsigned typedef enum struct packed automatic static import package endpackage interface endinterface modport assert assume cover property endproperty disable iff unique priority inside').split(' '));
+  // Tokenization only: no parsing, execution, or modification of generated HDL.
+  function tokenize(source){
+    const pattern=/\/\/[^\r\n]*|\/\*[\s\S]*?(?:\*\/|$)|"(?:\\[\s\S]|[^"\\])*"|\\[^\s]+|(?:\d[\d_]*\s*)?'[sS]?[bBoOdDhH][0-9a-fA-F_xXzZ?]+|'[01xXzZ]|\b\d[\d_]*(?:\.\d[\d_]*)?(?:[eE][+-]?\d[\d_]*)?\b|`[a-zA-Z_][\w$]*|\$[a-zA-Z_][\w$]*|\b[a-zA-Z_][\w$]*\b|[~!%^&*+=|?:<>/-]+/g;
+    const tokens=[];let offset=0;
+    for(const match of source.matchAll(pattern)){
+      if(match.index>offset)tokens.push({type:'plain',text:source.slice(offset,match.index)});
+      const text=match[0];let type='plain';
+      if(text.startsWith('//')||text.startsWith('/*'))type='comment';
+      else if(text.startsWith('"'))type='string';
+      else if(text.startsWith('`'))type='directive';
+      else if(text.startsWith('$'))type='system';
+      else if(/^[\d']/.test(text))type='number';
+      else if(keywords.has(text))type='keyword';
+      else if(/^[~!%^&*+=|?:<>/-]/.test(text))type='operator';
+      tokens.push({type,text});offset=match.index+text.length;
+    }
+    if(offset<source.length)tokens.push({type:'plain',text:source.slice(offset)});
+    return tokens;
+  }
+  function element(doc,tag,className,text){const node=doc.createElement(tag);if(className)node.className=className;if(text!==undefined)node.textContent=String(text);return node;}
+  function code(container,source,doc){
+    container.replaceChildren();
+    for(const token of tokenize(String(source||'')))container.append(element(doc,'span','tok-'+token.type,token.text));
+  }
+  function inline(container,source,doc){
+    // Intentionally support only inline code and bold, never arbitrary HTML or links.
+    const pattern=/`([^`\n]+)`|\*\*([^*\n]+)\*\*/g;let offset=0;
+    for(const match of source.matchAll(pattern)){
+      if(match.index>offset)container.append(element(doc,'span','',source.slice(offset,match.index)));
+      container.append(element(doc,match[1]!==undefined?'code':'strong','',match[1]??match[2]));offset=match.index+match[0].length;
+    }
+    if(offset<source.length)container.append(element(doc,'span','',source.slice(offset)));
+  }
+  function prose(container,source,doc){
+    const lines=String(source||'').split(/\r?\n/);let fence=null,block=[];
+    const flush=()=>{const pre=element(doc,'pre','embedded-code');if(/^(verilog|systemverilog|sv)$/i.test(fence))code(pre,block.join('\n'),doc);else pre.textContent=block.join('\n');container.append(pre);block=[];};
+    for(const line of lines){
+      const marker=line.match(/^\s*```\s*([\w-]*)\s*$/);
+      if(marker){if(fence!==null){flush();fence=null;}else fence=marker[1];continue;}
+      if(fence!==null){block.push(line);continue;}
+      if(!line.trim())continue;
+      const heading=line.match(/^#{1,6}\s+(.+)$/),bullet=line.match(/^\s*(?:[-*•]|\d+[.)])\s+(.+)$/);
+      const p=element(doc,heading?'h4':'p',bullet?'text-bullet':'');inline(p,heading?heading[1]:bullet?bullet[1]:line,doc);container.append(p);
+    }
+    if(fence!==null)flush();
+  }
+  function note(container,text,doc){container.append(element(doc,'p','result-note',text));}
+  function raw(container,source,t,doc){if(!source)return;const details=element(doc,'details','raw-result');details.append(element(doc,'summary','',t('查看原始文本')));details.append(element(doc,'pre','prose',source));container.append(details);}
+  const categories={design_advice:['设计建议','report-design'],coding_constraint:['编码约束','report-coding'],needs_confirmation:['待确认问题','report-unresolved']};
+  const confirmations={confirmed:'需求阶段已确认',rejected:'需求阶段已排除',needs_confirmation:'需求信息待确认',preventive:'预防性编码约束'};
+  const variantNames={original_function_secure:'原功能安全版',function_repaired:'功能修正版'};
+  function versionHandling(card,item,t,doc){
+    if(!item.version_handling||typeof item.version_handling!=='object')return;
+    const entries=Object.entries(item.version_handling).filter(([id,text])=>Object.hasOwn(variantNames,id)&&typeof text==='string'&&text);
+    if(!entries.length)return;
+    const box=element(doc,'div','version-handling');box.append(element(doc,'h4','',t('版本处理说明')));
+    for(const [id,text] of entries){box.append(element(doc,'p','version-label',t(variantNames[id])));const body=element(doc,'div','rich-text');prose(body,text,doc);box.append(body);}card.append(box);
+  }
+  function variantSummaries(container,result,t,doc){
+    if(!Array.isArray(result.variants)||result.variants.length<2)return;
+    note(container,t('两版均为待验证草稿；功能修正版包含功能调整，请检查变更与假设。'),doc);
+    for(const variant of result.variants){
+      if(!Object.hasOwn(variantNames,variant.id))continue;
+      const card=element(doc,'article','variant-summary');card.append(element(doc,'h3','',t(variantNames[variant.id])));
+      const changes=Array.isArray(variant.change_summary)?variant.change_summary.filter(item=>typeof item==='string'):[];
+      if(changes.length){card.append(element(doc,'div','measure-label',t('变更与假设')));for(const text of changes)card.append(element(doc,'p','text-bullet',text));}
+      for(const [key,label] of [['addressed_findings','计划处理的问题'],['remaining_findings','保留的问题']]){
+        const ids=Array.isArray(variant[key])?variant[key].filter(item=>typeof item==='string'):[];
+        card.append(element(doc,'p','finding-id',t(label)+' · '+(ids.length?ids.join(', '):t('无列出条目'))));
+      }
+      if(typeof variant.code_diff==='string'&&variant.code_diff){const details=element(doc,'details','raw-result variant-diff');details.append(element(doc,'summary','',t('功能修改差异')));details.append(element(doc,'pre','',variant.code_diff));card.append(details);}
+      container.append(card);
+    }
+  }
+  function locationText(location,t){
+    if(!location||typeof location!=='object')return String(location||'');
+    const labels={state:'状态',states:'状态',source:'起点',from:'起点',target:'终点',to:'终点',signal:'信号',transition:'转移'};
+    return Object.entries(location).filter(([key,value])=>key!=='kind'&&value!==null&&value!=='').map(([key,value])=>
+      (labels[key]?t(labels[key]):key)+' · '+(Array.isArray(value)?value.join(', '):typeof value==='object'?JSON.stringify(value):String(value))).join(' / ');
+  }
+  function findingDetails(card,item,t,doc){
+    const location=locationText(item.location,t),ids=Array.isArray(item.knowledge_ids)?item.knowledge_ids:[];
+    if(location)card.append(element(doc,'p','finding-location',t('位置')+' · '+location));
+    if(ids.length)card.append(element(doc,'p','finding-knowledge',t('关联知识')+' · '+ids.join(', ')));
+    const confirmation=item.confirmation;
+    if(confirmation&&typeof confirmation==='object'&&confirmation.status){
+      const box=element(doc,'div','finding-confirmation');
+      box.append(element(doc,'span','confirmation-label',t(confirmations[confirmation.status]||'需求分析')));
+      if(confirmation.reason)box.append(element(doc,'p','',confirmation.reason));
+      card.append(box);
+    }
+    const evidence=Array.isArray(item.evidence)?item.evidence:[];
+    if(evidence.length||confirmation?.method||confirmation?.rule_id){
+      const details=element(doc,'details','finding-evidence');details.append(element(doc,'summary','',t('分析证据')));
+      for(const entry of evidence)details.append(element(doc,'p','text-bullet',typeof entry==='string'?entry:JSON.stringify(entry)));
+      if(confirmation?.rule_id)details.append(element(doc,'p','',t('确认规则')+' · '+confirmation.rule_id));
+      if(confirmation?.method)details.append(element(doc,'p','',t('确认方式')+' · '+confirmation.method));
+      if(item.finding_id)details.append(element(doc,'p','finding-id',t('问题编号')+' · '+item.finding_id));
+      card.append(details);
+    }
+  }
+  function knowledge(container,output,t,doc){
+    container.replaceChildren();const items=output?.result?.knowledge_used;
+    if(!Array.isArray(items)||!items.length){prose(container,output?.knowledge||t('暂无安全知识条目。'),doc);return;}
+    note(container,t(output?.result?.verification?.demo_case?'预置示例引用的安全知识。':'知识参考不代表已落实到代码，需结合验证结果确认。'),doc);
+    for(const item of items){
+      const card=element(doc,'article','knowledge-card');const head=element(doc,'div','card-meta');head.append(element(doc,'span','knowledge-id',item.id||'KG'));if(item.domain)head.append(element(doc,'span','domain-tag',item.domain));card.append(head);
+      card.append(element(doc,'h3','',item.title||t('安全知识')));const body=element(doc,'div','rich-text');prose(body,item.content,doc);card.append(body);
+      if(item.relation)card.append(element(doc,'p','relation-text',t('关联')+' · '+item.relation));
+      if(item.source)card.append(element(doc,'p','source-text',t('来源')+' · '+item.source));container.append(card);
+    }
+    raw(container,output.knowledge,t,doc);
+  }
+  function report(container,output,t,doc){
+    container.replaceChildren();const result=output?.result||{},items=result.security_report,verification=result.verification||{};
+    const planned=verification.report_origin==='security_plan';
+    note(container,t(verification.demo_case?'预置示例说明；未执行模型审查。':verification.agent_mode==='model'?'模型生成草稿：安全措施尚待验证。':'演示模板：未按完整需求生成，尚待验证。'),doc);
+    if(planned){
+      note(container,t('以下为安全规划中拟采取的编码措施，不表示已落实或已消除漏洞。'),doc);
+      if(result.low_power_applied)note(container,t('低功耗调用后继续保留这些计划约束；安全性、功能等价性与功耗仍待验证。'),doc);
+      if(!Array.isArray(items)||!items.length)note(container,t('安全规划未列出编码措施；不代表设计不存在风险。'),doc);
+    }
+    if(verification.fsm_security||Array.isArray(items)&&items.some(item=>item.confirmation?.status))note(container,t('需求阶段的确认不代表生成 RTL 已通过安全验证。'),doc);
+    variantSummaries(container,result,t,doc);
+    if(Array.isArray(items)&&items.length){for(const item of items){
+      const category=Object.hasOwn(categories,item.category)?categories[item.category]:null;
+      const card=element(doc,'article','report-card'+(category?' '+category[1]:''));const head=element(doc,'div','card-meta');head.append(element(doc,'span','control-id',item.id||t('安全措施')));if(category)head.append(element(doc,'span','category-tag',t(category[0])));head.append(element(doc,'span','pending-tag',t('待验证')));card.append(head);
+      card.append(element(doc,'h3','risk-heading',item.risk||t('安全风险')));card.append(element(doc,'div','measure-label',t(planned?'拟采取的编码措施':'应对措施')));const body=element(doc,'div','rich-text');prose(body,item.measure,doc);card.append(body);findingDetails(card,item,t,doc);if(planned&&(!Array.isArray(item.knowledge_ids)||!item.knowledge_ids.length))card.append(element(doc,'p','finding-knowledge',t('关联知识')+' · '+t('需求约束（尚无匹配知识）')));versionHandling(card,item,t,doc);container.append(card);
+    }}else if(output?.report)prose(container,output.report,doc);
+    if(verification.fsm_structure){const structure=element(doc,'details','raw-result');structure.append(element(doc,'summary','',t('结构化 FSM')));structure.append(element(doc,'pre','prose',JSON.stringify(verification.fsm_structure,null,2)));container.append(structure);}
+    if(verification.fsm_security?.coverage){const coverage=element(doc,'details','raw-result');coverage.append(element(doc,'summary','',t('分析覆盖范围')));coverage.append(element(doc,'pre','prose',JSON.stringify(verification.fsm_security.coverage,null,2)));container.append(coverage);}
+    if(verification.fsm_graph){const graph=element(doc,'details','raw-result');graph.append(element(doc,'summary','',t('需求状态图检查')));graph.append(element(doc,'pre','prose',JSON.stringify(verification.fsm_graph,null,2)));container.append(graph);}
+    raw(container,output?.report,t,doc);
+  }
+  return {tokenize,code,knowledge,report,prose};
+});
+
+;
+(function(root,factory){const api=factory();if(typeof module==='object'&&module.exports)module.exports=api;else root.HDLGenDemos=api;})(typeof globalThis!=='undefined'?globalThis:this,function(){
+  'use strict';
+  const csrSecure=`// Paper-adapted reference: PowerSecV, Section IV.D, Figure 4(b), pp. 11-12.
+// Completed interface/reset/read behavior is documented in comparison.md.
+// Upstream decoding must prevent different privilege addresses from aliasing
+// the same low-7-bit storage index. This is not a complete RISC-V CSR decoder.
+// Static illustration only: compilation, simulation and physical evaluation were not run.
+module csr_access_secure (
+    input  wire        clk,
+    input  wire        rst_n,
+    input  wire        csr_we,
+    input  wire [1:0]  current_priv,
+    input  wire [11:0] csr_addr,
+    input  wire [31:0] write_data,
+    output wire [31:0] csr_rdata,
+    output reg         illegal_access,
+    output wire        power_signature
+);
+    reg [31:0] csr_mem [0:127];
+    reg [31:0] mask_0;
+    wire is_valid;
+    integer i;
+
+    assign is_valid = (current_priv >= csr_addr[11:10]);
+    // The read port is an explicit completion of the paper's abbreviated module.
+    assign csr_rdata = is_valid ? csr_mem[csr_addr[6:0]] : 32'b0;
+    // Observation of the auxiliary register, not a physical power measurement.
+    assign power_signature = ^mask_0;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            for (i = 0; i < 128; i = i + 1)
+                csr_mem[i] <= 32'b0;
+            mask_0 <= 32'b0;
+            illegal_access <= 1'b0;
+        end else begin
+            illegal_access <= 1'b0;
+            if (csr_we) begin
+                if (is_valid)
+                    csr_mem[csr_addr[6:0]] <= write_data;
+                illegal_access <= !is_valid;
+                // Match Figure 4(b): update the auxiliary path for every request,
+                // including denied writes. A fixed XOR does not guarantee toggling.
+                mask_0 <= write_data ^ 32'hA3EF63B2;
+            end
+        end
+    end
+endmodule
+`;
+  const csrLowPower=`// Paper-adapted reference: PowerSecV, Section IV.D, Figure 4(c), pp. 11-12.
+// Address, data and permission are buffered together to complete the pipeline.
+// Upstream decoding must prevent different privilege addresses from aliasing
+// the same low-7-bit storage index. This is not a complete RISC-V CSR decoder.
+// Static illustration only: compilation, simulation and physical evaluation were not run.
+module csr_access_low_power (
+    input  wire        clk,
+    input  wire        rst_n,
+    input  wire        csr_we,
+    input  wire [1:0]  current_priv,
+    input  wire [11:0] csr_addr,
+    input  wire [31:0] write_data,
+    output wire [31:0] csr_rdata,
+    output reg         illegal_access,
+    output wire        power_signature
+);
+    reg [31:0] csr_mem [0:127];
+    reg [31:0] dummy_0;
+    reg [6:0]  addr_q;
+    reg        allow_q;
+    reg        pending_q;
+    wire is_valid;
+    wire gated_clk_en;
+    integer i;
+
+    assign is_valid = (current_priv >= csr_addr[11:10]);
+    // Clock-enable style; no combinational AND is inserted into the clock path.
+    assign gated_clk_en = pending_q && allow_q;
+    assign csr_rdata = is_valid ? csr_mem[csr_addr[6:0]] : 32'b0;
+    // This parity observation is not a power or side-channel security metric.
+    assign power_signature = ^dummy_0;
+
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            for (i = 0; i < 128; i = i + 1)
+                csr_mem[i] <= 32'b0;
+            dummy_0 <= 32'b0;
+            addr_q <= 7'b0;
+            allow_q <= 1'b0;
+            pending_q <= 1'b0;
+            illegal_access <= 1'b0;
+        end else begin
+            illegal_access <= 1'b0;
+
+            // Nonblocking assignments use the previous accepted transaction here.
+            // Permission is sampled at acceptance and remains valid for that request.
+            if (gated_clk_en)
+                csr_mem[addr_q] <= dummy_0;
+
+            pending_q <= csr_we;
+            if (csr_we) begin
+                // Both permitted and denied requests update the lightweight buffer.
+                dummy_0 <= write_data;
+                addr_q <= csr_addr[6:0];
+                allow_q <= is_valid;
+                illegal_access <= !is_valid;
+            end
+        end
+    end
+endmodule
+`;
+  const regularFsm=`module secure_controller (
+  input  wire clk,
+  input  wire rst_n,
+  output reg  busy,
+  output reg  done,
+  output reg  alarm
+);
+  localparam [2:0]
+    IDLE = 3'b000, RUN = 3'b001, DONE = 3'b010;
+  reg [2:0] state, next_state;
+
+  always @(posedge clk or negedge rst_n) begin
+    if (!rst_n)
+      state <= IDLE;
+    else
+      state <= next_state;
+  end
+
+  always @* begin
+    next_state = state;
+    busy = 1'b0;
+    done = 1'b0;
+    alarm = 1'b0;
+    case (state)
+      IDLE: next_state = RUN;
+      RUN: begin
+        busy = 1'b1;
+        next_state = DONE;
+      end
+      DONE: begin
+        done = 1'b1;
+        next_state = IDLE;
+      end
+      default: begin
+        next_state = IDLE;
+        alarm = 1'b1;
+      end
+    endcase
+  end
+endmodule`;
+  const maintBranch="      MAINT: begin\n        alarm = 1'b1;\n        next_state = RUN;\n      end\n";
+  // Only the functional example declares MAINT. There is no transition into it,
+  // and its exit reaches the non-reset state RUN, matching the complete V5 rule.
+  const unreachableFsm=regularFsm.replace("DONE = 3'b010;","DONE = 3'b010, MAINT = 3'b011;")
+    .replace('      default: begin',maintBranch+'      default: begin');
+  const commonKnowledge=[
+    ['V7','Duplicate Encoding','为不同状态分配唯一编码。该知识每次 FSM 生成都纳入，不表示本例已经存在重复编码。','Assign unique encodings to distinct states. This knowledge is always included for FSM generation; it does not assert a duplicate in this example.','SecFSM maintained knowledge / V7'],
+    ['V9','RTL concurrency prevention (legacy CWE-364 mapping)','状态寄存器由单一时序过程写入；时序使用非阻塞赋值，组合逻辑使用阻塞赋值，保留需求规定的循环顺序。CWE-364 原指软件信号处理竞争，此处是 RTL 预防约束，不是物理竞争验证。','Use one sequential writer for the state register, nonblocking sequential assignments and blocking combinational assignments, preserving the specified cycle. CWE-364 originally concerns software signal handlers; this is adapted RTL guidance, not physical race verification.','SecFSM maintained knowledge / RTL adaptation'],
+    ['V15','CWE-1245: improper FSM default handling','组合逻辑完整赋默认值；非法编码时关闭 busy/done，置 alarm，下一拍按需求回到 IDLE。','Assign complete combinational defaults. For illegal encodings, deassert busy/done, assert alarm, and recover to IDLE on the next clock as required.','SecFSM maintained knowledge / V15']
+  ];
+  const functionalKnowledge=[
+    ['V4','Dead State','MAINT 不是初态，也没有有效入口。该死状态性质与同一个不可达状态问题合并报告，避免把一个状态重复计为多个功能修改。','MAINT is not the initial state and has no effective incoming transition. Report this dead-state property together with the same unreachable-state issue rather than duplicating the functional repair.','SecFSM maintained knowledge / V4'],
+    ['V5','Unreachable State','完整判据：从明确初态 IDLE 无法到达 MAINT，且 MAINT 有到非复位状态 RUN 的出口。原版保留声明的 MAINT 行为；修正版明确采用删除未使用状态的演示假设。','Complete rule: MAINT is unreachable from the explicit initial state IDLE and has an outgoing transition to non-reset RUN. Preserve its declared behavior in the original version; the repaired proposal explicitly assumes the unused state should be removed.','SecFSM maintained knowledge / V5']
+  ];
+  function fsmStructure(unreachable){
+    const states=[
+      {name:'IDLE',encoding:"3'b000",outputs:{busy:"1'b0",done:"1'b0",alarm:"1'b0"}},
+      {name:'RUN',encoding:"3'b001",outputs:{busy:"1'b1",done:"1'b0",alarm:"1'b0"}},
+      {name:'DONE',encoding:"3'b010",outputs:{busy:"1'b0",done:"1'b1",alarm:"1'b0"}}
+    ].map(state=>({...state,protected:false,terminal:false,operations:[]}));
+    const transitions=[{from:'IDLE',to:'RUN',condition:''},{from:'RUN',to:'DONE',condition:''},{from:'DONE',to:'IDLE',condition:''}];
+    if(unreachable){
+      states.push({name:'MAINT',encoding:"3'b011",outputs:{busy:"1'b0",done:"1'b0",alarm:"1'b1"},protected:false,terminal:false,operations:[]});
+      transitions.push({from:'MAINT',to:'RUN',condition:''});
+    }
+    return {initial_state:'IDLE',initial_state_explicit:true,default_recovery:'IDLE',return_to_initial_required:true,
+      states,transitions,signals:{clk:{width:1,signed:false,kind:'input'},rst_n:{width:1,signed:false,kind:'input'},
+        busy:{width:1,signed:false,kind:'output'},done:{width:1,signed:false,kind:'output'},alarm:{width:1,signed:false,kind:'output'}},
+      security_checks:[],assumptions:[]};
+  }
+  function fsmCase(unreachable){
+    return {code:unreachable?unreachableFsm:regularFsm,file:unreachable?'secure_controller_unreachable.v':'secure_controller.v',
+      name:{zh:unreachable?'不可达状态 FSM 示例':'常规 FSM 示例',en:unreachable?'Unreachable-state FSM example':'Regular FSM example'},
+      requirement:{
+        zh:'生成 Verilog-2005 控制器 secure_controller。输入 clk 和低有效异步复位 rst_n；输出 busy、done、alarm。明确初态是 IDLE。正常状态 IDLE、RUN、DONE 每拍无条件按 IDLE → RUN → DONE → IDLE 循环。仅 RUN 时 busy=1，仅 DONE 时 done=1；正常状态 alarm=0。'+
+          (unreachable?'另声明状态 MAINT，没有任何进入 MAINT 的转移，因此从 IDLE 不可达；MAINT 时 busy=0、done=0、alarm=1，下一拍无条件进入非复位状态 RUN。':'不包含保护状态、权限检查、算术运算或额外功能缺陷。')+
+          '非法状态编码时 busy=0、done=0、alarm=1，下一拍恢复 IDLE。',
+        en:'Generate a Verilog-2005 controller named secure_controller. Inputs: clk and active-low asynchronous reset rst_n. Outputs: busy, done and alarm. The explicit initial state is IDLE. The normal states cycle unconditionally on each clock: IDLE -> RUN -> DONE -> IDLE. busy is high only in RUN, done is high only in DONE, and alarm is low in normal states. '+
+          (unreachable?'Also declare MAINT with no incoming transition, making it unreachable from IDLE. In MAINT, busy=0, done=0 and alarm=1; the next clock unconditionally enters non-reset RUN. ':'There are no protected states, permission checks, arithmetic operations or additional functional defects. ')+
+          'An illegal encoding drives busy=0, done=0 and alarm=1, then recovers to IDLE on the next clock.'},
+      knowledge:unreachable?[...functionalKnowledge,...commonKnowledge]:commonKnowledge};
+  }
+  function paperNote(en){return en?'Predefined offline example adapted from PowerSecV Figure 4 for static comparison only. No model calls, live retrieval, compilation, simulation, security validation or physical power measurements were performed.':'预置离线示例；依据 PowerSecV 图 4 补全，仅作静态对照。未调用模型、执行实时检索、编译、仿真、安全验证或物理功耗测量。';}
+  const general={code:csrSecure,file:'csr_access_secure.v',name:{zh:'论文 CSR 安全示例',en:'Paper CSR secure example'},
+    requirement:{zh:'依据 PowerSecV 第 IV.D 节图 4(b)，生成 Verilog-2005 模块 csr_access_secure。输入 clk、低有效异步复位 rst_n、csr_we、current_priv[1:0]、csr_addr[11:0]、write_data[31:0]；输出 csr_rdata[31:0]、illegal_access、power_signature。存储为 128×32 位 csr_mem，索引使用 csr_addr[6:0]；权限条件为 current_priv >= csr_addr[11:10]。每个写请求仅在权限允许时更新 CSR，拒绝请求禁止写入并置 illegal_access，非请求周期清标志；每个合法或非法写请求均更新 mask_0 = write_data XOR 32\'hA3EF63B2，power_signature 为 mask_0 的归约异或。复位清零存储、辅助寄存器和标志；组合读仅在当前权限允许时返回对应 CSR，否则返回零。复位与读口为补全接口的明确假设。后续独立低功耗版允许增加一周期提交延迟，必须同时缓冲数据、地址、授权和有效位，权限在请求接收时采样并只用于该事务。不得把固定 XOR 或 parity 观察信号描述成真实噪声、恒功耗或侧信道安全证明。',
+      en:"Generate a complete Verilog-2005 module named csr_access_secure, adapted from the CSR access-control case in PowerSecV, Section IV.D, Figure 4(b).\n\nUse these ports:\n  input wire clk\n  input wire rst_n\n  input wire csr_we\n  input wire [1:0] current_priv\n  input wire [11:0] csr_addr\n  input wire [31:0] write_data\n  output wire [31:0] csr_rdata\n  output reg illegal_access\n  output wire power_signature\n\nPrimary secure implementation:\n1. Store 128 words of 32 bits in csr_mem[0:127]. The address index is csr_addr[6:0]. Permission is current_priv >= csr_addr[11:10]. Follow the paper's abstract address convention rather than treating this as a full RISC-V CSR decoder. An upstream decoder must ensure that addresses mapping to the same low-7-bit storage index cannot use inconsistent privilege requirements to bypass protection.\n2. rst_n is an active-low asynchronous reset. Clear the array, auxiliary register and illegal_access on reset. Reset behavior is an explicit completion of the abbreviated paper figure.\n3. At a rising edge with csr_we=1, write write_data to the indexed CSR only if permission is valid. A denied request must not write the array.\n4. illegal_access is a request-result pulse: set it to !is_valid when csr_we=1 and clear it otherwise.\n5. Update a 32-bit auxiliary register mask_0 on every write request, permitted or denied, with write_data XOR 32'hA3EF63B2. power_signature is the reduction XOR of mask_0.\n6. Provide a combinational read completion: csr_rdata is the indexed CSR when current permission is valid, otherwise zero. This read port is an explicit assumption because the paper figure does not show the complete interface.\n7. Use wire/reg and ordinary always blocks. Do not claim that a fixed XOR guarantees physical noise, constant power or side-channel resistance.\n\nOptional follow-up low-power variant (not part of the primary secure implementation):\nGenerate a separate module named csr_access_low_power using the same ports, following Figure 4(c)'s dummy-buffer and conditional array-update structure. On every request, capture write_data in dummy_0, the address in addr_q, permission in allow_q and request presence in pending_q. At the next rising edge, commit only pending_q && allow_q, using the buffered address and data from that same request. Permission is sampled at acceptance and remains valid for that transaction; mid-transaction permission revocation is outside this example's contract. Do not combine a previous dummy value with the current request's address or permission. This variant adds one clock cycle of write-commit latency. Use a conditional clock enable on the original clk, not a combinationally gated clock. power_signature observes reduction XOR of dummy_0 only.\n\nThe supplied reference files are paper-adapted illustrations for static comparison. They have not been compiled, simulated or physically evaluated.\n"},
+    controls:[
+      ['PAPER-CSR-ACCESS','未授权 CSR 写入','仅 current_priv >= csr_addr[11:10] 且 csr_we 成立时更新 csr_mem[csr_addr[6:0]]。','Unauthorized CSR write','Update csr_mem[csr_addr[6:0]] only for a write request with current_priv >= csr_addr[11:10].',['CWE-1262']],
+      ['PAPER-CSR-DENIED','拒绝请求未显式报告','illegal_access 表示当前写请求的权限拒绝；拒绝时不更新主存储，非请求周期清零。','Denied request not reported','Pulse illegal_access for a denied write, keep the array unchanged for that request, and clear the flag when no request is present.',['CWE-1262']],
+      ['PAPER-CSR-AUX','访问许可分支可能形成可区分的切换特征','按图 4(b)，每个合法或非法请求均更新 mask_0 为 write_data XOR 固定掩码。它只是辅助切换结构，重复数据不保证翻转，尚未证明侧信道抵抗。','Permission-dependent switching profile','Following Figure 4(b), update mask_0 with write_data XOR a fixed mask on every permitted or denied request. This is auxiliary switching structure; repeated data may not toggle and side-channel resistance is unproven.',['CWE-1300']],
+      ['PAPER-CSR-RESET-READ','补全接口的初始化与读权限不明确','示例明确增加异步清零与权限受控的组合读；这些行为未在论文缩略图中完整给出，不能视为原始物理实现的复现。','Unspecified initialization and read access','Explicitly add asynchronous reset and a permission-controlled combinational read. These complete the abbreviated figure and are not a reproduction of its physical implementation.',['CWE-1262']]
+    ],
+    knowledge:[
+      ['CWE-1262','Improper Access Control for Register Interface','CSR 寄存器接口应将地址访问条件与权限判定绑定。本文案例使用 current_priv >= csr_addr[11:10]，拒绝请求不写主存储，并显式报告拒绝。','Bind register-interface access to the relevant address and privilege. This case uses current_priv >= csr_addr[11:10], suppresses denied array writes, and reports denial.','Hardware-CWE snapshot / PowerSecV Figure 4'],
+      ['CWE-1300','Improper Protection of Physical Side Channels','论文图 4 对比权限分支的物理切换泄漏：图 4(b)使用每请求辅助寄存器更新。该示例保留其结构，不把固定 XOR 当成随机噪声，也不宣称复现电流波形或恒功耗。','Figure 4 compares physical switching leakage across permission branches. Figure 4(b) updates an auxiliary register for every request. This adaptation preserves that structure without treating fixed XOR as random noise or claiming reproduced waveforms or constant power.','Hardware-CWE snapshot / PowerSecV Section IV.D, Figure 4(b), pp. 11-12']
+    ]};
+  function create(route,language='zh',demoCase='regular'){
+    if(!['secv','secfsm'].includes(route))throw new Error('Unknown demo mode.');
+    if(!['regular','unreachable'].includes(demoCase)||route==='secv'&&demoCase!=='regular')throw new Error('Unknown demo case.');
+    const en=language==='en',unreachable=route==='secfsm'&&demoCase==='unreachable',item=route==='secv'?general:fsmCase(unreachable);
+    const note=route==='secv'?paperNote(en):en?'Predefined offline example. No model calls, live retrieval, compilation, or security verification were performed.':'预置离线示例；未调用模型、执行实时检索、编译或安全验证。';
+    const hits=item.knowledge.map(row=>({id:row[0],title:row[1],content:row[en?3:2],domain:route,source:row[4],relation:en?'Curated example reference':'示例关联知识',score:0}));
+    const controls=route==='secv'?item.controls.map(row=>({id:row[0],finding_id:row[0],knowledge_ids:row[5],category:'coding_constraint',risk:row[en?3:1],measure:row[en?4:2],status:'待验证',lines:[],location:{kind:'csr'},confirmation:{status:'preventive',method:'static_paper_comparison',scope:'paper_adapted_reference',reason:en?'Paper-guided coding structure, not a measured security result.':'依据论文补全的编码结构，不是实测安全结论。'}})):
+      commonKnowledge.map(row=>({id:row[0]+'-DEMO',finding_id:row[0]+'-DEMO',knowledge_ids:[row[0]],risk:row[1],measure:row[en?3:2],
+        category:'coding_constraint',status:'待验证',lines:[],location:{kind:'fsm'},
+        evidence:[en?'This FSM receives ordinary preventive coding guidance.':'此 FSM 纳入常规预防性编码知识。'],
+        confirmation:{status:'preventive',method:'curated_demo_reference',scope:'predefined_requirement_only',reason:en?'Preventive guidance, not a detected vulnerability.':'预防性知识，不表示已发现对应漏洞。'}}));
+    const result={route,route_label:item.name[en?'en':'zh'],file_name:item.file,code:item.code,security_report:controls,knowledge_used:hits,
+      verification:{agent_mode:'demo',demo_case:route==='secv'?'powersecv-csr':unreachable?'fsm-unreachable':'fsm-regular',hdl_language:'verilog-2005',
+        syntax:'not_run',security:'not_run',knowledge_origin:route==='secv'?'Paper-adapted reference / static comparison only':'Curated references from the bundled knowledge snapshot'},
+      low_power_available:route==='secv',low_power_applied:false,variants:[],selected_variant:''};
+    if(route==='secv')Object.assign(result.verification,{simulation:'not_run',power_validation:'not_run',equivalence:'not_run',source_type:'paper_adapted_reference',comparison_scope:'static_architectural_only',paper_reference:{title:'PowerSecV: LLM-Based Secure and Low-Power Verilog Generation via Hardware-CWE Knowledge Graph and Power Evolution',section:'IV.D',figure:'4(b)',pages:[11,12]}});
+    if(route==='secfsm'){
+      result.verification.fsm_structure=fsmStructure(unreachable);
+      result.verification.fsm_security={coverage:{scope:'predefined_demo_only',rtl_verification:'not_run'}};
+    }
+    if(unreachable){
+      const original='original_function_secure',repaired='function_repaired';
+      const functional={id:'V5-DEMO-MAINT',finding_id:'V5-DEMO-MAINT',knowledge_ids:['V4','V5'],category:'design_advice',status:'待验证',lines:[],
+        risk:en?'MAINT is the single unreachable state':'MAINT 是唯一不可达状态',
+        measure:en?'MAINT is unreachable from IDLE and exits to non-reset RUN, matching V5; its missing incoming edge also matches V4. These are one state and one combined functional change. Preserve MAINT in the original version; the repaired proposal explicitly assumes the unused state should be removed.':'MAINT 从 IDLE 不可达，且有到非复位状态 RUN 的出口，符合 V5；无入口性质也关联 V4。这是同一个状态、同一处合并功能修改。原版保留 MAINT；修正版明确采用删除未使用状态的演示假设。',
+        location:{kind:'state',state:'MAINT'},evidence:[en?'Reset enters IDLE. No transition enters MAINT; MAINT transitions to RUN.':'复位进入 IDLE。没有转移进入 MAINT；MAINT 转移到 RUN。'],
+        confirmation:{status:'confirmed',method:'curated_demo_fact',scope:'predefined_requirement_only',reason:en?'Preset graph fact, not a runtime analysis result.':'预置需求图事实，不是实时分析结果。'},
+        version_handling:{[original]:en?'Preserve MAINT and its exit to RUN; the unreachable-state issue remains.':'保留 MAINT 及其到 RUN 的出口；该不可达状态问题未修复。',
+          [repaired]:en?'Explicit demo assumption: remove unused MAINT and its branch; review the functional change.':'明确演示假设：删除未使用的 MAINT 及其分支；需确认功能变更。'}};
+      const common=controls.map(control=>control.id);controls.push(functional);
+      result.selected_variant=original;
+      result.variants=[{id:original,label:en?'Original-function secure RTL':'原功能安全版',file_name:item.file,code:unreachableFsm,
+        change_summary:[en?'Preserve the declared unreachable MAINT state and its exit to RUN; apply ordinary coding safeguards.':'保留声明的不可达 MAINT 状态及其到 RUN 的出口，应用常规安全编码措施。',note],
+        addressed_findings:common,remaining_findings:[functional.id]},
+        {id:repaired,label:en?'Function-repaired RTL':'功能修正版',file_name:'secure_controller_repaired.v',code:regularFsm,
+        change_summary:[en?'Explicit demo assumption: remove unused MAINT and its branch; preserve ports, the normal cycle and illegal-state recovery.':'明确演示假设：删除未使用的 MAINT 及其分支；保留接口、正常循环和非法状态恢复。',note],
+        addressed_findings:[...common,functional.id],remaining_findings:[],
+        code_diff:"--- secure_controller_unreachable.v\n+++ secure_controller_repaired.v\n-    IDLE = 3'b000, RUN = 3'b001, DONE = 3'b010, MAINT = 3'b011;\n+    IDLE = 3'b000, RUN = 3'b001, DONE = 3'b010;\n-      MAINT: begin\n-        alarm = 1'b1;\n-        next_state = RUN;\n-      end"}];
+    }
+    return JSON.parse(JSON.stringify({requirement:item.requirement[en?'en':'zh'],output:{result,
+      report:note+'\n\n'+controls.map(x=>x.id+' · '+x.risk+'\n'+x.measure).join('\n\n'),
+      knowledge:note+'\n\n'+hits.map(x=>x.id+' · '+x.title+'\n'+x.content+'\n'+x.source).join('\n\n')}}));
+  }
+  function optimize(language='zh'){
+    const sample=create('secv',language),en=language==='en',result=sample.output.result,note=paperNote(en);
+    Object.assign(result,{route_label:en?'Paper CSR secure and low-power example':'论文 CSR 安全与低功耗示例',file_name:'csr_access_low_power.v',code:csrLowPower,low_power_applied:true});
+    Object.assign(result.verification,{paper_reference:{...result.verification.paper_reference,figure:'4(c)'},write_commit_extra_cycles:1,clock_control:'conditional_clock_enable_not_physical_clock_gating'});
+    const access=result.security_report.find(item=>item.id==='PAPER-CSR-ACCESS');
+    access.measure=en?'Capture permission, address and data at request acceptance. Commit csr_mem[addr_q] <= dummy_0 only for pending_q && allow_q on the following clock; an earlier permitted request may commit while a new denied request is accepted.':'接收请求时同时锁存权限、地址和数据；下一拍仅在 pending_q && allow_q 时提交 csr_mem[addr_q] <= dummy_0。接收新拒绝请求的同一拍仍可能提交前一个已授权事务。';
+    const auxiliary=result.security_report.find(item=>item.id==='PAPER-CSR-AUX');
+    auxiliary.measure=en?'Following Figure 4(c), capture write_data in dummy_0 for every permitted or denied request. This lightweight buffer does not guarantee identical physical switching or constant power.':'按图 4(c)，每个合法或非法请求均抓取 write_data 到 dummy_0。轻量缓冲结构不保证相同物理切换或恒功耗。';
+    const sideChannel=result.knowledge_used.find(item=>item.id==='CWE-1300');
+    sideChannel.source='Hardware-CWE snapshot / PowerSecV Section IV.D, Figure 4(c), pp. 11-12';
+    sideChannel.content=en?'Figure 4(c) replaces the secure reference\'s auxiliary XOR path with a request buffer and conditional array updates. Capture data for both permitted and denied requests, and commit only the buffered permitted transaction. This reference does not establish indistinguishable physical switching or measured side-channel resistance.':'图 4(c) 将安全参考版的辅助 XOR 路径替换为请求缓冲与条件阵列更新。合法与拒绝请求都抓取数据，只提交缓冲的已授权事务。本参考版尚未证明物理切换不可区分或实测侧信道抵抗。';
+    result.security_report.push(
+      {id:'PAPER-CSR-TRANSACTION',finding_id:'PAPER-CSR-TRANSACTION',knowledge_ids:['POWERSECV-POWER-EVOLUTION'],category:'coding_constraint',status:'待验证',lines:[],risk:en?'Mismatched buffered data, address or permission':'流水线数据、地址或权限错配',measure:en?'Capture dummy_0, addr_q, allow_q and pending_q together; commit the same accepted transaction one cycle later. Authorization is sampled at acceptance and remains valid for that request; revocation during the transaction is outside this example contract.':'同时抓取 dummy_0、addr_q、allow_q 和 pending_q；下一拍提交同一已接收事务。授权在接收时采样并只用于该请求；本示例不包含事务中途撤销授权。'},
+      {id:'PAPER-CSR-POWER',finding_id:'PAPER-CSR-POWER',knowledge_ids:['POWERSECV-POWER-EVOLUTION'],category:'coding_constraint',status:'待验证',lines:[],risk:en?'Separate request buffering from array commits':'请求缓冲与主阵列提交分离',measure:en?'Update csr_mem only when pending_q && allow_q using a conditional enable on the original clock. Both references already suppress denied writes; buffering alone does not reduce the permitted-write count. This follows the paper\'s buffering/gating intent, adds one cycle of commit latency, and does not establish a power reduction or cycle-equivalence result.':'仅在 pending_q && allow_q 时以原时钟的条件写使能更新 csr_mem。两个参考版都禁止拒绝请求写入，增加缓冲本身不减少已授权写入次数。此结构对应论文的缓冲/门控意图，增加一周期提交延迟，尚未证明功耗降低或逐周期等价。'}
+    );
+    result.knowledge_used.push({id:'POWERSECV-POWER-EVOLUTION',title:en?'Dummy buffering and conditional array updates':'虚拟数据缓冲与条件阵列更新',domain:'secv',source:'PowerSecV Section IV.D, Figure 4(c), pp. 11-12',relation:en?'Paper-adapted optimization reference':'论文改编优化参考',score:0,
+      content:en?'Capture request data for both accepted and denied accesses, while conditionally updating the primary array only for the accepted transaction. Buffer address and authorization with the data; the schematic Figure 4(c) omits these pipeline details. Use a clock-enable idiom rather than ANDing the clock. Extra latency, physical gating, power and side-channel resistance require separate evaluation; no such test was run.':'合法与拒绝请求都更新请求数据缓冲，主阵列仅在已授权事务提交时更新。地址和授权必须随数据一起缓冲；图 4(c) 的示意代码未完整给出这些流水线细节。采用原时钟的写使能，不能直接与门门控时钟。额外延迟、物理门控、功耗和侧信道抵抗需要单独评估，本次未执行这些测试。'});
+    sample.output.report=note+'\n\n'+result.security_report.map(item=>item.id+' · '+item.risk+'\n'+item.measure).join('\n\n');
+    sample.output.knowledge=note+'\n\n'+result.knowledge_used.map(item=>item.id+' · '+item.title+'\n'+item.content+'\n'+item.source).join('\n\n');
+    return JSON.parse(JSON.stringify(sample));
+  }
+  return {create,optimize};
+});
+
+;
+
+(function(){
+  'use strict';
+  const route=document.body.dataset.route;
+  const initialCase=route==='secfsm'&&document.body.dataset.demoCase==='unreachable'?'unreachable':'regular';
+  let language=location.hash==='#en'?'en':'zh';
+  const records=[];
+  const state={type:'state',route,language,busy:false,history:[],target:'',configured:false,
+    output:null,submittedRequirement:'',requirement:HDLGenDemos.create(route,language,initialCase).requirement,
+    demo:true,demoCase:initialCase,includeSource:false,written:false};
+  function text(zh,en){return language==='en'?en:zh;}
+  function normalize(value){return String(value||'').trim().replace(/\s+/g,' ');}
+  function example(){return HDLGenDemos.create(route,language,state.demoCase);}
+  function publish(message){
+    window.dispatchEvent(new MessageEvent('message',{data:message||{...state,language,history:records.map((x,index)=>({index,label:x.requirement.slice(0,45)}))}}));
+    document.getElementById('offlineTitle').textContent=text('离线演示 · 预置示例','Offline demo · Predefined example');
+    document.getElementById('offlineDescription').textContent=text('无需安装环境或配置模型。选择功能并运行示例，查看代码、安全知识和安全报告。','No installation or model configuration. Choose a mode and run its example to explore code, knowledge, and the security report.');
+    document.getElementById('modelState').textContent=text('本地预置示例 · 无模型调用','Local predefined example · No model calls');
+    document.getElementById('generate').textContent=text('展示示例','Show example');
+  }
+  function showExample(demoCase=state.demoCase){
+    if(!['regular','unreachable'].includes(demoCase)||route==='secv'&&demoCase!=='regular')return;
+    state.demoCase=demoCase;
+    const sample=example();Object.assign(state,{requirement:sample.requirement,submittedRequirement:sample.requirement,output:sample.output,demo:true});
+    records.unshift({...sample,demoCase});records.splice(8);
+    state.status=text('已展示预置示例；未调用模型或外部工具。','Predefined example displayed. No model or external tools were called.');
+  }
+  async function handle(message){
+    if(message.route!==route)return;
+    switch(message.type){
+      case 'ready':state.status=text('点击“运行演示”即可查看当前功能示例。','Click Run demo to view the example for this mode.');break;
+      case 'draft':state.requirement=message.requirement;return;
+      case 'switchRoute':{
+        const file={secv:'CSL_HDLGen-General-Demo.html',secfsm:'CSL_HDLGen-FSM-Demo.html'}[message.nextRoute];
+        if(file)location.href=file+(language==='en'?'#en':'');return;
+      }
+      case 'setLanguage':{
+        const oldSample=example();language=message.language==='en'?'en':'zh';
+        if(normalize(state.requirement)===normalize(oldSample.requirement))state.requirement=example().requirement;
+        state.status=text('离线演示；运行示例查看预置结果。','Offline demo. Run the example to view predefined results.');break;
+      }
+      case 'runDemo':showExample(message.demoCase||state.demoCase);break;
+      case 'optimize':{
+        const result=state.output&&state.output.result;
+        if(route!=='secv'||result?.verification?.agent_mode!=='demo'||result.verification.demo_case!=='powersecv-csr'||result.low_power_applied)return;
+        const sample=HDLGenDemos.optimize(language);
+        Object.assign(state,{requirement:sample.requirement,submittedRequirement:sample.requirement,output:sample.output,demo:true,demoCase:'regular',written:false});
+        records.unshift({...sample,demoCase:'regular'});records.splice(8);
+        state.status=text('已展示论文低功耗参考版；仅静态对照，未测量功耗或验证侧信道。','Paper low-power reference displayed; static comparison only, with no power measurement or side-channel validation.');
+        break;
+      }
+      case 'generate':{
+        const matches=['zh','en'].some(lang=>normalize(message.requirement)===normalize(HDLGenDemos.create(route,lang,state.demoCase).requirement));
+        if(matches)showExample();else{
+          state.requirement=message.requirement;
+          state.status=text('离线页面仅展示固定示例。点击“运行演示”恢复示例需求；自定义生成请使用插件并配置模型。','This offline page shows a fixed example. Click Run demo to restore its requirements; use the extension with a configured model for custom generation.');
+        }break;
+      }
+      case 'new':Object.assign(state,{output:null,submittedRequirement:'',requirement:'',demo:true});state.status=text('点击“运行演示”加载固定示例。','Click Run demo to load the predefined example.');break;
+      case 'history':{
+        const saved=Number.isInteger(message.index)&&records[message.index];
+        if(saved)Object.assign(state,{requirement:saved.requirement,submittedRequirement:saved.requirement,output:saved.output,demoCase:saved.demoCase});break;
+      }
+      case 'selectVariant':{
+        const result=state.output&&state.output.result;
+        const variant=result&&Array.isArray(result.variants)&&result.variants.find(item=>item.id===message.variantId);
+        if(!variant)return;
+        state.output={...state.output,result:{...result,selected_variant:variant.id,code:variant.code,file_name:variant.file_name}};
+        state.written=false;break;
+      }
+      case 'copy':{
+        if(!state.output)return;
+        try{await navigator.clipboard.writeText(state.output.result.code);state.status=text('代码已复制。','Code copied.');}
+        catch{const range=document.createRange();range.selectNodeContents(document.getElementById('code'));const selection=window.getSelection();selection.removeAllRanges();selection.addRange(range);state.status=text('已选中代码，请按 Ctrl / Cmd + C 复制。','Code selected. Press Ctrl / Cmd + C to copy.');}
+        break;
+      }
+      case 'saveAs':{
+        if(!state.output)return;
+        const url=URL.createObjectURL(new Blob([state.output.result.code],{type:'text/plain;charset=utf-8'}));
+        const anchor=document.createElement('a');anchor.href=url;anchor.download=state.output.result.file_name;document.body.append(anchor);anchor.click();anchor.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+        state.status=text('已请求下载示例 HDL 文件。','Example HDL download requested.');break;
+      }
+      case 'configure':state.status=text('离线演示无需模型配置。自定义生成请在 VS Code 插件中配置模型。','Offline demos need no model settings. Configure a model in the VS Code extension for custom generation.');break;
+      case 'closeSettings':return;
+      default:return;
+    }
+    publish();
+  }
+  window.acquireVsCodeApi=()=>({postMessage:message=>queueMicrotask(()=>handle(message))});
+})();
+
+;
+'use strict';
+const vscode=acquireVsCodeApi(),$=id=>document.getElementById(id),route=document.body.dataset.route;
+let language=document.body.dataset.language==='en'?'en':'zh';
+const t=value=>HDLGenI18n.text(value,language),send=(type,extra={})=>vscode.postMessage({type,route,...extra});
+let lastState=null,lastOutput=null,currentTab='code';
+let configIsOpen=false,configBusy=false,hasStoredKey=false,configErrorMessage='';
+let autoGuideShown=false;
+const guide=typeof HDLGenOnboarding==='undefined'?null:HDLGenOnboarding.create({document,window,text:t,onComplete:()=>send('completeOnboarding')});
+function maybeShowGuide(){
+  if(guide&&lastState?.showOnboarding===true&&!autoGuideShown&&!lastState.busy&&!configIsOpen){autoGuideShown=true;guide.show();}
+}
+function configLabels(){
+  $('keyHelp').textContent=t(hasStoredKey?'已保存密钥；留空可保留，更换接口地址时需要重新填写。':'首次配置请填写 API Key。');
+  $('apiKey').placeholder=t(hasStoredKey?'留空保留已有密钥':'输入 API Key');
+  $('configError').textContent=t(configErrorMessage);$('configError').hidden=!configErrorMessage;
+  $('configSave').textContent=t(configBusy?'保存中…':'保存配置');
+}
+function translate(){
+  document.documentElement.lang=language==='en'?'en':'zh-CN';$('language').value=language;
+  for(const node of document.querySelectorAll('[data-i18n]'))node.textContent=t(node.dataset.i18n);
+  for(const node of document.querySelectorAll('[data-title]')){node.title=t(node.dataset.title);if(!node.dataset.i18n)node.setAttribute('aria-label',node.title);}
+  for(const node of document.querySelectorAll('[data-label]'))node.setAttribute('aria-label',t(node.dataset.label));
+  $('welcomeTitle').textContent=t(route==='secv'?'从需求到安全 RTL':'为状态机加入安全设计');
+  $('intro').textContent=t(route==='secv'?'描述你的设计，生成代码，并查看安全措施与知识依据。':'描述状态、初态、转移条件，以及异常状态下的预期行为。');
+  $('requirement').placeholder=t(route==='secv'?'描述接口、功能、时钟复位和安全约束…':'描述状态、初态、转移条件和异常处理…');
+  $('runDemo').textContent=t(route==='secfsm'?'常规 FSM 演示':'运行演示');
+  $('runFsmUnreachable').hidden=route!=='secfsm';
+  configLabels();
+  guide?.refresh();
+}
+function savingConfig(busy){configBusy=busy;for(const id of ['endpoint','modelName','apiKey','configSave','settingsClose','settingsCancel'])$(id).disabled=busy;configLabels();}
+function closeConfig(){
+  if(configBusy)return;
+  configIsOpen=false;$('apiKey').value='';$('modelSettings').hidden=true;$('conversation').hidden=false;$('composerArea').hidden=false;
+  $('settings').disabled=Boolean(lastState?.busy);send('closeSettings');$('settings').focus();
+  $('help').disabled=Boolean(lastState?.busy);maybeShowGuide();
+}
+$('settingsClose').onclick=closeConfig;$('settingsCancel').onclick=closeConfig;
+$('modelForm').onsubmit=e=>{
+  e.preventDefault();if(configBusy)return;
+  configErrorMessage='';savingConfig(true);
+  send('saveModelConfig',{config:{base_url:$('endpoint').value.trim(),model:$('modelName').value.trim(),api_key:$('apiKey').value.trim()}});
+  // Never keep a submitted key in DOM, UI state, history, or logs.
+  $('apiKey').value='';
+};
+$('modelSettings').onkeydown=e=>{if(e.key==='Escape'){e.preventDefault();closeConfig();}};
+const saveDraft=()=>send('draft',{requirement:$('requirement').value,demo:$('demo').checked,includeSource:$('include').checked});
+$('requirement').oninput=saveDraft;$('demo').onchange=saveDraft;$('include').onchange=saveDraft;
+$('mode').value=route;$('mode').onchange=()=>{saveDraft();send('switchRoute',{nextRoute:$('mode').value});};
+$('language').onchange=()=>{saveDraft();send('setLanguage',{language:$('language').value});};
+$('variantSelect').onchange=()=>send('selectVariant',{variantId:$('variantSelect').value});
+for(const [id,type] of Object.entries({settings:'configure',new:'new',bind:'bind',cancel:'cancel',copy:'copy',save:'saveAs',preview:'preview',write:'write',power:'optimize'}))$(id).onclick=()=>send(type);
+$('runDemo').onclick=()=>send('runDemo',{demoCase:'regular'});
+$('runFsmUnreachable').onclick=()=>send('runDemo',{demoCase:'unreachable'});
+$('help').onclick=()=>{if(!lastState?.busy&&!configIsOpen){autoGuideShown=true;guide?.show();}};
+$('generate').onclick=()=>{saveDraft();send('generate',{requirement:$('requirement').value,demo:$('demo').checked,includeSource:$('include').checked});};
+$('requirement').onkeydown=e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'&&!$('generate').disabled){e.preventDefault();$('generate').click();}};
+function showHistory(show){$('historyDrawer').hidden=!show;$('historyToggle').setAttribute('aria-expanded',String(show));if(show)$('conversation').scrollTop=0;}
+$('historyToggle').onclick=()=>showHistory($('historyDrawer').hidden);$('historyClose').onclick=()=>showHistory(false);
+$('optionsToggle').onclick=()=>{$('options').hidden=!$('options').hidden;$('optionsToggle').setAttribute('aria-expanded',String(!$('options').hidden));};
+function selectTab(id){currentTab=id;$('variantPicker').hidden=id!=='code'||!Array.isArray(lastState?.output?.result.variants)||lastState.output.result.variants.length<2;for(const button of document.querySelectorAll('[data-tab]')){const active=button.dataset.tab===id;button.classList.toggle('selected',active);button.setAttribute('aria-selected',String(active));}for(const panel of document.querySelectorAll('.panel'))panel.hidden=panel.id!==id;}
+const tabButtons=[...document.querySelectorAll('[data-tab]')];
+for(const [index,button] of tabButtons.entries()){button.onclick=()=>selectTab(button.dataset.tab);button.onkeydown=e=>{if(['ArrowLeft','ArrowRight'].includes(e.key)){e.preventDefault();const next=tabButtons[(index+(e.key==='ArrowRight'?1:tabButtons.length-1))%tabButtons.length];next.focus();selectTab(next.dataset.tab);}};}
+function render(state){
+  lastState=state;const ready=Boolean(state.output),busy=state.busy;
+  const languageChanged=state.language&&state.language!==language;
+  if(languageChanged){language=state.language;translate();}
+  if(typeof state.requirement==='string'){$('requirement').value=state.requirement;$('demo').checked=state.demo===true;$('include').checked=state.includeSource===true;}
+  $('status').textContent=t(state.status||'正在连接…');$('statusRow').classList.toggle('working',Boolean(busy));
+  let target=state.target||'';try{target=decodeURI(target);}catch{}
+  $('target').textContent=target?target.split(/[\\/]/).pop():t('未绑定文件');$('target').title=target;$('target').classList.toggle('attached',Boolean(target));
+  $('modelState').textContent=t(state.output?.result.verification.agent_mode==='demo'?'离线演示 · 无需配置':state.configured?'已配置模型':'未配置模型');
+  $('welcome').hidden=ready;$('result').hidden=!ready;
+  $('submitted').textContent=state.submittedRequirement||'';
+  $('badge').textContent=t(state.output?.result.verification.agent_mode==='model'?'待验证草稿':'演示结果');
+  const variants=Array.isArray(state.output?.result.variants)?state.output.result.variants:[];
+  const variantNames={original_function_secure:'原功能安全版',function_repaired:'功能修正版'};
+  $('variantSelect').replaceChildren();
+  for(const variant of variants){if(!Object.hasOwn(variantNames,variant.id))continue;const option=document.createElement('option');option.value=variant.id;option.textContent=t(variantNames[variant.id]);$('variantSelect').append(option);}
+  $('variantSelect').value=state.output?.result.selected_variant||'original_function_secure';$('variantSelect').disabled=Boolean(busy);
+  $('variantPicker').hidden=currentTab!=='code'||variants.length<2;
+  // Updating progress or language must not reset a user's code selection/scroll position.
+  const fingerprint=ready?JSON.stringify(state.output):null;
+  if(fingerprint!==lastOutput){HDLGenRender.code($('code'),state.output?.result.code||'',document);HDLGenRender.report($('report'),state.output,t,document);HDLGenRender.knowledge($('knowledge'),state.output,t,document);lastOutput=fingerprint;selectTab('code');}
+  else if(languageChanged&&ready){HDLGenRender.report($('report'),state.output,t,document);HDLGenRender.knowledge($('knowledge'),state.output,t,document);}
+  for(const id of ['generate','bind','settings','new','demo','include','requirement','runDemo','runFsmUnreachable'])$(id).disabled=Boolean(busy);
+  $('settings').disabled=Boolean(busy)||configIsOpen;
+  $('help').disabled=Boolean(busy)||configIsOpen;
+  $('cancel').hidden=!busy;$('generate').hidden=Boolean(busy);
+  for(const id of ['copy','save'])$(id).disabled=busy||!ready;
+  $('preview').disabled=busy||!ready||!state.target;$('write').disabled=busy||!ready||!state.target||state.written;
+  const paperPowerDemo=state.output?.result.verification.agent_mode==='demo'&&state.output?.result.verification.demo_case==='powersecv-csr';
+  $('power').hidden=route!=='secv'||!ready;$('power').disabled=busy||(!paperPowerDemo&&state.output?.result.verification.agent_mode!=='model')||state.output?.result.low_power_applied;
+  $('history').replaceChildren();$('noHistory').hidden=state.history.length>0;
+  for(const row of state.history){const b=document.createElement('button');b.textContent=row.label;b.title=row.label;b.disabled=Boolean(busy);b.onclick=()=>{send('history',{index:row.index});showHistory(false);};$('history').append(b);}
+  if(busy&&guide?.isOpen()){guide.hide();if(state.showOnboarding)autoGuideShown=false;}
+  else{guide?.refresh();maybeShowGuide();}
+}
+window.addEventListener('message',event=>{
+  const state=event.data;if(!state||state.route!==route)return;
+  if(state.type==='state'){render(state);return;}
+  if(state.type==='modelSettings'){
+    if(configIsOpen)return;
+    if(guide?.isOpen()){guide.hide();if(lastState?.showOnboarding)autoGuideShown=false;}
+    configIsOpen=true;hasStoredKey=state.config.hasKey;configErrorMessage='';savingConfig(false);
+    $('endpoint').value=state.config.base_url||'';$('modelName').value=state.config.model||'';$('apiKey').value='';
+    $('modelSettings').hidden=false;$('conversation').hidden=true;$('composerArea').hidden=true;$('settings').disabled=true;$('endpoint').focus();
+    $('help').disabled=true;
+  }
+  if(state.type==='modelConfigError'){configErrorMessage=state.error;savingConfig(false);}
+  if(state.type==='modelConfigSaved'){savingConfig(false);closeConfig();}
+});
+translate();$('status').textContent=t('正在连接…');send('ready');
+</script></body></html>

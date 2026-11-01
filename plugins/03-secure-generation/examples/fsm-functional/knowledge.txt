@@ -1,0 +1,171 @@
+本次检索的安全知识。是否落实到代码需结合验证结果确认。
+
+V4 · Dead State
+**Stage**
+State transition
+
+**Description**
+A declared state is inactive or unreachable from the permitted initial/reset states in the extracted FSM graph. Its case branch can be associated dead code under V11; report the underlying state issue once rather than counting the same evidence twice.
+
+**Mitigation**
+For the repaired variant, remove an unnecessary inactive state and its dependent transitions or restore a missing requirement-supported incoming path. Explain which choice changes the declared functionality. The original-function secure variant preserves the declared state and its behavior.
+
+**Confirmation guidance**
+Provide the state, initial/reset nodes, incoming-edge or reachability evidence, and assumptions about input guards. Distinguish no structural path from a merely unproven path. Explicit fault-injection entry and deliberate reserved-state handling must be considered before claiming that all implementation behavior is dead.
+
+**Good example**
+A requirement declares MAINT with alarm=1 and clear -> IDLE, but no permitted transition enters MAINT. The original-function code keeps MAINT. A repaired proposal removes MAINT and explicitly states that the declared maintenance behavior has been removed; alternatively add an incoming edge only if its trigger is supported or stated as an assumption.
+
+**Bad example**
+An inactive state is silently deleted while the generator claims the requirement's functional behavior is unchanged, or its dead case branch is reported as a second independent V11 defect.
+
+**Mapping note**
+V11 is an association of this root cause when dead state branches are present, not an extra independent repair request.
+来源：CSL_HDLGen maintained FSM guidance; SecFSM: Secure FSM Design and Generation (https://arxiv.org/html/2508.12910v2); MITRE CWE-561: Dead Code (https://cwe.mitre.org/data/definitions/561.html)
+
+V5 · Unreachable State
+**Stage**
+State transition
+
+**Description**
+In the SecFSM classification, an unreachable state has an outgoing transition to a non-reset state. This is a specific graph pattern; a state with no reset-reachable path alone is already covered by V4 and must not be blindly relabeled as this stronger pattern.
+
+**Mitigation**
+For a confirmed unintended pattern, the repaired proposal may remove the unnecessary state or constrain its recovery transition to the specified reset/safe state, following the requirement. Preserve its original transitions in the original-function secure variant and describe the difference.
+
+**Confirmation guidance**
+Show the unreachable state, reset/start reachability evidence, and the outgoing edge to a non-reset target. Resolve guards and any declared recovery or injection semantics before confirming. Unknown reachability or target roles remain needs_confirmation.
+
+**Good example**
+If unused S is not required, the repaired proposal removes it. If S is a specified recovery state, a requirement-supported S -> RESET recovery can replace its unsafe S -> EXEC edge; list that functional change.
+
+**Bad example**
+S is unreachable from RESET yet S -> EXEC enters a non-reset operational state. An unreachable S whose only exit is RESET is not automatically this V5 pattern.
+
+**Mapping note**
+Preserves the original SecFSM non-reset-target qualification and the user's two-variant treatment for functional graph changes.
+来源：CSL_HDLGen maintained FSM guidance; SecFSM: Secure FSM Design and Generation (https://arxiv.org/html/2508.12910v2)
+
+V7 · Duplicate Encoding
+**Stage**
+State encoding
+
+**Description**
+Distinct FSM states must not share the same effective state-register encoding. Retrieve this ordinary coding constraint for every FSM generation, even before explicit encodings or a duplicate are supplied.
+
+**Mitigation**
+Assign a unique, width-representable code to each distinct state and check effective values after sizing or truncation. Coordinate the assignment with applicable V1/V16 constraints and preserve state/output/transition semantics.
+
+**Confirmation guidance**
+A concrete duplicate needs two distinct state identifiers with equal effective bit vectors at the declared state width. Missing encodings are not a confirmed duplicate. Authorization or access-control examples do not confirm duplicate encoding.
+
+**Good example**
+With a two-bit state register, IDLE=2'b00, RUN=2'b01, ERROR=2'b10 are distinct encodings.
+
+**Bad example**
+IDLE=2'b00 and RUN=2'b00 collide. Also check sized effective values: a value that truncates to 2'b00 collides with IDLE even if its unsized source literal looks different.
+
+**Mapping note**
+Replaces legacy confirmation examples about authorization that were unrelated to V7. Encoding correction is a single-version coding security constraint, not an independent functional repair branch.
+来源：CSL_HDLGen maintained FSM guidance; SecFSM: Secure FSM Design and Generation (https://arxiv.org/html/2508.12910v2)
+
+V9 · CWE-364
+**Stage**
+RTL concurrency prevention (adapted guidance)
+
+**Description**
+Prevent conflicting updates and ambiguous event ordering in FSM RTL. V9 retains the legacy SecFSM identifier CWE-364, whose official meaning is a software signal-handler race. These RTL coding constraints are an adaptation, not a detector or proof of canonical CWE-364. Hardware logic races are more directly related to CWE-1298.
+
+**Mitigation**
+Use one sequential writer for each state or control register. Use non-blocking assignments for sequential updates and blocking assignments for combinational next-state logic. Resolve competing events with explicit mutually exclusive conditions or the priority specified by the requirement. If event priority is unspecified, record the assumption or request clarification rather than silently inventing a security policy. Where asynchronous or cross-clock inputs are explicitly present, require a protocol-appropriate CDC mechanism; do not insert extra latency, a generic two-flop synchronizer for a multi-bit bus, or new interface behavior without considering the stated protocol.
+
+**Confirmation guidance**
+Retrieval is unconditional preventive guidance for FSM generation and does not establish a vulnerability. A concrete RTL risk needs evidence such as multiple procedural writers to the same register, ambiguous conflicting updates, or an explicitly identified asynchronous/shared-state interaction without a stated handling mechanism. If only requirements are available, distinguish preventive constraints from confirmed RTL findings. Non-blocking assignment style alone does not prove physical race freedom, CDC correctness, or absence of glitches.
+
+**Good example**
+Illustrative Verilog-2005 single-writer pattern (declare state_q and state_d as reg vectors; constants and transitions omitted):
+always @(posedge clk or negedge rst_n) begin
+  if (!rst_n) state_q <= IDLE;
+  else state_q <= state_d;
+end
+// A separate always @* computes state_d using blocking assignments.
+// If the requirement states fault has priority over done, implement if (fault) ... else if (done) ... there.
+
+**Bad example**
+Conflicting procedural drivers of the same state register:
+always @(posedge clk) if (start) state_q <= RUN;
+always @(posedge clk) if (fault) state_q <= ERROR;
+The two processes can both update state_q in the same cycle. Combining them into one next-state decision must preserve the requirement's event priority.
+
+**Mapping note**
+Preserve the V9 / CWE-364 legacy label for traceability. Present this as RTL concurrency-prevention guidance with related CWE-1298, not as a confirmed software signal-handler vulnerability.
+来源：CSL_HDLGen maintained FSM guidance; MITRE CWE-364: Signal Handler Race Condition (https://cwe.mitre.org/data/definitions/364.html); MITRE CWE-1298: Hardware Logic Contains Race Conditions (https://cwe.mitre.org/data/definitions/1298.html); lowRISC Verilog Coding Style: Blocking and Non-blocking Assignments (https://github.com/lowRISC/style-guides/blob/master/VerilogCodingStyle.md#blocking-and-non-blocking-assignments)
+
+V12 · CWE-570
+**Stage**
+Transition-condition confirmation
+
+**Description**
+An unintended condition always evaluates to false. A constant-looking predicate is a candidate until intent and its expression semantics are confirmed; a deliberately disabled branch is not automatically a defect.
+
+**Mitigation**
+Correct the predicate according to the intended requirement, using the matching confirmation knowledge. Never blindly replace false with true or invent a new functional transition. This confirmed coding safety correction belongs in the secure version, and in both versions if separate functional findings cause two versions.
+
+**Confirmation guidance**
+Use condition expression, relevant types/ranges, transition location, and requirement intent. Literal 0=1 is false; i=1 is not a constant without additional facts. Intentional false predicates are rejected. If intent or expression semantics are unknown, retain needs_confirmation.
+
+**Good example**
+If the requirement explicitly intends count < LIMIT but an erroneous predicate is always false, restore the specified predicate. An intentional disabled feature with condition 0 is not repaired merely because it is false.
+
+**Bad example**
+A required transition is guarded by the unintended comparison 0=1. Replacing it blindly with true may introduce an unauthorized path and is not a justified repair.
+
+**Mapping note**
+Confirmed V12 correction is a single-version coding repair under the user's policy; a separately confirmed graph defect may independently require two versions.
+来源：CSL_HDLGen maintained FSM guidance; MITRE CWE-570: Expression is Always False (https://cwe.mitre.org/data/definitions/570.html)
+
+V13 · CWE-571
+**Stage**
+Transition-condition confirmation
+
+**Description**
+An unintended condition always evaluates to true and may bypass a required check or render an alternative branch dead. Normal unconditional transitions are not vulnerabilities solely because their condition is true.
+
+**Mitigation**
+Restore the intended predicate from the requirement and document missing intent. Do not arbitrarily invert or delete an intended unconditional transition. Apply confirmed corrections in the secure version or both versions when a separate functional finding causes two versions.
+
+**Confirmation guidance**
+Use expression semantics, types/ranges, branch location and intent. Literal 1=1 is true; i=0 is not a constant without further facts. Reject explicitly intentional unconditional conditions; unknown intent remains needs_confirmation. Associate V11 only where an actual alternative branch is dead.
+
+**Good example**
+A transition explicitly required to occur unconditionally retains its true guard. An accidentally true authorization predicate is replaced with the specified authorization test, if that test is known.
+
+**Bad example**
+A required permission check is accidentally written as 1=1, bypassing the check. Do not call every deliberate unconditional transition this defect.
+
+**Mapping note**
+Confirmed V13 correction is a coding repair; V11 association requires evidence of a dead alternative and does not cause duplicate retrieval.
+来源：CSL_HDLGen maintained FSM guidance; MITRE CWE-571: Expression is Always True (https://cwe.mitre.org/data/definitions/571.html)
+
+V15 · CWE-1245
+**Stage**
+Default state and output handling
+
+**Description**
+Provide explicit behavior for unused or illegal state encodings. Retrieve this ordinary coding knowledge for every FSM even when no encoding or existing RTL default statement is supplied. Preventive retrieval is not a detected vulnerability.
+
+**Mitigation**
+Generate complete combinational defaults and an explicit state-case default with the requirement's recovery state and safe outputs. Prevent inferred latches. If recovery behavior is unspecified, disclose the assumption rather than silently adding a functional transition or claiming validated recovery.
+
+**Confirmation guidance**
+A concrete implementation defect needs evidence of unused encodings without appropriate default handling. At requirement time, apply preventive guidance without asserting that generated or existing RTL is vulnerable.
+
+**Good example**
+For a requirement specifying illegal state -> ERROR with alarm=1, default assigns ERROR and alarm=1 while all other outputs receive explicit safe values.
+
+**Bad example**
+An unused state encoding reaches a case statement with no default and leaves next-state or outputs incompletely assigned. A missing requirement sentence alone does not establish that RTL defect.
+
+**Mapping note**
+Default-handling knowledge is always included before code generation; its implementation remains subject to RTL validation.
+来源：CSL_HDLGen maintained FSM guidance; MITRE CWE-1245: Improper Finite State Machines in Hardware Logic (https://cwe.mitre.org/data/definitions/1245.html)

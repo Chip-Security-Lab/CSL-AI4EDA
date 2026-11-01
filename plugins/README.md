@@ -1,12 +1,10 @@
 # Plugin directory
 
-[Home](../README.md) · [User guide](../docs/USER_GUIDE.md)
+[Home](../README.md) · [Downloads](../docs/DOWNLOADS.md)
 
-| Plugin | Introduction |
-| --- | --- |
-| Security Detection Plugin | [RTL vulnerabilities and multi-module permissions](01-security-detection/README.md) |
-| Optimization & Repair Plugin | [Side-channel and timing concerns](02-optimization-repair/README.md) |
-| Secure Generation Plugin | [Knowledge-assisted RTL and FSM generation](03-secure-generation/README.md) |
-| HDL Copilot Plugin | [Design questions and RTL discussion](04-hdl-copilot/README.md) |
+- [Security Detection Plugin](01-security-detection/README.md) / [中文](01-security-detection/README.zh-CN.md) — VS Code 0.1.1.
+- [Optimization & Repair Plugin](02-optimization-repair/README.md) / [中文](02-optimization-repair/README.zh-CN.md) — VS Code 0.5.3.
+- [Secure Generation Plugin](03-secure-generation/README.md) / [中文](03-secure-generation/README.zh-CN.md) — VS Code 0.3.15.
+- [HDL Copilot Plugin](04-hdl-copilot/README.md) / [中文](04-hdl-copilot/README.zh-CN.md) — VS Code 0.3.4.
 
-These directories currently contain documentation. Source code, plugin engineering files and installation packages are outside this first publication.
+Each plugin keeps its provided examples and independent distribution notes. Package versions refer to the VS Code manifest; companion interfaces may not declare a separate version.

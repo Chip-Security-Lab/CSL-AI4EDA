@@ -2,3 +2,9 @@
 *.md text eol=lf
 *.png binary
 *.jpg binary
+*.vsix binary
+*.zip binary
+# Preserve example bytes so supplied verification hashes remain valid.
+plugins/**/examples/** -text -whitespace
+# A blank context line in a unified diff intentionally contains one space.
+*.diff -whitespace

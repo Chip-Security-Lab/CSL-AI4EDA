@@ -1,0 +1,30 @@
+{
+  "example": "general",
+  "source_type": "paper_adapted_reference",
+  "source": {
+    "title": "PowerSecV: LLM-Based Secure and Low-Power Verilog Generation via Hardware-CWE Knowledge Graph and Power Evolution",
+    "section": "IV.D Case Study",
+    "figure": "4(b), 4(c)",
+    "pages": [11, 12]
+  },
+  "language": "Verilog-2005",
+  "code_files": ["csr_access_secure.v", "csr_access_low_power.v"],
+  "review": {
+    "method": "static_review_only",
+    "scope": "Compare RTL structure and documented assumptions with the paper's abbreviated CSR case.",
+    "comparison_file": "comparison.md"
+  },
+  "compile": {"status": "not_run"},
+  "simulation": {"status": "not_run"},
+  "security": {"status": "not_run"},
+  "power": {"status": "not_run"},
+  "model_generation": {"status": "not_run"},
+  "notes": [
+    "This replaces the former real-model counter example; its passed verification logs do not apply to these files.",
+    "The secure variant follows Figure 4(b)'s permission check and per-request auxiliary XOR register.",
+    "The low-power variant follows Figure 4(c)'s buffer and conditional array-update intent, with aligned data/address/permission metadata.",
+    "The low-power variant adds one cycle of write-commit latency and assumes accepted authorization remains valid for that transaction.",
+    "An upstream decoder must ensure consistent permissions for addresses that alias the same low-7-bit physical storage index; this is not a complete RISC-V CSR decoder.",
+    "No equality of physical waveforms, side-channel protection or power reduction has been measured or established."
+  ]
+}

@@ -1,0 +1,2 @@
+PASS FUNCTIONAL FSM REPAIRED: reset, cycles, outputs, removed MAINT -> IDLE, all unused encodings and recovery
+tb.v:114: $finish called at 173000 (1ps)

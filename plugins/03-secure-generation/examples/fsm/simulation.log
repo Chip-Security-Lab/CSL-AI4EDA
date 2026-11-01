@@ -1,0 +1,2 @@
+PASS FSM: reset, cyclic transitions, outputs, illegal encoding and recovery
+tb.v:64: $finish called at 113000 (1ps)

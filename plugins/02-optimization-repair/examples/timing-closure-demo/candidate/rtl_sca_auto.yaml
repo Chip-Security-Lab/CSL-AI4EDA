@@ -1,0 +1,5 @@
+project:
+  root: .
+  top_module: timing_closure_demo
+  rtl_files:
+    - rtl/timing_closure_demo.sv

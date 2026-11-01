@@ -1,0 +1,26 @@
+Generate a complete Verilog-2005 module named csr_access_secure, adapted from the CSR access-control case in PowerSecV, Section IV.D, Figure 4(b).
+
+Use these ports:
+  input wire clk
+  input wire rst_n
+  input wire csr_we
+  input wire [1:0] current_priv
+  input wire [11:0] csr_addr
+  input wire [31:0] write_data
+  output wire [31:0] csr_rdata
+  output reg illegal_access
+  output wire power_signature
+
+Primary secure implementation:
+1. Store 128 words of 32 bits in csr_mem[0:127]. The address index is csr_addr[6:0]. Permission is current_priv >= csr_addr[11:10]. Follow the paper's abstract address convention rather than treating this as a full RISC-V CSR decoder. An upstream decoder must ensure that addresses mapping to the same low-7-bit storage index cannot use inconsistent privilege requirements to bypass protection.
+2. rst_n is an active-low asynchronous reset. Clear the array, auxiliary register and illegal_access on reset. Reset behavior is an explicit completion of the abbreviated paper figure.
+3. At a rising edge with csr_we=1, write write_data to the indexed CSR only if permission is valid. A denied request must not write the array.
+4. illegal_access is a request-result pulse: set it to !is_valid when csr_we=1 and clear it otherwise.
+5. Update a 32-bit auxiliary register mask_0 on every write request, permitted or denied, with write_data XOR 32'hA3EF63B2. power_signature is the reduction XOR of mask_0.
+6. Provide a combinational read completion: csr_rdata is the indexed CSR when current permission is valid, otherwise zero. This read port is an explicit assumption because the paper figure does not show the complete interface.
+7. Use wire/reg and ordinary always blocks. Do not claim that a fixed XOR guarantees physical noise, constant power or side-channel resistance.
+
+Optional follow-up low-power variant (not part of the primary secure implementation):
+Generate a separate module named csr_access_low_power using the same ports, following Figure 4(c)'s dummy-buffer and conditional array-update structure. On every request, capture write_data in dummy_0, the address in addr_q, permission in allow_q and request presence in pending_q. At the next rising edge, commit only pending_q && allow_q, using the buffered address and data from that same request. Permission is sampled at acceptance and remains valid for that transaction; mid-transaction permission revocation is outside this example's contract. Do not combine a previous dummy value with the current request's address or permission. This variant adds one clock cycle of write-commit latency. Use a conditional clock enable on the original clk, not a combinationally gated clock. power_signature observes reduction XOR of dummy_0 only.
+
+The supplied reference files are paper-adapted illustrations for static comparison. They have not been compiled, simulated or physically evaluated.

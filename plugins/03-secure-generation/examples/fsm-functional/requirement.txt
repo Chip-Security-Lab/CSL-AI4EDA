@@ -1,0 +1,32 @@
+Generate synthesizable Verilog-2005 for a controller named live_functional_fsm.
+Use exactly these ports:
+  input wire clk
+  input wire rst_n
+  output reg busy
+  output reg done
+  output reg alarm
+
+Declare the following states with explicit unique 3-bit encodings:
+  IDLE=3'b000, RUN=3'b001, DONE=3'b010, MAINT=3'b011.
+Use reg [2:0] state for the current-state register.
+The explicit reset/initial state is IDLE. rst_n is an active-low asynchronous reset.
+
+The complete list of normal transitions is:
+  IDLE -> RUN, unconditionally on the next rising edge.
+  RUN -> DONE, unconditionally on the next rising edge.
+  DONE -> IDLE, unconditionally on the next rising edge.
+  MAINT -> RUN, unconditionally on the next rising edge.
+No other transition or additional input is specified. No transition enters MAINT.
+These listed transitions are deliberately unconditional. There are no protected states, permission checks, arithmetic operations or cross-clock interactions.
+
+Outputs depend on current state:
+  IDLE: busy=0, done=0, alarm=0.
+  RUN: busy=1, done=0, alarm=0.
+  DONE: busy=0, done=1, alarm=0.
+  MAINT: busy=0, done=0, alarm=1.
+On reset, enter IDLE and immediately produce its outputs.
+For every unused/illegal encoding, drive busy=0, done=0, alarm=1 and recover to IDLE on the next rising edge.
+
+Preserve the declared states and transitions in the original-function secure implementation; do not silently repair its graph.
+If a separate functional correction is proposed, keep the same module name, ports, normal IDLE/RUN/DONE cycle and cycle timing. The unused MAINT branch is not a required external maintenance interface; removing that unused branch is an acceptable repair assumption, which must be documented explicitly. Do not invent a new maintenance input or insert MAINT into the required normal cycle.
+Use localparam, reg/wire, one sequential state writer and complete combinational defaults. Do not use SystemVerilog.

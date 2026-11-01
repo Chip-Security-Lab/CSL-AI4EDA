@@ -1,60 +1,18 @@
-# 使用指南
+# 使用说明
 
-[总首页](../README.zh-CN.md) · [English](USER_GUIDE.md)
+[首页](../README.zh-CN.md) · [English](USER_GUIDE.md) · [下载说明](DOWNLOADS.md)
 
-本次首发仅包含文档与图片，源代码、插件工程和安装包将另行发布。本仓库当前不能直接安装或运行插件；下文用于说明取得相应发行包后的使用方式。
+先选择插件，再按照该插件自己的环境要求和安装说明操作。四个插件以及不同交互入口的依赖并不相同。
 
-## 选择插件
-
-| 插件 | 用途 |
-| --- | --- |
-| **Security Detection Plugin** | RTL 漏洞与多模块访问权限分析，技术组合为 **VerilogLAVD (CWE)** 与多模块权限检测。 |
-| **Optimization & Repair Plugin** | 侧信道与时序问题修复。 |
-| **Secure Generation Plugin** | 结合硬件安全知识生成 RTL 与 FSM 草稿，技术组合为 **PowerSecV (CWE) + SecFSM**。 |
-| **HDL Copilot Plugin** | 理解 Verilog/SystemVerilog，讨论问题，审查修改建议。 |
-
-## 准备环境与模型服务
-
-Secure Generation 和 HDL Copilot 的本地实现使用 Python 3.10 或以上版本，提供 VS Code 与 Vivado 入口。VS Code 入口需要桌面版 VS Code 1.85 或以上版本，并打开受信任的工作区。Vivado 入口使用 Tcl Console 和独立助手窗口，小型模式选择面板需要 Python 支持 Tkinter。
-
-使用模型功能时，在插件的模型设置中填写兼容 Chat Completions API 的文本模型服务：
-
-| 设置项 | 填写内容 |
-| --- | --- |
-| API 基础地址 | 服务商的基础地址，如 `https://api.example.com/v1`，此处仅为格式示例；不要追加 `/chat/completions`。 |
-| 模型名称 | 服务商支持的准确模型标识。 |
-| API Key | 服务商要求的凭据；无需鉴权的服务可不填写。 |
-
-问题、相关 RTL，以及对话或生成上下文会发送给配置的模型服务。请使用允许发送给该服务的材料。
-
-## Security Detection Plugin
-
-总览图介绍 RTL 漏洞检查与多模块访问权限分析。支持的输入、操作步骤和结果解释将随相应发行内容提供；本次文档首发不包含可执行的检测流程。
-
-## Optimization & Repair Plugin
-
-总览图介绍侧信道与时序问题的优化修复。支持的输入、操作步骤和验证说明将随相应发行内容提供；本次文档首发不包含可执行的优化或修复流程。
-
-## Secure Generation Plugin
-
-1. 选择通用 RTL 或 FSM 流程，描述端口、复位、设计行为和约束。
-2. 生成草稿，结合相关安全知识和审查报告查看代码。
-3. 在相应界面确认写入或加入工程前，检查目标文件和代码差异。
-4. 对结果执行编译、仿真及设计要求的其他检查。
-
-示例：“生成带使能输入和低电平有效复位的同步计数器，并明确回绕行为。”
-
-生成代码仍是草稿。模型审查不代表功能正确，也不构成不存在漏洞的证明。
-
-## HDL Copilot Plugin
-
-1. 打开相关 RTL 文件，说明预期行为或需要讨论的问题。
-2. 发送问题，阅读回答；需要追问时继续使用同一会话。
-3. 需要改代码时生成修改建议，先审查差异，再决定是否采用。
-
-示例：“解释这个计数器的复位和回绕行为，在保持端口不变的前提下给出最小修改建议。”
-
-| 入口 | 代码来源 | 采用建议的方式 |
+| 任务 | 安装与使用 | 示例 |
 | --- | --- | --- |
-| VS Code | 当前编辑器内容，包含尚未保存的修改。 | 预览差异后手动应用；应用修改不会自动保存文件。 |
-| Vivado | 当前选中 RTL 文件已保存到磁盘的内容。 | 提问前先保存；审查并复制建议，再按原编辑流程修改文件。助手不直接写回工程。 |
+| RTL 漏洞及多模块权限检查 | [Security Detection](../plugins/01-security-detection/USER_GUIDE.zh-CN.md) | [示例入口](../plugins/01-security-detection/examples/README.md) |
+| 侧信道缓解与时序优化 | [Optimization & Repair](../plugins/02-optimization-repair/USER_GUIDE.zh-CN.md) | [示例入口](../plugins/02-optimization-repair/examples/README.md) |
+| Verilog / FSM 生成 | [Secure Generation](../plugins/03-secure-generation/USER_GUIDE.zh-CN.md) | [示例入口](../plugins/03-secure-generation/examples/README.md) |
+| HDL 问答与代码讨论 | [HDL Copilot](../plugins/04-hdl-copilot/USER_GUIDE.zh-CN.md) | [示例入口](../plugins/04-hdl-copilot/examples/README.md) |
+
+需要模型服务的流程应配置自己的接口、模型名和凭据。相关 RTL、需求与上下文可能发送到所选服务；不要把密钥写入 RTL、示例或公开报告。
+
+从示例副本开始，检查候选和实际证据，再进行设计所需的功能、时序及安全验证。生成回答、运行完成或可以导出 RTL，本身都不代表结果已经正确或安全。
+
+各版本的下载文件和组合方式见[下载说明](DOWNLOADS.md)，插件之间的边界和交互入口见[框架说明](ARCHITECTURE.md)。

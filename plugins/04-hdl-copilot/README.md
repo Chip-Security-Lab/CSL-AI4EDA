@@ -1,21 +1,29 @@
 # HDL Copilot Plugin
 
-**Understand RTL. Ask questions. Review suggestions.**
+[Home](../../README.md) · [简体中文](README.zh-CN.md) · [User guide](USER_GUIDE.md) · [Examples](examples/README.md)
 
-[Home](../../README.md) · [Plugin directory](../README.md) · [User guide](../../docs/USER_GUIDE.md)
+Understand, debug, and refine Verilog/SystemVerilog through multi-turn HDL questions and reviewed code changes. The installed interface, extension ID `trustrtl-local.trustrtl`, and package names retain **CSL_HDLChat** for compatibility.
 
-HDL Copilot supports conversations about Verilog and SystemVerilog, including code explanation, design questions, and suggested changes. It fits across the RTL design flow as an assistant to the engineer.
+![HDL Copilot current VS Code interface](assets/hdlchat-interface.png)
 
-## Interaction
+The supplied interface screenshot shows English controls and a Chinese answer. Interface and answer languages can differ.
 
-1. Provide the current RTL and a concrete question, including the expected behavior and constraints.
-2. Read the explanation and ask follow-up questions in the same discussion.
-3. Review proposed code differences before applying a suggestion.
+| Distribution | Version / environment | Package |
+| --- | --- | --- |
+| VS Code | **0.3.4**; desktop VS Code 1.85+; Python 3.10+; trusted workspace. Local Windows is the documented validation environment. | `CSL_HDLChat-0.3.4.vsix` |
+| Examples | The two intentional-bug inputs and bilingual prompts are now included in the VSIX; also offered separately. | `CSL_HDLChat-Examples.zip` |
+| Vivado companion | Project Mode and Python 3.10+; optional mode picker needs Tkinter. No separate numeric version is declared. | `CSL_HDLChat-for-Vivado.zip` |
 
-The existing VS Code interaction reads the current editor buffer and supports explicit application after a diff preview. The Vivado interaction reads saved RTL from the selected project file and provides previewable, copyable suggestions. These editor-specific details are introduced in the shared [user guide](../../docs/USER_GUIDE.md).
+[Preview release and downloads](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/hdl-copilot-v0.3.4) — preview distribution. The release tag follows the VS Code version and does not assign a separate Vivado version.
 
-## This publication
+## What is updated
 
-This directory contains the plugin introduction. Implementation source, extension engineering files and installation packages will be documented with their implementation release.
+Version 0.3.4 adds Chinese/English interface selection, a replayable four-step quick tour, the current interface documentation and screenshot, and packaged example inputs. The tour is local UI guidance and does not call a model. The model configuration form stores credentials in VS Code SecretStorage; saving does not test the connection.
 
-Suggested RTL changes should be checked with the normal compilation, simulation and project validation workflow.
+Install the VSIX using **Install from VSIX…**, open a trusted folder and your RTL, configure your model, then ask a question. The [full guide](USER_GUIDE.md) covers setup, current-file questions, history, demos, difference preview, and applying a change.
+
+VS Code reads the current buffer, including unsaved edits. Apply a reviewed proposal explicitly and save manually. Vivado reads saved project files and offers preview/copy without writing back. Its current source files match the supplied companion ZIP, so this staging pass keeps that archive unchanged.
+
+The backend is bundled and uses Python's standard library; ordinary use needs no pip installation or Node.js. Questions, RTL and conversation context are sent to your configured Chat Completions service. The plugin does not automatically compile, simulate, synthesize or measure PPA.
+
+[Example inputs and prompts](examples/README.md) · [Change notes](CHANGELOG.md) · [Distribution status](DISTRIBUTION_NOTES.md)

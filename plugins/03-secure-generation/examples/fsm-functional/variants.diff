@@ -1,0 +1,99 @@
+--- original.v
++++ repaired.v
+@@ -6,40 +6,48 @@
+     output reg alarm
+ );
+ 
+-    // original_function_secure variant:
+-    // Preserve the declared original functional graph, including MAINT and
+-    // MAINT -> RUN. MAINT has no incoming transition and is unreachable from
+-    // IDLE, but the V4/V5 functional repairs are intentionally not applied in
+-    // this original-function variant. Those original-function issues are
+-    // retained and only documented here.
++    // function_repaired variant.
+     //
+-    // V7: state encodings are unique and width-representable.
+-    // V9: one sequential writer for state; combinational logic uses blocking
+-    //     assignments and nonblocking assignment is used for the state register.
+-    // V15: illegal encodings recover to IDLE with safe outputs
+-    //      busy=0, done=0, alarm=1. MAINT=3'b011 remains a declared legal state.
+-    // No additional input, maintenance interface, protected state, permission
+-    // check, arithmetic operation, or cross-clock interaction is introduced.
+-    // Reset is active-low asynchronous, and IDLE outputs are produced
+-    // combinationally immediately after reset.
++    // Functional repair V4/V5: the unused MAINT branch is removed in this
++    // repaired variant because MAINT has no incoming transition and is
++    // unreachable from reset. This changes declared functionality with respect
++    // to original_function_secure: MAINT and MAINT -> RUN are intentionally
++    // not present here. No maintenance input is added, and MAINT is not inserted
++    // into the normal IDLE/RUN/DONE cycle.
++    //
++    // Assumption: removing the unused MAINT branch is permitted by the original
++    // requirement's explicit functional-repair allowance. Encoding 3'b011 is
++    // therefore treated as unused/illegal in this variant and recovers to IDLE.
++    //
++    // Coding constraints:
++    // V7: IDLE/RUN/DONE keep unique 3-bit encodings.
++    // V9: single sequential writer for state; nonblocking assignment for state,
++    //     blocking assignments in combinational logic.
++    // V15: complete combinational defaults; illegal/unused encodings output
++    //      busy=0, done=0, alarm=1 and recover to IDLE on the next rising edge.
++    //
++    // Rejected V12/V13 findings are not used to alter the intentionally
++    // unconditional normal transitions.
++    //
++    // This comment does not claim functional equivalence, verified behavior,
++    // or elimination of all vulnerabilities.
+ 
+-    localparam [2:0] IDLE  = 3'b000;
+-    localparam [2:0] RUN   = 3'b001;
+-    localparam [2:0] DONE  = 3'b010;
+-    localparam [2:0] MAINT = 3'b011;
++    localparam [2:0] IDLE = 3'b000;
++    localparam [2:0] RUN  = 3'b001;
++    localparam [2:0] DONE = 3'b010;
+ 
+     reg [2:0] state;
+     reg [2:0] next_state;
+ 
+-    // Combinational next-state logic with complete defaults.
++    // Combinational next-state logic with explicit default recovery.
++    // The retained normal transitions remain unconditional.
+     always @* begin
+-        next_state = IDLE; // Default recovery for unused/illegal encodings.
++        next_state = IDLE;
+ 
+         case (state)
+-            IDLE:  next_state = RUN;
+-            RUN:   next_state = DONE;
+-            DONE:  next_state = IDLE;
+-            MAINT: next_state = RUN;
++            IDLE: next_state = RUN;
++            RUN:  next_state = DONE;
++            DONE: next_state = IDLE;
+             default: next_state = IDLE;
+         endcase
+     end
+@@ -52,8 +60,8 @@
+             state <= next_state;
+     end
+ 
+-    // Outputs depend on the current state.
+-    // The default branch gives illegal encodings busy=0, done=0, alarm=1.
++    // Outputs depend on current state. Default handling covers unused/illegal
++    // encodings, including 3'b011 after removal of MAINT.
+     always @* begin
+         busy  = 1'b0;
+         done  = 1'b0;
+@@ -75,11 +83,6 @@
+                 done  = 1'b1;
+                 alarm = 1'b0;
+             end
+-            MAINT: begin
+-                busy  = 1'b0;
+-                done  = 1'b0;
+-                alarm = 1'b1;
+-            end
+             default: begin
+                 busy  = 1'b0;
+                 done  = 1'b0;

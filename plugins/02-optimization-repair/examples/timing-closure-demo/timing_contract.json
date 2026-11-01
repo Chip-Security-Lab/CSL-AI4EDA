@@ -1,0 +1,19 @@
+{
+  "top_module": "timing_closure_demo",
+  "baseline_done_cycles": 5,
+  "candidate_done_cycles": 17,
+  "max_added_cycles": 12,
+  "interface_change_allowed": false,
+  "same_xdc_required": true,
+  "functional": {
+    "success_marker": "FUNCTIONAL_PASS",
+    "baseline_commands": [
+      ["iverilog", "-g2012", "-o", ".timing-baseline.vvp", "baseline/rtl/timing_closure_demo.sv", "tb/tb_timing_closure_demo.sv"],
+      ["vvp", ".timing-baseline.vvp"]
+    ],
+    "candidate_commands": [
+      ["iverilog", "-g2012", "-DPIPELINED", "-o", ".timing-candidate.vvp", "candidate/rtl/timing_closure_demo.sv", "tb/tb_timing_closure_demo.sv"],
+      ["vvp", ".timing-candidate.vvp"]
+    ]
+  }
+}

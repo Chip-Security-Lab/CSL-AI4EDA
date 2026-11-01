@@ -1,0 +1,2 @@
+PASS FUNCTIONAL FSM ORIGINAL: reset, cycles, outputs, MAINT -> RUN, all unused encodings and recovery
+tb.v:114: $finish called at 179000 (1ps)

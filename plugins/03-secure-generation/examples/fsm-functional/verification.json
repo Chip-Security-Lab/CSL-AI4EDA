@@ -1,0 +1,77 @@
+{
+  "tested_at": "2026-11-01T08:47:23.358932+00:00",
+  "extension_version": "0.3.13",
+  "model": "deepseek-flash",
+  "checks": [
+    "five normal IDLE/RUN/DONE cycles",
+    "exact state encodings and outputs",
+    "asynchronous reset and post-reset timing",
+    "all illegal encodings 100 through 111",
+    "original 011/MAINT -> RUN versus removed-MAINT 011 -> IDLE"
+  ],
+  "testbench_sha256": "94abe91e90cb04ab4f3868d73a3c6d06d91d05fab158f12fb929a7655d239f3a",
+  "scope": "Finite simulation of the explicit removal proposal; not formal verification.",
+  "variants": [
+    {
+      "id": "original_function_secure",
+      "file": "original.v",
+      "code_sha256": "214d6effdf6019ee44a05d5de178a4816f6b6285a1b1525398b6d7057c80e328",
+      "expected_repaired": false,
+      "compile": {
+        "status": "passed",
+        "exit_code": 0,
+        "command": "iverilog -g2005 -s tb -Ptb.EXPECT_REPAIRED=0 -o original.vvp original.v tb.v",
+        "log": "original.compile.log"
+      },
+      "simulation": {
+        "status": "passed",
+        "exit_code": 0,
+        "command": "vvp original.vvp",
+        "log": "original.simulation.log"
+      },
+      "original_export_label": "name.v"
+    },
+    {
+      "id": "function_repaired",
+      "file": "repaired.v",
+      "code_sha256": "209d162ee9c047e57a0b15991e5610c3543eca1962ef14d98520d3f0ff241e4e",
+      "expected_repaired": true,
+      "compile": {
+        "status": "passed",
+        "exit_code": 0,
+        "command": "iverilog -g2005 -s tb -Ptb.EXPECT_REPAIRED=1 -o repaired.vvp repaired.v tb.v",
+        "log": "repaired.compile.log"
+      },
+      "simulation": {
+        "status": "passed",
+        "exit_code": 0,
+        "command": "vvp repaired.vvp",
+        "log": "repaired.simulation.log"
+      },
+      "original_export_label": "name_repaired.v"
+    }
+  ],
+  "example": "fsm-functional",
+  "module": "live_functional_fsm",
+  "source": "Saved real model output from CSL_HDLGen",
+  "provider": "DeepSeek",
+  "generated_on": "2026-11-01",
+  "language": "Verilog-2005",
+  "requirement_file": "requirement.txt",
+  "testbench_file": "tb.v",
+  "report_file": "security-report.txt",
+  "knowledge_file": "knowledge.txt",
+  "diff_file": "variants.diff",
+  "repair_assumption": "Removal of the unused MAINT branch is explicitly permitted by this requirement. The original variant preserves MAINT -> RUN; the repaired variant treats 011 as illegal and recovers to IDLE.",
+  "notes": [
+    "The code and testbench are unchanged from the verified live run.",
+    "Public filenames are original.v and repaired.v; both alternatives declare module live_functional_fsm and must be compiled separately.",
+    "The security report retains its original pending status; these external finite checks are not a proof of complete security."
+  ],
+  "sha256": {
+    "requirement.txt": "20dec870911cb65d9103c8f7225199428b163e2a23cfc80cb75631f3bd398a7c",
+    "original.v": "214d6effdf6019ee44a05d5de178a4816f6b6285a1b1525398b6d7057c80e328",
+    "repaired.v": "209d162ee9c047e57a0b15991e5610c3543eca1962ef14d98520d3f0ff241e4e",
+    "tb.v": "94abe91e90cb04ab4f3868d73a3c6d06d91d05fab158f12fb929a7655d239f3a"
+  }
+}

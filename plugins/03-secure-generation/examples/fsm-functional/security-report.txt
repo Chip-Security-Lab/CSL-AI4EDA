@@ -1,0 +1,77 @@
+模型生成草稿，等待编译与功能验证。
+安全性与功耗尚未通过仿真、形式验证或实现后评估。
+
+安全控制参考（非已验证结论）：
+• State has no incoming transition：Functional repair in a separate version. For the repaired variant, remove an unnecessary inactive state and its dependent transitions or restore a missing requirement-supported incoming path. Explain which choice changes the declared functionality. The original-function secure variant preserves the declared state and its behavior. Preserve the original functional graph in the baseline secure version; disclose any functional change in the repaired version. The extracted state has no incoming transition from another state. Confirm whether the declaration is required by the design.
+  分流：design_advice；关联知识：V4
+  位置：{"kind": "state", "state": "MAINT"}
+  需求阶段确认：confirmed；The extracted state has no incoming transition from another state. Confirm whether the declaration is required by the design.
+  证据：No graph transition enters MAINT.
+  原功能安全版：保留原功能结构及该功能问题，仅落实其他安全编码约束；该项未修复。
+  功能修正版：使用对应功能修复知识提出修改；状态、转移或条件可能改变，需人工确认并验证。
+• State is unreachable from the specified reset state：Functional repair in a separate version. For a confirmed unintended pattern, the repaired proposal may remove the unnecessary state or constrain its recovery transition to the specified reset/safe state, following the requirement. Preserve its original transitions in the original-function secure variant and describe the difference. Preserve the original functional graph in the baseline secure version; disclose any functional change in the repaired version. The state is unreachable from the explicit initial state and has a transition to a non-reset target, matching both parts of V5. Unknown guards are over-approximated; this is a requirement-graph property, not proven unsafe RTL.
+  分流：design_advice；关联知识：V5
+  位置：{"kind": "state", "state": "MAINT"}
+  需求阶段确认：confirmed；The state is unreachable from the explicit initial state and has a transition to a non-reset target, matching both parts of V5. Unknown guards are over-approximated; this is a requirement-graph property, not proven unsafe RTL.
+  证据：No graph path from IDLE to MAINT; nonconstant guards are treated as possible.
+  原功能安全版：保留原功能结构及该功能问题，仅落实其他安全编码约束；该项未修复。
+  功能修正版：使用对应功能修复知识提出修改；状态、转移或条件可能改变，需人工确认并验证。
+• Assign distinct encodings when implementing the FSM：Assign unique codes to distinct states. Correct any explicitly conflicting encodings in this secure version and document the changed codes while preserving state and transition meaning.
+  分流：coding_constraint；关联知识：V7
+  位置：{"kind": "fsm"}
+  需求阶段确认：preventive；Apply the rule's coding guidance as a preventive constraint; no existing RTL vulnerability is asserted.
+  证据：Unique encoding is a mandatory implementation constraint for every FSM; this preventive retrieval does not assert a duplicate encoding.
+  原功能安全版：作为生成约束落实，尚未验证生成RTL是否满足。
+  功能修正版：作为生成约束落实，尚未验证生成RTL是否满足。
+• Use deterministic event and register update rules：Use a single sequential writer per register, appropriate blocking/nonblocking assignments, and explicit event priority from the requirement. Preserve cycle semantics; apply CDC protocols only where asynchronous crossings are explicitly present.
+  分流：coding_constraint；关联知识：V9
+  位置：{"kind": "fsm"}
+  需求阶段确认：preventive；Apply the rule's coding guidance as a preventive constraint; no existing RTL vulnerability is asserted.
+  证据：Every generated FSM receives the RTL event-race prevention guidance; no race is asserted.
+  原功能安全版：作为生成约束落实，尚未验证生成RTL是否满足。
+  功能修正版：作为生成约束落实，尚未验证生成RTL是否满足。
+• Specify safe behavior for unused state encodings：Provide explicit default next-state/output handling. Use the specified recovery target; if none is specified, disclose the missing policy instead of inventing a normal functional transition.
+  分流：coding_constraint；关联知识：V15
+  位置：{"kind": "fsm"}
+  需求阶段确认：preventive；Apply the rule's coding guidance as a preventive constraint; no existing RTL vulnerability is asserted.
+  证据：Include default next-state and output handling in RTL; the absence of a requirement is not evidence of a code vulnerability.
+  原功能安全版：作为生成约束落实，尚未验证生成RTL是否满足。
+  功能修正版：作为生成约束落实，尚未验证生成RTL是否满足。
+
+生成版本（待验证）：
+• 原功能安全版 · name.v
+  保留原功能结构，落实共同安全编码约束。
+  功能问题保留并列入剩余项。
+  生成结果尚未经过编译、仿真、形式验证或安全验证；代码注释中的假设需确认。
+  保留/待确认：V4-4b3e5e78b464, V5-7199fc4105dc
+• 功能修正版 · name_repaired.v
+  拟按 V4 修复：Functional repair in a separate version. For the repaired variant, remove an unnecessary inactive state and its dependent transitions or restore a missing requirement-supported incoming path. Explain which choice changes the declared functionality. The original-function secure variant preserves the declared state and its behavior. Preserve the original functional graph in the baseline secure version; disclose any functional change in the repaired version. The extracted state has no incoming transition from another state. Confirm whether the declaration is required by the design.
+  拟按 V5 修复：Functional repair in a separate version. For a confirmed unintended pattern, the repaired proposal may remove the unnecessary state or constrain its recovery transition to the specified reset/safe state, following the requirement. Preserve its original transitions in the original-function secure variant and describe the difference. Preserve the original functional graph in the baseline secure version; disclose any functional change in the repaired version. The state is unreachable from the explicit initial state and has a transition to a non-reset target, matching both parts of V5. Unknown guards are over-approximated; this is a requirement-graph property, not proven unsafe RTL.
+  生成结果尚未经过编译、仿真、形式验证或安全验证；代码注释中的假设需确认。
+
+上述确认针对需求图与知识规则，不代表最终RTL通过安全验证。
+
+需求状态图检查：
+{
+  "parsed": true,
+  "state_count": 4,
+  "transition_count": 4,
+  "initial_state": "IDLE",
+  "initial_state_explicit": true,
+  "initial_state_source": "explicit",
+  "reachability_evaluated": true,
+  "dead_states": [],
+  "self_locked_states": [],
+  "unreachable_states": [
+    "MAINT"
+  ],
+  "literal_false_edges_excluded": 0,
+  "condition_semantics": "literal_false_edges_excluded; unknown_guards_overapproximated",
+  "assumptions": [
+    "Unused/illegal 3-bit encodings are 3'b100, 3'b101, 3'b110, 3'b111; for these, outputs are busy=0, done=0, alarm=1 and the next rising edge recovers to IDLE.",
+    "MAINT has no incoming normal transition and is unreachable from IDLE under the listed normal transitions; it is preserved as declared.",
+    "No repair is applied; the unused MAINT branch is not removed.",
+    "No additional input, maintenance input, protected state, permission check, arithmetic operation, or cross-clock interaction is specified.",
+    "Reset is active-low asynchronous; this extraction records the reset initial state rather than adding a reset transition."
+  ]
+}

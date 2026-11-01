@@ -1,0 +1,5 @@
+create_clock -name clk -period 6.500 [get_ports clk]
+set_input_delay -max 0.100 -clock clk [get_ports {start plaintext[*] key[*] mask_i[*]}]
+set_input_delay -min 1.200 -clock clk [get_ports {start plaintext[*] key[*] mask_i[*]}]
+set_output_delay -max 0.100 -clock clk [get_ports {done ciphertext[*]}]
+set_output_delay -min 0.000 -clock clk [get_ports {done ciphertext[*]}]
