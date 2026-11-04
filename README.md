@@ -70,6 +70,10 @@ Each plugin directory contains English and Chinese introductions, usage guides, 
 
 <p><strong>WeChat Official Account:</strong> 芯片与安全实验室</p>
 <p>Search for 芯片与安全实验室 in WeChat to follow our lab.</p>
-<p><strong>Email:</strong> <a href="mailto:zitenghu@hdu.edu.cn">zitenghu@hdu.edu.cn</a></p>
+<p>
+<strong>RTL-SecCheck:</strong> <a href="mailto:cxxv@hdu.edu.cn">cxxv@hdu.edu.cn</a><br>
+<strong>Optimization &amp; Repair:</strong> <a href="mailto:yuwang@hdu.edu.cn">yuwang@hdu.edu.cn</a><br>
+<strong>CSL_HDLGen / CSL_HDLChat:</strong> <a href="mailto:zitenghu@hdu.edu.cn">zitenghu@hdu.edu.cn</a>
+</p>
 
 </div>
