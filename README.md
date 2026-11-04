@@ -14,7 +14,7 @@
 
 CSL_AI4EDA brings together AI plugins for RTL vulnerability checks, optimization and repair, Verilog generation, and HDL questions. Each plugin has its own installation requirements and release version.
 
-**Preview distributions:** packages are offered for trial use. Full fresh-machine and installed-VS Code end-to-end acceptance remains pending; see each plugin's validation scope.
+**Preview distributions:** packages are offered for trial use. See each plugin's release notes for the checks performed and remaining validation, including fresh-machine setup.
 
 This repository contains introductions, installation and user guides, and example designs. Installable distributions are organized as separate GitHub Releases; development engineering trees are maintained separately. Installation packages may contain readable runtime scripts and third-party components.
 
@@ -22,10 +22,10 @@ This repository contains introductions, installation and user guides, and exampl
 
 | Plugin | VS Code package version | Main purpose | Interfaces |
 | --- | --- | --- | --- |
-| [**Security Detection Plugin**](plugins/01-security-detection/README.md) | 0.1.1 | RTL vulnerabilities and module access permissions | VS Code; shared runtime; Vivado Tcl entry |
-| [**Optimization & Repair Plugin**](plugins/02-optimization-repair/README.md) | 0.5.3 | Side-channel mitigation and timing optimization | Windows VS Code; Vivado integration for timing |
-| [**Secure Generation Plugin**](plugins/03-secure-generation/README.md) | 0.3.15 | Knowledge-assisted Verilog and FSM generation | VS Code; Vivado companion interface |
-| [**HDL Copilot Plugin**](plugins/04-hdl-copilot/README.md) | 0.3.4 | HDL questions, explanations, and change suggestions | VS Code; Vivado companion interface |
+| [**Security Detection Plugin**](plugins/01-security-detection/README.md) | 0.1.1 (revision 2) | RTL vulnerabilities and module access permissions | VS Code; shared runtime; Vivado Tcl entry |
+| [**Optimization & Repair Plugin**](plugins/02-optimization-repair/README.md) | 0.5.5 | Side-channel mitigation and timing optimization | Windows VS Code; Vivado integration for timing |
+| [**Secure Generation Plugin**](plugins/03-secure-generation/README.md) | 0.3.16 | Knowledge-assisted Verilog and FSM generation | VS Code; Vivado companion interface |
+| [**HDL Copilot Plugin**](plugins/04-hdl-copilot/README.md) | 0.4.0 | HDL questions, explanations, and change suggestions | VS Code; Vivado companion interface |
 
 Open a plugin page for its download files, environment requirements, examples, and validation scope. The detection distribution uses a VSIX with a matching external runtime; the optimization distribution includes its backend in the VSIX. A Vivado bridge or companion interface is described separately from an installable VS Code extension.
 

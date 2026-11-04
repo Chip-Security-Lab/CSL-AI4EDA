@@ -2,7 +2,7 @@
 
 [Plugin](../README.md) · [Usage](../USER_GUIDE.md)
 
-The supplied sample files are preserved from version 0.5.3. Their original root guide is retained as [SOURCE_README.zh-CN.md](SOURCE_README.zh-CN.md). The same examples are included in the VSIX; **RTL: open built-in examples** copies them to editable user storage.
+The supplied sample files are preserved from the 0.5.5 package. They are unchanged from 0.5.3. Their original root guide is retained as [SOURCE_README.zh-CN.md](SOURCE_README.zh-CN.md). The same examples are included in the VSIX; **RTL: open built-in examples** copies them to editable user storage.
 
 | Example | How to start | Scope |
 | --- | --- | --- |

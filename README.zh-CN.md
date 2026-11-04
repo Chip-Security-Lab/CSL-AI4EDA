@@ -14,7 +14,7 @@
 
 CSL_AI4EDA 汇集 RTL 漏洞检查、优化与修复、Verilog 生成和 HDL 问答插件。各插件独立维护版本，环境要求以各自使用说明为准。
 
-**当前提供试用分发版本。** 完整新机器及安装版真实 VS Code 端到端验收仍待完成，已验证范围见各插件说明。
+**当前提供试用分发版本。** 已完成的检查及尚待验证的项目（包括全新机器安装）见各插件的发布说明。
 
 仓库提供插件介绍、安装与使用说明、示例设计；安装包通过各插件对应的 GitHub Releases 分发。开发工程另行维护，安装包内可能包含可读的运行脚本及第三方组件。
 
@@ -22,10 +22,10 @@ CSL_AI4EDA 汇集 RTL 漏洞检查、优化与修复、Verilog 生成和 HDL 问
 
 | 插件 | VS Code 包版本 | 主要用途 | 交互入口 |
 | --- | --- | --- | --- |
-| [Security Detection Plugin](plugins/01-security-detection/README.zh-CN.md) | 0.1.1 | RTL 漏洞检查与多模块权限分析 | VS Code＋配套运行目录；Vivado Tcl 入口 |
-| [Optimization & Repair Plugin](plugins/02-optimization-repair/README.zh-CN.md) | 0.5.3 | 侧信道缓解与时序优化 | Windows 本地 VS Code；时序流程连接 Vivado |
-| [Secure Generation Plugin](plugins/03-secure-generation/README.zh-CN.md) | 0.3.15 | 知识辅助 Verilog / FSM 生成 | VS Code；Vivado 配套界面 |
-| [HDL Copilot Plugin](plugins/04-hdl-copilot/README.zh-CN.md) | 0.3.4 | HDL 问答、代码解释与修改建议 | VS Code；Vivado 配套界面 |
+| [Security Detection Plugin](plugins/01-security-detection/README.zh-CN.md) | 0.1.1（修订版 2） | RTL 漏洞检查与多模块权限分析 | VS Code＋配套运行目录；Vivado Tcl 入口 |
+| [Optimization & Repair Plugin](plugins/02-optimization-repair/README.zh-CN.md) | 0.5.5 | 侧信道缓解与时序优化 | Windows 本地 VS Code；时序流程连接 Vivado |
+| [Secure Generation Plugin](plugins/03-secure-generation/README.zh-CN.md) | 0.3.16 | 知识辅助 Verilog / FSM 生成 | VS Code；Vivado 配套界面 |
+| [HDL Copilot Plugin](plugins/04-hdl-copilot/README.zh-CN.md) | 0.4.0 | HDL 问答、代码解释与修改建议 | VS Code；Vivado 配套界面 |
 
 具体下载文件、依赖、示例入口和验证范围见各插件页面。检测插件需要 VSIX 与配套后端运行包；优化插件的 VSIX 已包含后端。Vivado 桥接和配套界面的安装方式分别说明。
 

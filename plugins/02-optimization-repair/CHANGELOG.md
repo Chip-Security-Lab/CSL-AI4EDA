@@ -1,7 +1,13 @@
 # Change notes
 
-## 0.5.3 distribution
+## 0.5.5
 
-The supplied extension manifest is 0.5.3. Its manual describes a documentation update with the same operation as 0.5.2. This local publication set preserves the VSIX byte-for-byte and adds bilingual navigation plus a repository copy of its provided examples.
+- Settings open as a full editor tab. Tool Environment lists missing dependencies and what to do first; details about bundled resources are collapsed further down.
+- The sidebar guides users through RTL input, input and project checks, then workflow and model execution.
+- The installed name is `CSL_RTL Side-Channel Mitigation and Timing Optimization`; its title is aligned beside the chip icon. The extension ID is unchanged.
 
-No extension ID, runtime logic, version, or example RTL is changed by this preparation. The public guide omits a maintainer-specific model-provider test paragraph and condenses internal historical validation notes; complete original bundled manuals remain in the VSIX.
+The backend, Vivado integration files, dependency scripts, and example files are unchanged from 0.5.3.
+
+## 0.5.3
+
+First preview distribution in this repository. The bundled manual was updated and the plugin page linked to repository copies of the provided examples.

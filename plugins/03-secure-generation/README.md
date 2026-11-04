@@ -6,18 +6,20 @@ Generate security-focused **Verilog-2005** from requirements using general RTL o
 
 ![CSL_HDLGen offline CSR demo interface](assets/csl-hdlgen-vscode.png)
 
-*Provided interface capture showing a fixed offline CSR example, not evidence of a new live-model run.*
+*Version 0.3.16 offline CSR preview with requirements collapsed after loading the preset result.*
 
 | Distribution | File | Environment |
 | --- | --- | --- |
-| VS Code 0.3.15 | `CSL_HDLGen-VSCode-0.3.15.vsix` | Desktop VS Code 1.85+, trusted local folder; Python 3.10+ and model account for custom generation |
+| VS Code 0.3.16 | `CSL_HDLGen-VSCode-0.3.16.vsix` | Desktop VS Code 1.85+, trusted local folder; Python 3.10+ and model account for custom generation |
 | Vivado companion | `CSL_HDLGen-for-Vivado.zip` | Vivado and Python 3.10+; Tkinter for the optional mode selector |
 | Saved examples | `CSL_HDLGen-Examples.zip` | CSR references, regular FSM, and original/function-corrected FSM with saved records |
 | Offline previews | `CSL_HDLGen-Demos.zip` | Three self-contained HTML previews; open in a browser without installation or network |
 
-**[Preview release and downloads](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/secure-generation-v0.3.15)** — preview distribution. The tag follows the VS Code version and does not assert a separate numeric Vivado version.
+**[Preview release and downloads](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/secure-generation-v0.3.16)** — preview distribution. The tag follows the VS Code version and does not assert a separate numeric Vivado version.
 
 ## Start
+
+Version 0.3.16 moves language selection into **Settings**, folds the requirements after a successful result, and uses VS Code Quick Pick to restore recent results.
 
 1. Install the VSIX and open a trusted folder. First use shows a four-step guide; skip it or replay it through **?**.
 2. Use a fixed **Run demo** immediately, or configure your own endpoint, model and key for new generation.

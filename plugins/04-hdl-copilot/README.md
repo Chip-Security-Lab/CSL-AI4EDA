@@ -6,19 +6,19 @@ Understand, debug, and refine Verilog/SystemVerilog through multi-turn HDL quest
 
 ![HDL Copilot current VS Code interface](assets/hdlchat-interface.png)
 
-The supplied interface screenshot shows English controls and a Chinese answer. Interface and answer languages can differ.
+The updated interface preview uses simulated answer and statistics data. Interface and answer languages can differ.
 
 | Distribution | Version / environment | Package |
 | --- | --- | --- |
-| VS Code | **0.3.4**; desktop VS Code 1.85+; Python 3.10+; trusted workspace. Local Windows is the documented validation environment. | `CSL_HDLChat-0.3.4.vsix` |
+| VS Code | **0.4.0**; desktop VS Code 1.85+; Python 3.10+; trusted workspace. Local Windows is the documented validation environment. | `CSL_HDLChat-0.4.0.vsix` |
 | Examples | The two intentional-bug inputs and bilingual prompts are now included in the VSIX; also offered separately. | `CSL_HDLChat-Examples.zip` |
 | Vivado companion | Project Mode and Python 3.10+; optional mode picker needs Tkinter. No separate numeric version is declared. | `CSL_HDLChat-for-Vivado.zip` |
 
-[Preview release and downloads](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/hdl-copilot-v0.3.4) — preview distribution. The release tag follows the VS Code version and does not assign a separate Vivado version.
+[Preview release and downloads](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/hdl-copilot-v0.4.0) — preview distribution. The release tag follows the VS Code version and does not assign a separate Vivado version.
 
 ## What is updated
 
-Version 0.3.4 adds Chinese/English interface selection, a replayable four-step quick tour, the current interface documentation and screenshot, and packaged example inputs. The tour is local UI guidance and does not call a model. The model configuration form stores credentials in VS Code SecretStorage; saving does not test the connection.
+Version 0.4.0 gives answers more space above the bottom composer, opens model and language settings in a separate editor tab, and keeps empty chats out of history. The replayable quick tour and two packaged examples remain available. The tour is local UI guidance and does not call a model. The model configuration form stores credentials in VS Code SecretStorage; saving does not test the connection.
 
 Install the VSIX using **Install from VSIX…**, open a trusted folder and your RTL, configure your model, then ask a question. The [full guide](USER_GUIDE.md) covers setup, current-file questions, history, demos, difference preview, and applying a change.
 

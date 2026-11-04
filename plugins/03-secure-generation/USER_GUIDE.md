@@ -12,7 +12,7 @@ CSL_HDLGen generates security-focused Verilog-2005 from design requirements. It 
 The knowledge library is included. No Neo4j or additional Python packages are required. Preset demos work without Python or model configuration.
 
 1. In VS Code, open **Extensions → … → Install from VSIX…**.
-2. Select `CSL_HDLGen-VSCode-0.3.15.vsix` from the matching release and reload if prompted.
+2. Select `CSL_HDLGen-VSCode-0.3.16.vsix` from the matching release and reload if prompted.
 3. Open a trusted local project folder and click the **G icon** in the Activity Bar.
 4. For custom generation, set `cslHdlgen.pythonPath` in **User Settings** if `python` does not point to your Python installation.
 
@@ -20,9 +20,11 @@ On first open, a four-step guide points out model settings, the requirement inpu
 
 ## 2. Quick Start
 
-### Configure your model
+### Language and model settings
 
-Click **Model settings** and save these three fields together:
+Click the gear in the top-right toolbar to open **Settings**. Choose Chinese or English under **Interface language**; the change takes effect immediately and does not require model configuration.
+
+For custom generation, save these three model fields together:
 
 - **API endpoint:** a Chat Completions-compatible base URL, usually ending in `/v1`; omit `/chat/completions`.
 - **Model name:** the model ID supplied by your provider.
@@ -35,19 +37,20 @@ Remote endpoints use HTTPS; local services may use HTTP.
 1. Choose **General secure RTL** or **Secure FSM** below the input box.
 2. Describe the interfaces, behavior, clock/reset, and security requirements. For FSMs, include states, transitions, and outputs.
 3. Click **Generate** or press `Ctrl+Enter` (`Cmd+Enter` on macOS).
-4. Review **Code → Knowledge → Security report**. If multiple FSM versions are offered, use the version selector to compare them.
+4. After successful generation, the requirement input collapses to give results more space. Review **Code → Knowledge → Security report**, and click **Edit requirements** to expand the input again. If multiple FSM versions are offered, use the version selector to compare them.
 5. For general RTL, optionally click **Optimize power**. Use **Copy** or **Open as file** to save the result.
 
 To replace an existing workspace file, use **Attach file → Generate → Review diff → Write to file**. Writing asks for confirmation and creates a backup. Enable **Allow model to reference attached file** only when you want its contents included in the model request.
 
+Click the **History** clock icon to restore a result using VS Code's Quick Pick list. Each mode keeps its eight most recent results in the current window. Starting an empty task does not add a history entry.
+
 ### Try a demo
 
-Click **Run demo** for a preset example. The FSM page offers a regular example and an example with a proposed functional correction. The `examples/` directory includes CSR references, a saved regular FSM, and a real-model FSM case with original and function-repaired code, reports, knowledge, and verification records.
+Click **Run demo** for a preset example. Loading a demo also collapses the requirement input; use **Edit requirements** to expand it. The FSM page offers a regular example and an example with a proposed functional correction. The `examples/` directory includes CSR references, a saved regular FSM, and a real-model FSM case with original and function-repaired code, reports, knowledge, and verification records.
 
-For a browser-only preview, use the [offline HTML demos](examples/demos/README.md) or extract the separate `CSL_HDLGen-Demos.zip`, then double-click an HTML file. These fixed demos need no installation or model configuration.
+For a browser-only preview, use the [offline HTML demos](examples/demos/README.md) or extract `CSL_HDLGen-Demos.zip` and double-click an HTML file. These fixed demos need no installation or model configuration.
 
 Generated code requires verification before use. Security reports describe proposed measures; power optimization does not include power measurements.
-
 
 ## 3. Vivado companion
 
@@ -64,6 +67,4 @@ Read the [complete Vivado guide](VIVADO_GUIDE.zh-CN.md) for file selection, conf
 
 ## 4. Examples and verification scope
 
-The [provided examples](examples/README.md) preserve the source materials and their saved records. The CSR secure/low-power references are static and untested; the regular and functional-correction FSMs carry previous finite-check results. No new model, GUI or independent HDL simulation was executed during this packaging refresh. Saved records are not claims that a current arbitrary generation succeeds.
-
-Low-power optimization is part of the generation workflow, separate from the Optimization & Repair Plugin. Report statements, fixed demos and finite examples do not establish functional equivalence, physical power savings or security.
+The [provided examples](examples/README.md) retain earlier saved records. Local installed VS Code checks covered settings, draft preservation, preset demos, automatic collapse and native history; they made no model requests. The independent HTML demos were checked offline. Vivado and clean-machine workflows were not retested. The static CSR reference has no compile, simulation, physical security, equivalence, or power measurements. Verify generated HDL in your own workflow.

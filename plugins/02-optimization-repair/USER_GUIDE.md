@@ -8,10 +8,12 @@ Use Windows desktop VS Code 1.100+ in a trusted local folder. Install Windows Py
 
 ## Install and configure
 
-1. Install `rtl-optimize-repair-0.5.3.vsix` with **Install from VSIX…**, then reload.
-2. Open the local RTL folder and choose **CSL → settings → tool environment**. Check existing tools; use the dependency buttons where needed. Inspect terminal errors if preparation fails.
+1. Install `rtl-optimize-repair-0.5.5.vsix` with **Install from VSIX…**, then reload.
+2. Open the local RTL folder and click the gear in the **CSL_RTL** view, or run **RTL：打开插件设置**. In the editor tab, check the missing requirements at the top of **工具环境** (Tool environment). Use the dependency buttons where needed. Inspect terminal errors if preparation fails.
 3. Add your own compatible model endpoint, model identifier, and API key. Save and select the configuration. The API key is held in VS Code SecretStorage. Relevant RTL and context are sent to that service during tasks.
-4. Use **open examples** in settings or open the [repository example copy](examples/README.md).
+4. Use **打开示例** (Open examples) in settings or open the [repository example copy](examples/README.md).
+
+In the task sidebar, work through **1 · 提供 RTL** (Provide RTL), **2 · 确认输入与工程条件** (Confirm input and project context), and **3 · 选择流程、模型与执行** (Choose workflow and model, then run).
 
 ## Side-channel task
 

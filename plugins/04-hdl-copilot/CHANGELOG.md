@@ -1,5 +1,13 @@
 # Change notes
 
+## 0.4.0
+
+- Expand the answer reading area and keep the composer docked at the bottom.
+- Compact the toolbar and collapse completed M1–M4 progress.
+- Move model configuration and interface language to a separate editor settings tab.
+- Create a chat only when a question is sent; hide existing empty history records without deleting files.
+- Keep native VS Code history selection and update the first-open tour and documentation.
+
 ## 0.3.4 preview distribution
 
 - Stage the current source-matching VS Code 0.3.4 package; keep its extension ID and all executable contents unchanged.

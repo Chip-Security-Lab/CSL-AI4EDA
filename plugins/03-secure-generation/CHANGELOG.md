@@ -1,5 +1,12 @@
 # Change notes
 
+## 0.3.16 — VS Code layout
+
+- Move interface language to Settings; switching languages does not require model credentials.
+- Collapse requirements after successful generation or a preset demo. Use Edit requirements to restore the input and keep the draft.
+- Replace the inline history with VS Code Quick Pick. Restoring a result collapses the requirements; a blank task adds no history entry.
+- Refresh the three offline browser demos for the new layout. Keep the saved HDL examples and Vivado companion unchanged.
+
 ## 0.3.15 local distribution refresh
 
 Refreshes the prior local 0.3.11 candidate using the supplied 0.3.15 VS Code package and current source materials. Current instructions cover the first-use four-step guide, bilingual UI, model settings, saved demos, FSM version selection and reviewed/confirmed file writes.

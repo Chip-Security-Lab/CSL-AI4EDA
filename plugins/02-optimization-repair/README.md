@@ -6,17 +6,17 @@ Generate and inspect RTL candidates for side-channel mitigation and timing optim
 
 | Item | Distribution |
 | --- | --- |
-| VS Code package | `rtl-optimize-repair-0.5.3.vsix` |
-| Version / extension ID | `0.5.3` / `rtl-research.rtl-optimize-repair` |
-| Installed display name | CSL · RTL Side-Channel Mitigation and Timing Optimization |
+| VS Code package | `rtl-optimize-repair-0.5.5.vsix` |
+| Version / extension ID | `0.5.5` / `rtl-research.rtl-optimize-repair` |
+| Installed display name | CSL_RTL Side-Channel Mitigation and Timing Optimization |
 | Host | Windows desktop VS Code 1.100+; trusted local workspace |
 | Vivado interface | Project and timing integration from VS Code; no separate native Vivado plugin package |
 
 ## Download and start
 
-This is a preview distribution. Get the VSIX from [optimization-repair-v0.5.3](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/optimization-repair-v0.5.3). Install it using **Install from VSIX…**, reload, and open your local RTL folder. The VSIX includes the backend, manuals, rules, and examples; system software is installed separately.
+This is a preview distribution. Get the VSIX from [optimization-repair-v0.5.5](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/optimization-repair-v0.5.5). Install it using **Install from VSIX…**, reload, and open your local RTL folder. The VSIX includes the backend, manuals, rules, and examples; system software is installed separately.
 
-Use **CSL → settings** to check the environment and save your own model configuration. Start with the [provided examples](examples/README.md). Detailed steps are in the [English quick guide](USER_GUIDE.md) and [Chinese manual](USER_GUIDE.zh-CN.md).
+Open the gear in the **CSL_RTL** view to check missing requirements and configure your model in the editor settings tab. The task sidebar walks through RTL input, project context, and execution. Start with the [provided examples](examples/README.md). Detailed steps are in the [English quick guide](USER_GUIDE.md) and [Chinese manual](USER_GUIDE.zh-CN.md).
 
 ## Environment and scope
 

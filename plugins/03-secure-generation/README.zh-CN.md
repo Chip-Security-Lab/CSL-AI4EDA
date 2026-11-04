@@ -6,16 +6,18 @@
 
 ![CSL_HDLGen 离线 CSR 示例界面](assets/csl-hdlgen-vscode.png)
 
-*原工程提供的离线示例界面截图，不代表本次新增真实模型验证。*
+*0.3.16 离线 CSR 界面预览：预置结果加载后，需求区折叠。*
 
 | 交付文件 | 环境 / 内容 |
 | --- | --- |
-| `CSL_HDLGen-VSCode-0.3.15.vsix` | VS Code 1.85+、可信本地文件夹；自定义生成需 Python 3.10+ 和模型账号 |
+| `CSL_HDLGen-VSCode-0.3.16.vsix` | VS Code 1.85+、可信本地文件夹；自定义生成需 Python 3.10+ 和模型账号 |
 | `CSL_HDLGen-for-Vivado.zip` | Vivado 配套界面，Python 3.10+；可选模式面板使用 Tkinter |
 | `CSL_HDLGen-Examples.zip` | CSR 安全/低功耗参考、常规 FSM、FSM 功能修正案例 |
 | `CSL_HDLGen-Demos.zip` | 三个自包含 HTML 离线预览，无需安装、模型或网络 |
 
-**[试用版与下载](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/secure-generation-v0.3.15)**：当前为试用分发版本。标签沿用 VS Code 0.3.15，不表示 Vivado 另有同号版本。
+**[试用版与下载](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/secure-generation-v0.3.16)**：当前为试用分发版本。标签沿用 VS Code 0.3.16，不表示 Vivado 另有同号版本。
+
+0.3.16 将语言切换移入**设置**，成功生成后自动折叠需求区，并通过 VS Code 原生快速选择列表恢复近期结果。
 
 首次打开提供四步引导，可跳过或点击 **?** 重看。选择通用安全生成或 FSM 安全生成，填写需求并查看代码、安全知识与安全报告；多版本 FSM 可通过选择器比较。功能修正版本可能改变行为，需确认符合设计意图。
 

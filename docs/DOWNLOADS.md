@@ -6,10 +6,12 @@ Use the release for the plugin you need. Versions are independent; there is no s
 
 | Plugin | Release entry | Files / installation format |
 | --- | --- | --- |
-| [Security Detection](../plugins/01-security-detection/README.md) | [security-detection-v0.1.1](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/security-detection-v0.1.1) | VSIX plus matching runtime ZIP; the VSIX alone does not include the detection engines |
-| [Optimization & Repair](../plugins/02-optimization-repair/README.md) | [optimization-repair-v0.5.3](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/optimization-repair-v0.5.3) | `rtl-optimize-repair-0.5.3.vsix`; backend, examples and manuals are included |
-| [Secure Generation](../plugins/03-secure-generation/README.md) | [secure-generation-v0.3.15](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/secure-generation-v0.3.15) | VS Code VSIX, Vivado companion ZIP, provided examples archive, and optional browser demos ZIP |
-| [HDL Copilot](../plugins/04-hdl-copilot/README.md) | [hdl-copilot-v0.3.4](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/hdl-copilot-v0.3.4) | VS Code VSIX, Vivado companion ZIP, and provided examples archive |
+| [Security Detection](../plugins/01-security-detection/README.md) | [security-detection-v0.1.1-r2](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/security-detection-v0.1.1-r2) | VSIX plus matching runtime ZIP; the VSIX alone does not include the detection engines |
+| [Optimization & Repair](../plugins/02-optimization-repair/README.md) | [optimization-repair-v0.5.5](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/optimization-repair-v0.5.5) | `rtl-optimize-repair-0.5.5.vsix`; backend, examples and manuals are included |
+| [Secure Generation](../plugins/03-secure-generation/README.md) | [secure-generation-v0.3.16](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/secure-generation-v0.3.16) | VS Code VSIX, Vivado companion ZIP, provided examples archive, and optional browser demos ZIP |
+| [HDL Copilot](../plugins/04-hdl-copilot/README.md) | [hdl-copilot-v0.4.0](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/hdl-copilot-v0.4.0) | VS Code VSIX, Vivado companion ZIP, and provided examples archive |
+
+**Updating Security Detection from the earlier 0.1.1 release:** use both revision 2 files. The VSIX still reports version 0.1.1. Uninstall the earlier extension before installing the new VSIX, then point it at the newly extracted revision 2 runtime. See the [Security Detection guide](../plugins/01-security-detection/USER_GUIDE.md).
 
 Release notes list the exact assets, supported environment, change scope, and verification limits. `SHA256SUMS.txt` records the SHA-256 checksum of every downloadable file for that release. Follow the plugin guide before installing system dependencies or configuring a model service.
 

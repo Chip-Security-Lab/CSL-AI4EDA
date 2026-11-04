@@ -1,13 +1,13 @@
 # Version notes
 
-## Frontend 0.1.1 — local distribution candidate
+## 0.1.1-r2 — 2026-11-04 preview
 
-- Removes only the internal `extension/PROGRESS.md` handover record from the supplied VSIX and pairs the candidate with the supplied runtime snapshot. All remaining VSIX entries, including JavaScript, manifests, ID and version, are byte-identical.
-- Preserves all six `examples/demo_soc` RTL files and one existing interface illustration.
-- Separates runtime files from extension development files and optional paper datasets/notebook.
-- Removes a supplied default database password and personal example/comment paths from the staged runtime only; leaves the example scan target empty and documents picker/absolute target paths.
-- Backend FastAPI metadata remains 0.1.0; this is not a new backend version.
-- Archive/example checks were performed during preparation. Real VS Code, Neo4j, engine, and model integration checks remain outstanding.
-- Upstream license documents and applicable distribution terms remain pending maintainer confirmation; see [third-party notices](THIRD_PARTY_NOTICES.md).
+- Shows the scan summary, report and dependency graph before runtime information; groups repeated warnings and collapses logs by default.
+- Separates scan controls and connection settings into tabs in the sidebar.
+- Retains the installed extension ID and version 0.1.1, plus the backend metadata version 0.1.0. Existing users need to reinstall the revised VSIX.
+- Keeps the six-file demo design and the companion runtime for Windows and optional Vivado Tcl.
 
-This record describes publication preparation rather than a new implementation release.
+## 0.1.1 — earlier preview
+
+- Published the original VS Code frontend and matching backend/engine runtime as separate downloads.
+- Separated ordinary runtime use from the optional upstream research datasets and retained the provided demo design.

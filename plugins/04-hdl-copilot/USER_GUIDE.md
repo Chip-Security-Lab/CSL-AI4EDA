@@ -1,16 +1,14 @@
 # HDL Copilot Plugin — user guide
 
+[Plugin](README.md) · [简体中文](USER_GUIDE.zh-CN.md)
+
 **CSL_HDLChat is a VS Code assistant that helps RTL engineers understand, debug, and refine Verilog/SystemVerilog through concise, multi-turn Q&A and reviewed code changes.**
-
-[Plugin](README.md) · [中文](USER_GUIDE.zh-CN.md) · [Examples](examples/README.md)
-
-The installed extension retains CSL_HDLChat for compatibility. The sections below describe VS Code 0.3.4; the Vivado interface is documented separately below.
 
 ## Interface
 
-![CSL_HDLChat interface with the top input box, M1–M4 progress, highlighted RTL, and change-preview button](assets/hdlchat-interface.png)
+![CSL_HDLChat interface with expanded answers, a bottom composer, collapsed progress, and a settings shortcut](assets/hdlchat-interface.png)
 
-*User-provided screenshot of the current interface. Interface language and answer language can differ, as shown.*
+*Updated interface preview with simulated answer and statistics data. Interface language and answer language can differ.*
 
 ## Examples
 
@@ -27,7 +25,7 @@ Open an example in VS Code, start a new chat, and use the prompts in the [Exampl
 
 - [ ] Desktop VS Code **1.85.0 or later**.
 - [ ] Python **3.10 or later**.
-- [ ] The extension package: `CSL_HDLChat-0.3.4.vsix`.
+- [ ] The extension package: `CSL_HDLChat-0.4.0.vsix`.
 - [ ] A model service compatible with the **Chat Completions API**.
 - [ ] The service's API base URL, model name, and API key (if required).
 - [ ] Network access to the configured model service.
@@ -49,17 +47,17 @@ If Python cannot be found, set `trustrtl.pythonPath` in VS Code Settings to your
 
 1. Open VS Code and press **Ctrl+Shift+P**.
 2. Select **Extensions: Install from VSIX...**.
-3. Choose `CSL_HDLChat-0.3.4.vsix` and reload VS Code if prompted.
+3. Choose `CSL_HDLChat-0.4.0.vsix` and reload VS Code if prompted.
 4. Open your project folder and trust it if appropriate.
 5. Click the **C icon** in the activity bar to open CSL_HDLChat.
 
 ## 2. Quick Start
 
-On first open, a four-step tour highlights Model settings, the top input box, the answer area, and Demos. Finish or skip to dismiss it for future opens. Use **Quick tour** at the top to replay it. The tour does not call the model.
+On first open, a four-step tour highlights Settings, the bottom input box, the main answer area, and Demos. Finish or skip to dismiss it for future opens. Use **Quick tour** at the top to replay it. The tour does not call the model.
 
 ### Configure Your Model
 
-Click **Model settings**, fill in all three fields in the same form, and click **Save settings**.
+Click the **Settings** gear in the toolbar. A separate settings tab opens in the VS Code editor area. Fill in the three model fields and click **Save settings**. Interface language is configured on the same page.
 
 | Field | What to enter |
 | --- | --- |
@@ -72,14 +70,14 @@ Keys are stored in VS Code SecretStorage. Questions, attached code, and conversa
 ### Ask a Question
 
 1. Open a `.v`, `.sv`, `.vh`, or `.svh` file and confirm the current filename in the assistant.
-2. Enter your question in the **top input box**, for example:
+2. Enter your question in the **bottom input box**, for example:
 
    > Check whether this counter resets to zero every 10 cycles. Keep the ports and reset behavior unchanged, and suggest a minimal fix.
 
 3. Click **Send** or press **Ctrl+Enter**.
-4. View the M1–M4 progress and answer below the input box.
+4. Read progress and answers in the main area above the composer. The answer area scrolls independently, and completed progress is collapsed.
 
-The assistant reads the current file, including unsaved edits. You can also paste code or ask general questions. Continue in the same chat for follow-up questions, or use **New chat** and **History** to manage conversations.
+The assistant reads the current file, including unsaved edits. You can also paste code or ask general questions. Continue in the same chat for follow-up questions, or use **New chat** and **History** to manage conversations. Empty chats are not added to history. History opens a native VS Code Quick Pick list.
 
 ### Review and Apply Changes
 
@@ -93,10 +91,9 @@ Changes are not applied or saved automatically. If the file changes after analys
 ### Demos and Language
 
 - Click **Demos** to try a counter boundary issue, a combinational latch, or a nonblocking-assignment pipeline. Each demo opens an unsaved file; click **Send** to run it.
-- Select **中文 / English** at the top to switch the interface language. The choice is remembered. Existing answers and code are unchanged; ask in English for English answers.
+- Open **Settings** and select **中文 / English / Follow VS Code** to switch the interface language. The choice is remembered. Existing answers and code are unchanged; ask in English for English answers.
 
 The assistant currently analyzes one file at a time. It does not run compilation, simulation, or synthesis. Verify proposed RTL changes using your normal development workflow.
-
 
 ## Vivado companion interface
 
@@ -111,4 +108,4 @@ The optional `HDLCHAT_PYTHON` environment variable selects the Python interprete
 
 ## Distribution verification scope
 
-This local packaging update checks source/package byte equality, archive integrity, examples, metadata and documentation links. It does not add a new live-model, VS Code GUI, Vivado GUI or clean-machine installation claim. Supplied example validation notes describe the maintainer's earlier reviewed fixes; new model outputs still need independent checking.
+The installed VS Code extension was checked locally for answer scrolling, a docked composer, editor settings and native history. A local mock model service exercised the request and history flow; this did not retest real-model answer quality, Vivado or a clean machine. The supplied example validation notes are retained; independently verify new model outputs.
