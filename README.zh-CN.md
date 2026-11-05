@@ -73,7 +73,7 @@ CSL-AI4EDA/
 <p>
 <strong>RTL-SecCheck：</strong><a href="mailto:cxxv@hdu.edu.cn">cxxv@hdu.edu.cn</a><br>
 <strong>RTL-Optimize-repair：</strong><a href="mailto:yuwang@hdu.edu.cn">yuwang@hdu.edu.cn</a><br>
-<strong>CSL_HDLGen / CSL_HDLChat：</strong><a href="mailto:zitenghu@hdu.edu.cn">zitenghu@hdu.edu.cn</a>
+<a href="mailto:zitenghu@hdu.edu.cn">zitenghu@hdu.edu.cn</a>
 </p>
 
 </div>
