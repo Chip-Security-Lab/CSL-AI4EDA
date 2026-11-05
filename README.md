@@ -67,9 +67,9 @@ Each plugin directory contains English and Chinese introductions, usage guides, 
 <div align="center">
 
 <p>
-<img src="assets/chip-security-lab.jpg" alt="Chip Security Lab — 芯片与安全实验室" width="220" align="middle">
+<img src="assets/hangzhou-dianzi-university-emblem.png" alt="Hangzhou Dianzi University — 杭州电子科技大学" width="140" align="middle">
 &nbsp;&nbsp;
-<img src="assets/hangzhou-dianzi-university.png" alt="Hangzhou Dianzi University — 杭州电子科技大学" width="180" align="middle">
+<img src="assets/chip-security-lab.jpg" alt="Chip Security Lab — 芯片与安全实验室" width="220" align="middle">
 </p>
 
 <p><strong>WeChat Official Account:</strong> 芯片与安全实验室</p>
