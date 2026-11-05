@@ -72,7 +72,7 @@ CSL-AI4EDA/
 <p>在微信中搜索“芯片与安全实验室”，关注实验室动态。</p>
 <p>
 <strong>RTL-SecCheck：</strong><a href="mailto:cxxv@hdu.edu.cn">cxxv@hdu.edu.cn</a><br>
-<strong>优化与修复：</strong><a href="mailto:yuwang@hdu.edu.cn">yuwang@hdu.edu.cn</a><br>
+<strong>RTL-Optimize-repair：</strong><a href="mailto:yuwang@hdu.edu.cn">yuwang@hdu.edu.cn</a><br>
 <strong>CSL_HDLGen / CSL_HDLChat：</strong><a href="mailto:zitenghu@hdu.edu.cn">zitenghu@hdu.edu.cn</a>
 </p>
 
