@@ -66,7 +66,11 @@ CSL-AI4EDA/
 
 <div align="center">
 
-<img src="assets/chip-security-lab.jpg" alt="芯片与安全实验室 · Chip Security Lab" width="220">
+<p>
+<img src="assets/chip-security-lab.jpg" alt="芯片与安全实验室 · Chip Security Lab" width="220" align="middle">
+&nbsp;&nbsp;
+<img src="assets/hangzhou-dianzi-university.png" alt="杭州电子科技大学 · Hangzhou Dianzi University" width="180" align="middle">
+</p>
 
 <p><strong>微信公众号：</strong>芯片与安全实验室</p>
 <p>在微信中搜索“芯片与安全实验室”，关注实验室动态。</p>

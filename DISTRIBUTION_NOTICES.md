@@ -11,4 +11,4 @@ This repository does not assign a new blanket license to all four plugins, third
 
 Keep original attribution and license notices with redistributed packages. Package-level metadata is not evidence that every included third-party engine, dataset, or derived knowledge resource uses the same license. The plugin-specific notes record unresolved attribution or redistribution questions where present.
 
-The overview illustration was generated for this repository; the lab identity image was supplied by the maintainer. The contact account and email are shown on the homepage.
+The overview illustration was generated for this repository; the lab and university identity images were supplied by the maintainer. The contact account and email are shown on the homepage.

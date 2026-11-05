@@ -9,3 +9,5 @@ The plugin order is Security Detection, Optimization & Repair, Secure Generation
 ## Lab identity
 
 [chip-security-lab.jpg](chip-security-lab.jpg) is the lab identity image supplied by the maintainer. The homepage contact section identifies the WeChat Official Account by its searchable name, **芯片与安全实验室**.
+
+[hangzhou-dianzi-university.png](hangzhou-dianzi-university.png) is the university logo supplied by the maintainer. Both homepages show it to the right of the lab identity image, preserving the original image proportions.
