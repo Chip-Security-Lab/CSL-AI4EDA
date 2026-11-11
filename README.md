@@ -4,6 +4,8 @@
 
 **AI Plugins for Chip Design**
 
+[![Releases · Preview](https://img.shields.io/badge/Releases-Preview-2f6f9f)](docs/DOWNLOADS.md)
+
 [English](README.md) · [简体中文](README.zh-CN.md)
 
 [Plugins](#plugins) · [Downloads](docs/DOWNLOADS.md) · [User guide](docs/USER_GUIDE.md) · [Framework](docs/ARCHITECTURE.md)

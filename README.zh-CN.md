@@ -4,6 +4,8 @@
 
 **面向芯片设计的 AI 插件 · AI Plugins for Chip Design**
 
+[![Releases · Preview](https://img.shields.io/badge/Releases-Preview-2f6f9f)](docs/DOWNLOADS.md)
+
 [English](README.md) · [简体中文](README.zh-CN.md)
 
 [插件概览](#插件概览) · [下载说明](docs/DOWNLOADS.md) · [使用说明](docs/USER_GUIDE.zh-CN.md) · [框架说明](docs/ARCHITECTURE.md)
