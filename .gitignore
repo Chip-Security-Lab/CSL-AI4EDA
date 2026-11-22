@@ -6,6 +6,7 @@
 !/.gitattributes
 !/assets/*.png
 !/assets/*.jpg
+!/assets/demos/*.gif
 !/plugins/*/assets/*.png
 !/plugins/*/assets/*.jpg
 !/plugins/*/assets/*.svg

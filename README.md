@@ -31,6 +31,40 @@ This repository contains introductions, installation and user guides, and exampl
 
 Open a plugin page for its download files, environment requirements, examples, and validation scope. The detection distribution uses a VSIX with a matching external runtime; the optimization distribution includes its backend in the VSIX. A Vivado bridge or companion interface is described separately from an installable VS Code extension.
 
+The previews below use the original plugin interfaces with demo or sample data. Zoom and highlights guide attention; validation status is shown in the interface.
+
+### 1. Security Detection Plugin
+
+Scan RTL, review reported findings, and locate affected modules in the dependency graph. [Plugin guide](plugins/01-security-detection/README.md)
+
+<p align="center">
+<img src="assets/demos/01-security-detection.gif" alt="Security Detection Plugin: select RTL, review a sample access-control finding, and locate the highlighted module." width="960" height="750">
+</p>
+
+### 2. Optimization & Repair Plugin
+
+Choose a repair workflow, review candidate status, and open the Diff entry for code comparison. [Plugin guide](plugins/02-optimization-repair/README.md)
+
+<p align="center">
+<img src="assets/demos/02-optimization-repair.gif" alt="Optimization and Repair Plugin: configure a workflow, review an unverified sample candidate, and locate the Diff button." width="960" height="750">
+</p>
+
+### 3. Secure Generation Plugin
+
+Describe the design requirements and inspect generated Verilog, including FSM transitions and default-state recovery in the built-in demo. [Plugin guide](plugins/03-secure-generation/README.md)
+
+<p align="center">
+<img src="assets/demos/03-secure-generation.gif" alt="Secure Generation Plugin: run the built-in FSM demo and inspect state transitions and default recovery in the Verilog code." width="960" height="750">
+</p>
+
+### 4. HDL Copilot Plugin
+
+Ask about RTL behavior, read the explanation, and review a suggested code change. [Plugin guide](plugins/04-hdl-copilot/README.md)
+
+<p align="center">
+<img src="assets/demos/04-hdl-copilot.gif" alt="HDL Copilot Plugin: ask about an incomplete assignment and review an explanation and suggested default assignment." width="960" height="750">
+</p>
+
 ## Getting started
 
 1. Choose a plugin and read its environment requirements.
@@ -45,7 +79,7 @@ CSL-AI4EDA/
 ├── README.md
 ├── README.zh-CN.md
 ├── DISTRIBUTION_NOTICES.md
-├── assets/                       Overview and lab identity
+├── assets/                       Overview, plugin GIFs and lab identity
 ├── docs/                         Downloads, selection guide, framework
 └── plugins/
     ├── 01-security-detection/

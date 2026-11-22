@@ -2,6 +2,7 @@
 *.md text eol=lf
 *.png binary
 *.jpg binary
+*.gif binary
 *.vsix binary
 *.zip binary
 # Preserve example bytes so supplied verification hashes remain valid.
