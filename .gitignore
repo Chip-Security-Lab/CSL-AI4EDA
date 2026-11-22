@@ -7,6 +7,7 @@
 !/assets/*.png
 !/assets/*.jpg
 !/assets/demos/*.gif
+!/assets/icons/*.svg
 !/plugins/*/assets/*.png
 !/plugins/*/assets/*.jpg
 !/plugins/*/assets/*.svg

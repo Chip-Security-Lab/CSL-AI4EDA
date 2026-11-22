@@ -8,6 +8,10 @@ The plugin order is Security Detection, Optimization & Repair, Secure Generation
 
 The earlier [minimal overview](overview-plugins-minimal.en.png) is retained as a previous version.
 
+## Homepage heading icons
+
+The four SVGs in [icons/](icons/) are small, locally stored line icons for the plugin headings. They match the overview's magnifying glass, gear, code document and speech bubble, using the same blue, teal, sage and amber accents. Both homepages render them at 24 × 24 pixels. The six main section headings use a single emoji each; existing section links retain named anchors.
+
 ## Plugin interface previews
 
 The four GIFs in [demos/](demos/) use the original published plugin interfaces with built-in demo or sample data. Each is 960 × 750 pixels and loops every 12 seconds. Camera zoom, focus boxes and background dimming guide attention without replacing the interface. The optimization preview retains its unverified candidate status; these animations do not report a new end-to-end validation run.

@@ -21,7 +21,9 @@ RTL security, optimization, Verilog generation and HDL Q&A — inside VS Code.
 
 > **Preview releases:** environment requirements and validation scope vary by plugin. See the linked installation guide and release notes.
 
-## Plugins
+<a name="plugins"></a>
+
+## 🧩 Plugins
 
 Choose a plugin for your task. Each has its own version and installation requirements.
 
@@ -34,7 +36,9 @@ Choose a plugin for your task. Each has its own version and installation require
 
 **Security Detection needs both its VSIX and matching runtime ZIP.** The Optimization & Repair VSIX includes its backend. Exact files, versions and companion interfaces are listed in the [download guide](docs/DOWNLOADS.md).
 
-## Getting started
+<a name="getting-started"></a>
+
+## 🚀 Getting started
 
 1. **Download:** choose a plugin above and get the required attachments from its Release.
 2. **Install:** in desktop VS Code, open Extensions → `…` → **Install from VSIX…**. Follow the plugin guide for its runtime and system dependencies.
@@ -42,13 +46,17 @@ Choose a plugin for your task. Each has its own version and installation require
 
 [Installation and configuration guide](docs/USER_GUIDE.md) · [Download details](docs/DOWNLOADS.md)
 
-## Plugin demos
+<a name="plugin-demos"></a>
+
+## 🎬 Plugin demos
 
 [Security Detection](#1-security-detection-plugin) · [Optimization & Repair](#2-optimization--repair-plugin) · [Secure Generation](#3-secure-generation-plugin) · [HDL Copilot](#4-hdl-copilot-plugin)
 
 Original plugin interfaces with demo or sample data. Verification results, where available, are shown in the interface.
 
-### 1. Security Detection Plugin
+<a name="1-security-detection-plugin"></a>
+
+### <img src="assets/icons/security-detection.svg" alt="" width="24" height="24" align="middle"> 01 Security Detection Plugin
 
 Scan RTL, review reported findings, and locate affected modules in the dependency graph.
 
@@ -60,7 +68,9 @@ Scan RTL, review reported findings, and locate affected modules in the dependenc
 
 [**Download**](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/security-detection-v0.1.1-r2) · [User guide](plugins/01-security-detection/USER_GUIDE.md) · [Examples](plugins/01-security-detection/examples/README.md)
 
-### 2. Optimization & Repair Plugin
+<a name="2-optimization--repair-plugin"></a>
+
+### <img src="assets/icons/optimization-repair.svg" alt="" width="24" height="24" align="middle"> 02 Optimization & Repair Plugin
 
 Choose a repair workflow and inspect its candidate code and evidence.
 
@@ -72,7 +82,9 @@ Choose a repair workflow and inspect its candidate code and evidence.
 
 [**Download**](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/optimization-repair-v0.5.5) · [User guide](plugins/02-optimization-repair/USER_GUIDE.md) · [Examples](plugins/02-optimization-repair/examples/README.md)
 
-### 3. Secure Generation Plugin
+<a name="3-secure-generation-plugin"></a>
+
+### <img src="assets/icons/secure-generation.svg" alt="" width="24" height="24" align="middle"> 03 Secure Generation Plugin
 
 Describe design requirements and inspect generated Verilog and FSM logic.
 
@@ -84,7 +96,9 @@ Describe design requirements and inspect generated Verilog and FSM logic.
 
 [**Download**](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/secure-generation-v0.3.16) · [User guide](plugins/03-secure-generation/USER_GUIDE.md) · [Examples](plugins/03-secure-generation/examples/README.md)
 
-### 4. HDL Copilot Plugin
+<a name="4-hdl-copilot-plugin"></a>
+
+### <img src="assets/icons/hdl-copilot.svg" alt="" width="24" height="24" align="middle"> 04 HDL Copilot Plugin
 
 Ask about RTL behavior, read the explanation, and review a suggested code change.
 
@@ -96,14 +110,18 @@ Ask about RTL behavior, read the explanation, and review a suggested code change
 
 [**Download**](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/hdl-copilot-v0.4.0) · [User guide](plugins/04-hdl-copilot/USER_GUIDE.md) · [Examples](plugins/04-hdl-copilot/examples/README.md)
 
-## Latest updates
+<a name="latest-updates"></a>
+
+## 📰 Latest updates
 
 - **2026-11-22** — Added four interface demo GIFs with zoom and highlights; refreshed homepage navigation and quick start.
 - **2026-11-04** — Updated the four preview distributions, download entries, examples and user guides.
 
 [Update history](docs/CHANGELOG.md)
 
-## Documentation
+<a name="documentation"></a>
+
+## 📚 Documentation
 
 | Start here | Details |
 | --- | --- |
@@ -115,7 +133,9 @@ Ask about RTL behavior, read the explanation, and review a suggested code change
 
 [All documentation](docs/README.md)
 
-## Contact
+<a name="contact"></a>
+
+## ✉️ Contact
 
 <div align="center">
 

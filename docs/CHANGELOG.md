@@ -6,6 +6,7 @@ This history covers shared documentation, presentation and distribution mileston
 
 ## 2026-11-22
 
+- Added section emoji and matching small plugin heading icons to both homepages, retaining existing navigation anchors.
 - Updated the homepage overview with muted card colors and matching detection, optimization, generation and chat icons.
 - Added four original-interface GIF previews in detection, optimization and repair, generation, and HDL Q&A order. All are 960 × 750 pixels with zoom and focus highlights; previews use demo or sample data.
 - Reorganized both homepages with prominent download, demo and documentation links; moved quick start ahead of the previews.

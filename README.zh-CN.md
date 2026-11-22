@@ -21,7 +21,9 @@
 
 > **当前提供试用分发版本。** 各插件的环境要求和验证范围不同，安装前请查看对应手册和发布说明。
 
-## 插件概览
+<a name="插件概览"></a>
+
+## 🧩 插件概览
 
 按任务选择插件，各插件独立维护版本与安装要求。
 
@@ -34,7 +36,9 @@
 
 **检测插件需要同时下载 VSIX 和配套运行包 ZIP。** 优化与修复插件的 VSIX 已包含后端。具体版本、文件和配套界面见[下载说明](docs/DOWNLOADS.md)。
 
-## 开始使用
+<a name="开始使用"></a>
+
+## 🚀 开始使用
 
 1. **下载：** 按上表选择插件，在对应发布页获取所需附件。
 2. **安装：** 在桌面版 VS Code 中选择“扩展 → `…` → Install from VSIX…”。按插件手册完成运行环境与依赖配置。
@@ -42,13 +46,17 @@
 
 [安装与配置指南](docs/USER_GUIDE.zh-CN.md) · [下载详情](docs/DOWNLOADS.md)
 
-## 插件演示
+<a name="插件演示"></a>
+
+## 🎬 插件演示
 
 [漏洞检测](#1-漏洞检测插件) · [优化与修复](#2-优化与修复插件) · [Verilog 生成](#3-verilog-生成插件) · [HDL 问答](#4-hdl-问答插件)
 
 以下动图使用插件原始界面与内置 Demo 或示例数据；涉及验证时，以实际界面状态为准。
 
-### 1. 漏洞检测插件
+<a name="1-漏洞检测插件"></a>
+
+### <img src="assets/icons/security-detection.svg" alt="" width="24" height="24" align="middle"> 01 漏洞检测插件
 
 扫描 RTL、查看问题报告，并通过模块依赖图定位相关模块。
 
@@ -60,7 +68,9 @@
 
 [**下载插件**](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/security-detection-v0.1.1-r2) · [使用说明](plugins/01-security-detection/USER_GUIDE.zh-CN.md) · [示例文件](plugins/01-security-detection/examples/README.md)
 
-### 2. 优化与修复插件
+<a name="2-优化与修复插件"></a>
+
+### <img src="assets/icons/optimization-repair.svg" alt="" width="24" height="24" align="middle"> 02 优化与修复插件
 
 选择修复流程，审阅候选代码与相应证据。
 
@@ -72,7 +82,9 @@
 
 [**下载插件**](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/optimization-repair-v0.5.5) · [使用说明](plugins/02-optimization-repair/USER_GUIDE.zh-CN.md) · [示例文件](plugins/02-optimization-repair/examples/README.md)
 
-### 3. Verilog 生成插件
+<a name="3-verilog-生成插件"></a>
+
+### <img src="assets/icons/secure-generation.svg" alt="" width="24" height="24" align="middle"> 03 Verilog 生成插件
 
 输入设计需求，查看生成的 Verilog 和 FSM 逻辑。
 
@@ -84,7 +96,9 @@
 
 [**下载插件**](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/secure-generation-v0.3.16) · [使用说明](plugins/03-secure-generation/USER_GUIDE.zh-CN.md) · [示例文件](plugins/03-secure-generation/examples/README.md)
 
-### 4. HDL 问答插件
+<a name="4-hdl-问答插件"></a>
+
+### <img src="assets/icons/hdl-copilot.svg" alt="" width="24" height="24" align="middle"> 04 HDL 问答插件
 
 围绕 RTL 行为提问，阅读代码解释并审阅修改建议。
 
@@ -96,14 +110,18 @@
 
 [**下载插件**](https://github.com/Chip-Security-Lab/CSL-AI4EDA/releases/tag/hdl-copilot-v0.4.0) · [使用说明](plugins/04-hdl-copilot/USER_GUIDE.zh-CN.md) · [示例文件](plugins/04-hdl-copilot/examples/README.md)
 
-## 最近更新
+<a name="最近更新"></a>
+
+## 📰 最近更新
 
 - **2026-11-22** — 新增四个插件的界面 GIF，加入放大和重点框选；调整首页导航与快速开始。
 - **2026-11-04** — 更新四个插件的试用分发文件、下载入口、示例与使用说明。
 
 [查看更新记录](docs/CHANGELOG.zh-CN.md)
 
-## 文档入口
+<a name="文档入口"></a>
+
+## 📚 文档入口
 
 | 从这里开始 | 内容 |
 | --- | --- |
@@ -115,7 +133,9 @@
 
 [全部文档](docs/README.md)
 
-## 联系我们
+<a name="联系我们"></a>
+
+## ✉️ 联系我们
 
 <div align="center">
 
