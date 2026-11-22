@@ -15,7 +15,7 @@
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-<img src="assets/overview-plugins-minimal.en.png" alt="CSL_AI4EDA 按漏洞检查、优化、生成、问答顺序展示四类插件，末尾省略号表示还有新插件在开发。" width="960">
+<img src="assets/overview-plugins-color-icons.en.png" alt="CSL_AI4EDA 按漏洞检查、优化、生成、问答顺序展示四类插件，末尾省略号表示还有新插件在开发。" width="960">
 
 </div>
 

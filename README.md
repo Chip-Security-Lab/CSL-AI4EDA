@@ -15,7 +15,7 @@ RTL security, optimization, Verilog generation and HDL Q&A — inside VS Code.
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 
-<img src="assets/overview-plugins-minimal.en.png" alt="CSL_AI4EDA: Security Detection, Optimization and Repair, Secure Generation, and HDL Copilot, followed by an ellipsis for additional plugins in development." width="960">
+<img src="assets/overview-plugins-color-icons.en.png" alt="CSL_AI4EDA: Security Detection, Optimization and Repair, Secure Generation, and HDL Copilot, followed by an ellipsis for additional plugins in development." width="960">
 
 </div>
 

@@ -2,9 +2,11 @@
 
 ## Overview illustration
 
-[overview-plugins-minimal.en.png](overview-plugins-minimal.en.png) is the English overview for CSL_AI4EDA. It uses a white background, restrained gray and blue accents, and short labels.
+[overview-plugins-color-icons.en.png](overview-plugins-color-icons.en.png) is the English overview used by both CSL_AI4EDA homepages. It uses a white background, muted blue, teal, sage and amber cards, and small matching icons: magnifying glass, gear, code document and speech bubble.
 
 The plugin order is Security Detection, Optimization & Repair, Secure Generation, then HDL Copilot. A trailing ellipsis indicates additional plugins in development. The illustration was created with the built-in image generation tool and checked for labels and order.
+
+The earlier [minimal overview](overview-plugins-minimal.en.png) is retained as a previous version.
 
 ## Plugin interface previews
 
