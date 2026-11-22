@@ -21,7 +21,26 @@ Users select a task, provide requirements or RTL, run the chosen interaction, in
 
 - `plugins/` contains introductions, usage guides, version notes, notices, screenshots where provided, and example designs.
 - `docs/` contains shared selection and download guidance.
-- `assets/` contains the overview and lab identity.
+- `assets/` contains the overview, plugin interface GIFs and lab identity.
 - GitHub Releases contain installable packages and matching runtime/example attachments, with version notes and checksums.
 
 The four release tags are independent. VS Code extension versions are recorded separately from companions that do not declare an independent version. Installation packages contain the runtime resources required by their distribution; development environments, personal settings, histories, and caches are not intended public content.
+
+## Repository structure
+
+```text
+CSL-AI4EDA/
+├── README.md
+├── README.zh-CN.md
+├── DISTRIBUTION_NOTICES.md
+├── assets/
+│   └── demos/                    Four plugin GIFs, all 960 × 750
+├── docs/                         Downloads, guides, updates and framework
+└── plugins/
+    ├── 01-security-detection/
+    ├── 02-optimization-repair/
+    ├── 03-secure-generation/
+    └── 04-hdl-copilot/
+```
+
+Each plugin directory contains introductions, usage guides, version notes, distribution notices and the examples provided for that plugin. Installable packages and matching runtime attachments are published as Release assets.
