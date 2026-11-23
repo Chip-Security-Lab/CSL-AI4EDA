@@ -1,9 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="178" height="30" viewBox="0 0 178 30" role="img" aria-labelledby="title">
-  <title id="title">Releases &#183; Preview</title>
-  <rect x="0.5" y="0.5" width="177" height="29" rx="6" fill="#FCF2E1" stroke="#D9BB8C"/>
-  <g transform="translate(30 7) scale(.8)" fill="none" stroke="#AD8144" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M2.5 3h8l7.5 7.5-7.5 7.5L3 10.5Z"/>
-    <circle cx="7" cy="7" r="1.2"/>
-  </g>
-  <text x="54" y="19.5" fill="#18354F" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="600">Releases &#183; Preview</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="112" height="20" role="img" aria-label="Releases: Preview"><title>Releases: Preview</title><g shape-rendering="crispEdges"><rect width="59" height="20" fill="#555"/><rect x="59" width="53" height="20" fill="#956b2f"/></g><g fill="#fff" text-anchor="middle" font-family="Verdana,Geneva,DejaVu Sans,sans-serif" text-rendering="geometricPrecision" font-size="110"><text x="305" y="140" textLength="490" transform="scale(.1)">Releases</text><text x="845" y="140" textLength="430" transform="scale(.1)">Preview</text></g></svg>

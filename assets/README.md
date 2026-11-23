@@ -6,7 +6,7 @@
 
 ## Homepage navigation buttons
 
-The five `button-*.svg` images in [icons/](icons/) use pale blue, teal, sage, warm gold and blue-gray backgrounds, navy text and fine matching outlines. Their palette coordinates with the overview. The three primary navigation buttons are 42 pixels high and the two secondary links are 30 pixels high. They contain no external resources and retain the existing README link destinations.
+The five `button-*.svg` images in [icons/](icons/) retain the compact Shields badge style, with muted blue, teal, sage, warm gold and blue-gray accents coordinated with the overview. The three primary links use the 28-pixel-high `for-the-badge` style; the two secondary links use the 20-pixel-high `flat-square` style with a gray label segment. The SVGs are stored locally, contain no external resources and retain the existing README link destinations.
 
 ## Overview illustration
 
