@@ -1,17 +1,19 @@
 <div align="center">
 
+<img src="assets/csl-ai4eda-emblem.png" alt="CSL_AI4EDA 项目标识：芯片、AI 节点、安全盾牌与插件模块" width="144">
+
 <h1>CSL_AI4EDA</h1>
 
 <p><strong>AI Plugins for Chip Design · 面向芯片设计的 AI 插件</strong></p>
 
 在 VS Code 中辅助完成 RTL 检测、优化、Verilog 生成与 HDL 问答。
 
-[![下载插件](https://img.shields.io/badge/Download_Plugins-2f6f9f?style=for-the-badge&logo=github&logoColor=white)](docs/DOWNLOADS.md)
-[![查看演示](https://img.shields.io/badge/Watch_Demos-526579?style=for-the-badge)](#插件演示)
-[![使用文档](https://img.shields.io/badge/Documentation-526579?style=for-the-badge)](docs/README.md)
+[![下载插件](assets/icons/button-download-plugins.svg)](docs/DOWNLOADS.md)
+[![查看演示](assets/icons/button-watch-demos.svg)](#插件演示)
+[![使用文档](assets/icons/button-documentation.svg)](docs/README.md)
 
-[![Releases · Preview](https://img.shields.io/badge/Releases-Preview-2f6f9f?style=flat-square)](docs/DOWNLOADS.md)
-[![VS Code 插件](https://img.shields.io/badge/VS_Code-Plugins-526579?style=flat-square)](docs/USER_GUIDE.zh-CN.md)
+[![Releases · Preview](assets/icons/button-releases-preview.svg)](docs/DOWNLOADS.md)
+[![VS Code 插件](assets/icons/button-vscode-plugins.svg)](docs/USER_GUIDE.zh-CN.md)
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 

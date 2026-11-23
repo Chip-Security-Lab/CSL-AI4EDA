@@ -1,5 +1,13 @@
 # Images
 
+## Project icon
+
+[csl-ai4eda-emblem.png](csl-ai4eda-emblem.png) is the CSL_AI4EDA project emblem: a microchip containing a security shield and connected AI nodes, with a small interlocking plugin module. Its ink illustration style uses deep navy outlines with muted blue, teal, sage and warm gold to coordinate with the overview. Both homepages display it above the project title at 144 pixels wide, preserving its proportions and transparent background. It was created with the built-in image generation tool using the maintainer's style reference and the project overview as palette guidance. It is separate from the laboratory and university identity images in the contact section.
+
+## Homepage navigation buttons
+
+The five `button-*.svg` images in [icons/](icons/) use pale blue, teal, sage, warm gold and blue-gray backgrounds, navy text and fine matching outlines. Their palette coordinates with the overview. The three primary navigation buttons are 42 pixels high and the two secondary links are 30 pixels high. They contain no external resources and retain the existing README link destinations.
+
 ## Overview illustration
 
 [overview-plugins-color-icons.en.png](overview-plugins-color-icons.en.png) is the English overview used by both CSL_AI4EDA homepages. It uses a white background, muted blue, teal, sage and amber cards, and small matching icons: magnifying glass, gear, code document and speech bubble.

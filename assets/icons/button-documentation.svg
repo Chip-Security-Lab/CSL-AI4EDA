@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="204" height="42" viewBox="0 0 204 42" role="img" aria-labelledby="title">
+  <title id="title">Documentation</title>
+  <rect x="0.5" y="0.5" width="203" height="41" rx="8" fill="#EDF3E7" stroke="#B2C5A3"/>
+  <g transform="translate(34 11)" fill="none" stroke="#70875C" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 4C7.7 2.5 4.8 2.3 2 3.2v13.5c2.8-.9 5.7-.7 8 .8 2.3-1.5 5.2-1.7 8-.8V3.2c-2.8-.9-5.7-.7-8 .8Zm0 0v13.5"/>
+  </g>
+  <text x="64" y="26.5" fill="#18354F" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600">Documentation</text>
+</svg>

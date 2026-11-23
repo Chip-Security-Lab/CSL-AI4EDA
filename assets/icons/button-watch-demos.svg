@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="188" height="42" viewBox="0 0 188 42" role="img" aria-labelledby="title">
+  <title id="title">Watch Demos</title>
+  <rect x="0.5" y="0.5" width="187" height="41" rx="8" fill="#E6F2F1" stroke="#98BFC0"/>
+  <g transform="translate(32 11)" fill="none" stroke="#3D8385" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10" cy="10" r="8.5"/>
+    <path d="m8 6.5 5.5 3.5L8 13.5Z"/>
+  </g>
+  <text x="62" y="26.5" fill="#18354F" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600">Watch Demos</text>
+</svg>

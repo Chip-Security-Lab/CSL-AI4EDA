@@ -1,17 +1,19 @@
 <div align="center">
 
+<img src="assets/csl-ai4eda-emblem.png" alt="CSL_AI4EDA project emblem: an AI circuit shield on a microchip with a plugin module" width="144">
+
 <h1>CSL_AI4EDA</h1>
 
 <p><strong>AI Plugins for Chip Design</strong></p>
 
 RTL security, optimization, Verilog generation and HDL Q&A — inside VS Code.
 
-[![Download Plugins](https://img.shields.io/badge/Download_Plugins-2f6f9f?style=for-the-badge&logo=github&logoColor=white)](docs/DOWNLOADS.md)
-[![Watch Demos](https://img.shields.io/badge/Watch_Demos-526579?style=for-the-badge)](#plugin-demos)
-[![Documentation](https://img.shields.io/badge/Documentation-526579?style=for-the-badge)](docs/README.md)
+[![Download Plugins](assets/icons/button-download-plugins.svg)](docs/DOWNLOADS.md)
+[![Watch Demos](assets/icons/button-watch-demos.svg)](#plugin-demos)
+[![Documentation](assets/icons/button-documentation.svg)](docs/README.md)
 
-[![Releases · Preview](https://img.shields.io/badge/Releases-Preview-2f6f9f?style=flat-square)](docs/DOWNLOADS.md)
-[![VS Code Plugins](https://img.shields.io/badge/VS_Code-Plugins-526579?style=flat-square)](docs/USER_GUIDE.md)
+[![Releases · Preview](assets/icons/button-releases-preview.svg)](docs/DOWNLOADS.md)
+[![VS Code Plugins](assets/icons/button-vscode-plugins.svg)](docs/USER_GUIDE.md)
 
 [English](README.md) · [简体中文](README.zh-CN.md)
 

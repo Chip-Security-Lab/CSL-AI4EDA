@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="164" height="30" viewBox="0 0 164 30" role="img" aria-labelledby="title">
+  <title id="title">VS Code Plugins</title>
+  <rect x="0.5" y="0.5" width="163" height="29" rx="6" fill="#EDF1F5" stroke="#B8C5D0"/>
+  <g transform="translate(26.5 7) scale(.8)" fill="none" stroke="#687E90" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m6 5-4 5 4 5m8-10 4 5-4 5M11.5 3.5l-3 13"/>
+  </g>
+  <text x="50.5" y="19.5" fill="#18354F" font-family="Segoe UI, Arial, sans-serif" font-size="12" font-weight="600">VS Code Plugins</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="212" height="42" viewBox="0 0 212 42" role="img" aria-labelledby="title">
+  <title id="title">Download Plugins</title>
+  <rect x="0.5" y="0.5" width="211" height="41" rx="8" fill="#E7F0F9" stroke="#9EBBD5"/>
+  <g transform="translate(29 11)" fill="none" stroke="#416D95" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 1.5v11m-4-4 4 4 4-4M2.5 13.5V18h15v-4.5"/>
+  </g>
+  <text x="59" y="26.5" fill="#18354F" font-family="Segoe UI, Arial, sans-serif" font-size="15" font-weight="600">Download Plugins</text>
+</svg>
